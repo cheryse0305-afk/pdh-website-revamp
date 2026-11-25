@@ -9,23 +9,61 @@
     --qf-muted: #48606a;
 }
 
-/* ---------- Canvas ---------- */
+/* ---------- Canvas: teal/aqua gradient, waves, light trails, cross outlines, dots ---------- */
 .pdh-hero { color: var(--qf-ink); overflow: hidden; padding: 2rem 0 3rem; position: relative;
     background:
-        radial-gradient(60rem 40rem at 100% 0%, rgba(10, 161, 165, .20), transparent 60%),
-        radial-gradient(40rem 30rem at 0% 100%, rgba(244, 122, 32, .10), transparent 60%),
-        linear-gradient(180deg, #eef8f8 0%, #f9fdfd 65%, #fff 100%); }
+        radial-gradient(46rem 30rem at 24% 32%, rgba(255, 255, 255, .78), transparent 70%),   /* light behind the headline */
+        radial-gradient(36rem 24rem at 94% 96%, rgba(255, 207, 160, .5), transparent 70%),    /* warm glow, bottom right */
+        radial-gradient(56rem 34rem at 68% 6%, rgba(255, 255, 255, .4), transparent 62%),
+        linear-gradient(125deg, #cdeeed 0%, #98dbd9 34%, #66c4c4 62%, #a9e2e0 100%); }
 @media screen and (min-width: 64em) { .pdh-hero { padding: 3rem 0 4rem; } }
-.pdh-hero__bg { inset: 0; pointer-events: none; position: absolute; z-index: 0; }
-/* The plus from the PDH logo, used as a soft brand motif */
-.pdh-hero__plus { position: absolute;
-    background: linear-gradient(currentColor, currentColor) center / 32% 100% no-repeat,
-                linear-gradient(currentColor, currentColor) center / 100% 32% no-repeat; }
-.pdh-hero__plus--a { color: rgba(10, 161, 165, .09); height: 11rem; right: 40%; top: -2.5rem; transform: rotate(12deg); width: 11rem; }
-.pdh-hero__plus--b { bottom: 1rem; color: rgba(244, 122, 32, .08); height: 15rem; left: -4rem; transform: rotate(-8deg); width: 15rem; }
-.pdh-hero__dots { height: 18rem; position: absolute; right: 1%; top: 5rem; width: 18rem;
-    background-image: radial-gradient(rgba(0, 127, 134, .28) 1.5px, transparent 1.6px); background-size: 18px 18px;
-    -webkit-mask-image: radial-gradient(circle, #000 35%, transparent 70%); mask-image: radial-gradient(circle, #000 35%, transparent 70%); }
+.pdh-hero__bg { inset: 0; overflow: hidden; pointer-events: none; position: absolute; z-index: 0; }
+/* global.css gives every svg `stroke: #000`; reset it so only elements with their own stroke draw one. */
+.pdh-hero__art { height: 100%; inset: 0; position: absolute; stroke: none; stroke-width: 0; width: 100%; }
+
+/* PDH's own building, ghosted into the bottom-left (desktop only, so phones never download it). */
+@media screen and (min-width: 64em) {
+    .pdh-hero__facade { background: url(/assets/images/pdh/PDH-CLEAN-FACADE-1024x461.jpg) left bottom / cover no-repeat;
+        bottom: 20%; filter: saturate(.5) brightness(1.1); height: 42%; left: 0; mix-blend-mode: luminosity; opacity: .3; position: absolute; width: 46%;
+        -webkit-mask-image: radial-gradient(ellipse at 20% 90%, #000 30%, transparent 72%); mask-image: radial-gradient(ellipse at 20% 90%, #000 30%, transparent 72%); }
+}
+
+.pdh-ribbon { fill: none; opacity: .28; stroke: #fff; stroke-linecap: round; stroke-width: 140; }
+.pdh-wave { transform-box: fill-box; }
+.pdh-cross { fill: rgba(255, 255, 255, .16); stroke: rgba(255, 255, 255, .95); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
+.pdh-cross--1 { opacity: .75; }
+.pdh-cross--2, .pdh-cross--3 { opacity: .8; }
+.pdh-cross--4 { opacity: .6; }
+.pdh-trail { fill: none; filter: drop-shadow(0 0 6px rgba(255, 255, 255, .95)) drop-shadow(0 0 14px rgba(255, 255, 255, .6)); stroke-linecap: round; stroke-width: 3; }
+.pdh-wave-edge { fill: none; filter: drop-shadow(0 0 5px rgba(255, 255, 255, .9)); opacity: .75; stroke: #fff; stroke-linecap: round; stroke-width: 2; transform-box: fill-box; }
+.pdh-wave-edge--2 { opacity: .5; stroke-width: 1.5; }
+.pdh-trail--warm { filter: drop-shadow(0 0 8px rgba(255, 190, 120, .95)) drop-shadow(0 0 18px rgba(244, 122, 32, .45)); stroke-width: 4; }
+.pdh-trail--top, .pdh-trail--right { opacity: .85; stroke-width: 2; }
+
+/* Phones: keep the atmosphere, drop the busiest details. */
+@media screen and (max-width: 39.99em) {
+    /* the art scales up ~2.8x on tall phone heroes, so the big cross would sit behind the headline and search */
+    .pdh-cross--1, .pdh-cross--2, .pdh-cross--4, .pdh-trail--top, .pdh-trail--right, .pdh-dots--b { display: none; }
+    .pdh-ribbon { opacity: .16; }
+}
+
+@keyframes pdh-wave-drift { from { transform: translateX(-30px); } to { transform: translateX(30px); } }
+@keyframes pdh-cross-float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
+@keyframes pdh-trail-glow { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+    .pdh-wave--1, .pdh-wave-edge { animation: pdh-wave-drift 18s ease-in-out infinite alternate; }
+    .pdh-wave-edge--2 { animation: pdh-wave-drift 24s ease-in-out infinite alternate-reverse; }
+    .pdh-wave--2 { animation: pdh-wave-drift 24s ease-in-out infinite alternate-reverse; }
+    .pdh-wave--3 { animation: pdh-wave-drift 30s ease-in-out infinite alternate; }
+    .pdh-cross--1 { animation: pdh-cross-float 12s ease-in-out infinite; }
+    .pdh-cross--2 { animation: pdh-cross-float 9s ease-in-out infinite 1s; }
+    .pdh-cross--3 { animation: pdh-cross-float 11s ease-in-out infinite 2s; }
+    .pdh-cross--4 { animation: pdh-cross-float 14s ease-in-out infinite .5s; }
+    .pdh-trail { animation: pdh-trail-glow 6s ease-in-out infinite; }
+    .pdh-trail--white { animation-delay: 1.5s; }
+    .pdh-trail--top { animation-delay: 3s; }
+    .pdh-trail--right { animation-delay: 4.5s; }
+}
 
 .pdh-hero__inner { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); margin: 0 auto; max-width: 82rem;
     padding: 0 1.25rem; position: relative; z-index: 1; }
@@ -121,7 +159,7 @@ html:not(.no-js) .pdh-qf__title { clip: rect(0 0 0 0); height: 1px; margin: -1px
 .pdh-trust__faces img { background: #e8f4f4; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 4px 10px rgba(13, 59, 64, .15);
     height: 2.75rem; object-fit: cover; object-position: top; width: 2.75rem; }
 .pdh-trust__faces img + img { margin-left: -.75rem; }
-.pdh-trust__text { color: var(--qf-muted); font-size: .9375rem; margin: 0; }
+.pdh-trust__text { background: rgba(255, 255, 255, .78); border-radius: 999px; color: var(--qf-muted); font-size: .9375rem; margin: 0; padding: .3rem .75rem; }
 .pdh-trust__text strong { color: var(--qf-ink); }
 .pdh-trust__text a { color: var(--qf-teal); font-weight: 700; margin-left: .25rem; text-decoration: underline; }
 .pdh-trust__badges { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: 0; padding: 0; width: 100%; }
