@@ -16,16 +16,23 @@
         radial-gradient(36rem 24rem at 94% 96%, rgba(255, 207, 160, .5), transparent 70%),    /* warm glow, bottom right */
         radial-gradient(56rem 34rem at 68% 6%, rgba(255, 255, 255, .4), transparent 62%),
         linear-gradient(125deg, #cdeeed 0%, #98dbd9 34%, #66c4c4 62%, #a9e2e0 100%); }
-@media screen and (min-width: 64em) { .pdh-hero { padding: 3rem 0 4rem; } }
+@media screen and (min-width: 64em) { .pdh-hero { padding-top: 3rem; } }
 .pdh-hero__bg { inset: 0; overflow: hidden; pointer-events: none; position: absolute; z-index: 0; }
 /* global.css gives every svg `stroke: #000`; reset it so only elements with their own stroke draw one. */
 .pdh-hero__art { height: 100%; inset: 0; position: absolute; stroke: none; stroke-width: 0; width: 100%; }
 
-/* PDH's own building, ghosted into the bottom-left (desktop only, so phones never download it). */
+/* PDH's own building as a full-width architectural backdrop: strong at the base (entrance and signage),
+   fading up into the aqua sky. Sits above the waves so they don't wash it out. */
+.pdh-hero__facade { background: url(/assets/images/pdh/pdh-facade-2026.jpg) center bottom / 100% auto no-repeat; bottom: 0;
+    height: 42vw; max-height: 52rem;
+    left: 0; position: absolute; right: 0;
+    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 55%, rgba(0, 0, 0, .6) 78%, transparent 100%);
+    mask-image: linear-gradient(to top, #000 0%, #000 55%, rgba(0, 0, 0, .6) 78%, transparent 100%); }
+.pdh-hero__facade::after { background: linear-gradient(180deg, rgba(102, 196, 196, .4) 0%, rgba(102, 196, 196, .08) 45%, rgba(13, 59, 64, .1) 100%);
+    content: ""; inset: 0; position: absolute; }
+.pdh-hero { padding-bottom: 9rem; }
 @media screen and (min-width: 64em) {
-    .pdh-hero__facade { background: url(/assets/images/pdh/PDH-CLEAN-FACADE-1024x461.jpg) left bottom / cover no-repeat;
-        bottom: 20%; filter: saturate(.5) brightness(1.1); height: 42%; left: 0; mix-blend-mode: luminosity; opacity: .3; position: absolute; width: 46%;
-        -webkit-mask-image: radial-gradient(ellipse at 20% 90%, #000 30%, transparent 72%); mask-image: radial-gradient(ellipse at 20% 90%, #000 30%, transparent 72%); }
+    .pdh-hero { padding-bottom: 14rem; }
 }
 
 .pdh-ribbon { fill: none; opacity: .28; stroke: #fff; stroke-linecap: round; stroke-width: 140; }
@@ -226,7 +233,7 @@ html:not(.no-js) .pdh-qf__title { clip: rect(0 0 0 0); height: 1px; margin: -1px
 /* ---------- Tiles ---------- */
 .pdh-tiles { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
 @media screen and (min-width: 40em) { .pdh-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.pdh-tile { -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); background: rgba(255, 255, 255, .88); border: 1px solid var(--qf-line);
+.pdh-tile { -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); background: rgba(255, 255, 255, .76); border: 1px solid var(--qf-line);
     border-radius: 1.25rem; margin: 0; padding: 1.25rem; transition: transform .25s ease, box-shadow .25s ease; }
 .pdh-tile:hover { box-shadow: 0 18px 36px -18px rgba(13, 59, 64, .35); transform: translateY(-4px); }
 .pdh-tile__badge { align-items: center; background: rgba(10, 161, 165, .12); border-radius: .875rem; display: inline-flex; height: 2.75rem;
