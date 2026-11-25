@@ -23,7 +23,7 @@
 
 /* PDH's own building as the backdrop of the upper hero: starts under the navigation and fades down into
    the aqua; a light veil on the left keeps the headline readable while the building shows on the right. */
-.pdh-hero__facade { background: url(/assets/images/pdh/pdh-facade-2026.jpg) center 35% / cover no-repeat; filter: saturate(.8); height: 62%;
+.pdh-hero__facade { background: url(/assets/images/pdh/pdh-facade-2026.webp) center 35% / cover no-repeat; filter: saturate(.8); height: 62%;
     left: 0; opacity: .38; position: absolute; right: 0; top: 0;
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, rgba(0, 0, 0, .5) 78%, transparent 100%);
     mask-image: linear-gradient(to bottom, #000 0%, #000 55%, rgba(0, 0, 0, .5) 78%, transparent 100%); }

@@ -28,6 +28,9 @@ Keep `data/*.json` (doctors, services, contacts, hospital profile, HMO partners)
    Also run this after any change to the header, navigation or footer in `index.html` (the generated pages copy them from there) and after editing `data/search-terms.json`. `doctors/`, `services/`, `directory/`, `data/search-index.json`, `sitemap.xml`, `robots.txt`, `llms.txt` and the Hospital JSON-LD block in `index.html` (between the `<!-- pdh:hospital-jsonld -->` markers) are generated output: never edit them by hand.
    The site is in **pre-launch mode** (`PRE_LAUNCH = True` in `tools/build_pages.py`): every page carries `<meta name="robots" content="noindex, follow">` and `robots.txt` asks AI crawlers to stay out, so search engines keep sending patients to the official pdh.com.ph. See "Going live on pdh.com.ph" below.
 
+## Security headers (`vercel.json`)
+The Content-Security-Policy only allows our own files plus Google Fonts, Vimeo (the "Our Story" video) and pdh.com.ph images. If you add a new external service (e.g. a chat widget, analytics, a map embed), add its domain to the matching directive or it will be silently blocked. The one inline script in `index.html` (`window.JSON_ENDPOINTS`) is allowed by its SHA-256 hash: if that block is edited, recompute the hash and update `script-src`, or the script will be blocked.
+
 ## Going live on pdh.com.ph
 1. Point the pdh.com.ph domain at this Vercel project (Vercel → Settings → Domains) and confirm the site loads on it.
 2. Redirect important old WordPress URLs to their new equivalents (e.g. `/all-doctors/` → `/doctors/`, `/our-services/` → `/services/`, `/doctor/<name>/` → `/doctors/<name>/`) so existing search results and bookmarks keep working.
