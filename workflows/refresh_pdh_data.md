@@ -21,8 +21,13 @@ Keep `data/*.json` (doctors, services, contacts, hospital profile, HMO partners)
 2. Read the summary line for each file, e.g. `data/doctors.json: 289 records ({'pending': 289, 'verified': 0, 'changed': 0})`.
    - A sudden drop in record counts means the old site's layout changed. Don't commit; see the edge cases below.
    - `changed > 0` means previously verified records changed at the source and need re-review.
-3. Review with `git diff data/` before committing.
-4. Commit the data files. Pushing to `main` deploys to production, so confirm with the project owner first.
+3. Regenerate the Doctor Finder and profile pages from the new data:
+   ```
+   python tools/build_doctor_pages.py
+   ```
+   Also run this after any change to the header, navigation or footer in `index.html`, because the doctor pages copy them from there. `doctors/` is generated output: never edit it by hand.
+4. Review with `git diff data/` before committing.
+5. Commit the data files and `doctors/`. Pushing to `main` deploys to production, so confirm with the project owner first.
 
 ## Reviewing records (PDH data owner)
 Edit the record in the JSON file and set:
@@ -52,6 +57,7 @@ Edit the record in the JSON file and set:
 - **The room list is rendered twice** on the Our Services page; the tool keeps the copy with more amenities. Parsing stops at the "How Can We Help You?" block.
 - **Services without a "More Details" link** are matched to detail pages by exact slug (e.g. `hemodialysis-center`).
 - **Duplicate IDs** stop the tool before writing, because review tracking depends on unique IDs.
+- **Doctor photos:** the directory shows `Doctor-Feature-Photo.webp` when a doctor has no photo; the tool sets `has_photo: false` for it (`PLACEHOLDER_PHOTOS` in the tool). `photo_thumb` (300 px) and `photo_medium` (768 px) come from the WordPress media library sizes.
 - **Every doctor lists the general line** "8776-0644 to 46"; there are no direct numbers on the old site.
 - **The Windows terminal shows en-dashes as `�`.** The JSON files are correct UTF-8.
 

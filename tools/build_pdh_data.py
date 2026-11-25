@@ -116,7 +116,23 @@ def doctor_cards(page_html):
             photo.group(1) if photo else None, rec
 
 
+PLACEHOLDER_PHOTOS = {"Doctor-Feature-Photo.webp"}  # generic image the old directory shows when there's no photo
+
+
+def media_sizes():
+    """source_url -> {size name: url} for every image in the WordPress media library."""
+    sizes, page = {}, 1
+    while True:
+        body, headers = get(f"{BASE}media?per_page=100&page={page}&_fields=source_url,media_details")
+        for m in json.loads(body):
+            sizes[m["source_url"]] = {k: v["source_url"] for k, v in (m.get("media_details") or {}).get("sizes", {}).items()}
+        if page >= int(headers.get("X-WP-TotalPages", 1)):
+            return sizes
+        page += 1
+
+
 def build_doctors():
+    sizes = media_sizes()
     first, _ = get(SITE + "all-doctors/")
     pages = int(re.search(rb'data-max-page="(\d+)"', first).group(1))
     urls = [SITE + "all-doctors/"] + [f"{SITE}all-doctors/page/{n}/" for n in range(2, pages + 1)]
@@ -127,6 +143,8 @@ def build_doctors():
     for body in bodies:
         for post_id, link, photo, rec in doctor_cards(body.decode("utf-8")):
             schedule = rec["schedule"]
+            has_photo = bool(photo) and os.path.basename(photo) not in PLACEHOLDER_PHOTOS
+            variants = sizes.get(photo, {}) if has_photo else {}
             doctors.append({
                 "id": slugify(link.rstrip("/").rsplit("/", 1)[-1]) if link else slugify(rec["name"]),
                 "wp_id": int(post_id) if post_id else None,
@@ -139,6 +157,9 @@ def build_doctors():
                 "phone": rec["phone"],
                 "profile_url": link,
                 "photo_url": photo,
+                "has_photo": has_photo,
+                "photo_thumb": (variants.get("medium") or photo) if has_photo else None,
+                "photo_medium": (variants.get("medium_large") or variants.get("large") or photo) if has_photo else None,
             })
     return doctors, urls[:1]
 
