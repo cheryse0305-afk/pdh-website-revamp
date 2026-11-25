@@ -1,0 +1,16 @@
+# Development, reference and tooling files: kept in the repo, never deployed.
+tgh-reference.html
+index-backup.html
+pdh-homepage.html
+PDH_UPGRADE_PLAN.md
+style.css
+assets/images/style.css
+tools/
+.tmp/
+
+# Duplicate images in the repo root (the site uses assets/images/ only).
+/*.jpg
+/*.jpeg
+/*.png
+/*.webp
+/*.avif

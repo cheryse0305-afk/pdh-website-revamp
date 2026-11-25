@@ -1,0 +1,16 @@
+(self.webpackChunkTGH=self.webpackChunkTGH||[]).push([[427],{1427:function(a,i,t){t.r(i);var n=t(2674),e=t.n(n),s=t(6398);i.default=(()=>{let n={Pagination:(a,i)=>{var t;if(a&&1<i)return t=!Foundation.MediaQuery.atLeast("tablet-p"),(0,s.wire)({page:a,totalPages:i},":pagination")`
+          <nav class="pagination" name="Pagination">
+            ${n.PreviousLink(a,i)}
+            <ol class="pagination__list">
+              <li class=${1!==a?"is-visible":"is-hidden"}><button type="button" class="pagination__page js-pagination-button" aria-label="Go to Page 1"><span class="pagination__page-text">1</span></button></li>
+              <li class="ellipsis${a-(t?2:3)<=1?" is-hidden":""}" aria-hidden="true">&hellip;</li>
+              <li class=${1<a-2?"is-visible":"is-hidden"}><button type="button" class="pagination__page js-pagination-button show-for-tablet-p" aria-label=${"Go to Page "+(a-2)}><span class="pagination__page-text">${a-2}</span></button></li>
+              <li class=${1<a-1?"is-visible":"is-hidden"}><button type="button" class="pagination__page js-pagination-button" aria-label=${"Go to Page "+(a-1)}><span class="pagination__page-text">${a-1}</span></button></li>
+              <li class="is-current pagination__page"><span class="show-for-sr">You're on page </span><span class="pagination__page-text">${a}</span></li>
+              <li class=${a+1<i?"is-visible":"is-hidden"}><button type="button" class="pagination__page js-pagination-button" aria-label=${"Go to Page "+(a+1)}><span class="pagination__page-text">${a+1}</span></button></li>
+              <li class=${a+2<i?"is-visible":"is-hidden"}><button type="button" class="pagination__page js-pagination-button show-for-tablet-p" aria-label=${"Go to Page "+(a+2)}><span class="pagination__page-text">${a+2}</span></button></li>
+              <li class="ellipsis${i<=a+(t?2:3)?" is-hidden":""}" aria-hidden="true">&hellip;</li>
+              <li class=${a!==i?"is-visible":"is-hidden"}><button type="button" class="pagination__page js-pagination-button" aria-label=${"Page "+i}><span class="pagination__page-text">${i}</span></button></li>
+            </ol>
+            ${n.NextLink(a,i)}
+          </nav>`},PreviousLink:(a,i)=>1===a?(0,s.wire)({page:a,totalPages:i},":prevDisabled")`<span class="pagination-prev disabled"></span>`:(0,s.wire)({page:a,totalPages:i},":prevActive")`<button type="button" class="pagination-prev js-pagination-prev" aria-label="Go to Previous Page"><svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true"><use xlink:href="#icon-chevron-right"></use></svg></button>`,NextLink:(a,i)=>a===i?(0,s.wire)({page:a,totalPages:i},":nextDisabled")`<span class="pagination-next disabled"></span>`:(0,s.wire)({page:a,totalPages:i},":nextActive")`<button type="button" class="pagination-next js-pagination-next" aria-label="Go to Next Page"><svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true"><use xlink:href="#icon-chevron-right"></use></svg></button>`};return{Render:({container:a=e()(".js-pagination-container"),page:i,totalPages:t})=>{a&&a.length&&(0<t&&a.removeClass("is-hidden").attr("aria-hidden",!1),(0,s.bind)(a.get(0))`${n.Pagination(i,t)}`)}}})()}}]);

@@ -4,7 +4,6 @@
 <html class="no-js" lang="en">
 
 <head>
-    <base href="https://www.tgh.org/">
     
 
 <meta charset="utf-8" />
@@ -37,15 +36,21 @@
 <link rel="icon" href="https://pdh.com.ph/wp-content/uploads/2025/02/viber_image_2026-03-31_13-47-20-915-150x150.avif" sizes="32x32" />
 
 
-<link rel="stylesheet" href="https://use.typekit.net/xus6sna.css">
-<link rel="stylesheet" href="/assets/css/global.css?v=639306044380000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<link rel="stylesheet" href="/assets/css/global.css">
 <style>
 /* PDH logo: the PDH lockup is wider (~4.7:1) than TGH's (~3:1), so widen the
    logo slot per breakpoint to keep a comparable visual height in the header. */
-.global-navigation .nav__logo { flex: 0 1 11.25rem; }
+.global-navigation .nav__logo { flex: 0 1 11.25rem; align-self: flex-start; }
 .global-navigation .nav__logo img { display: block; }
-@media screen and (min-width: 64em) { .global-navigation .nav__logo { flex: 0 1 16.25rem; } }
-@media screen and (min-width: 80em) { .global-navigation .nav__logo { flex: 0 0 18.75rem; } }
+@media screen and (min-width: 64em) { .global-navigation .nav__logo { flex: 0 0 16.25rem; align-self: auto; } }
+/* Wide screens: the badge spans both header rows (top of utility CTAs to bottom of main nav). */
+@media screen and (min-width: 80em) {
+    .global-navigation .nav__logo { flex: 0 0 auto; }
+    .global-navigation .nav__logo img { height: 5.5rem; width: auto; max-width: none; }
+}
 
 /* PDH HMO partners marquee: two identical lists scroll by -50% for a seamless loop. */
 .pdh-partners { background: #fff; padding: 3rem 0; overflow: hidden; text-align: center; }
@@ -86,7 +91,7 @@
 
         <div class="global-navigation js-global-navigation">
             <div class="inner">
-                <a href="/" class="nav__logo"><img src="http://127.0.0.1:5500/assets/images/pdh-logo.png" alt="Parañaque Doctors Hospital logo"></a>
+                <a href="/" class="nav__logo"><img src="/assets/images/pdh-logo.png" alt="Parañaque Doctors Hospital logo"></a>
                 <nav class="nav-main show-for-tablet-l" aria-label="Desktop Main Navigation Menu">
                     <div class="nav-main__inner">
                         <ul class="nav-main-items dropdown menu js-nav-main" data-dropdown-menu id="nav" data-close-on-click-inside="false">
@@ -495,7 +500,7 @@ Critical &amp; Inpatient Care                                                   
                 </div>
                     <div class="col">
                         <a href="https://pdh.com.ph/alagang-pdh-ako-stories-more-than-a-hospital-a-second-home-built-on-trust-and-care/"  class="image-cta ga-link-10" data-in-view="once">
-                            <img class="cta__image" src="http://127.0.0.1:5500/assets/images/pdh/Patient-Stories-1.avif" alt="Alagang PDH Ako patient stories">
+                            <img class="cta__image" src="/assets/images/pdh/Patient-Stories-1.avif" alt="Alagang PDH Ako patient stories">
                             <span class="cta__text">
                                 Alagang PDH Ako Stories: A Second Home Built on Trust and Care&nbsp;
                                 <svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
@@ -506,7 +511,7 @@ Critical &amp; Inpatient Care                                                   
                     </div>
                                     <div class="col">
                         <a href="https://pdh.com.ph/about-us/" class="image-cta ga-link-10" data-in-view="once">
-                            <img class="cta__image" src="http://127.0.0.1:5500/assets/images/pdh/MPH-Map.png" alt="Map of Metro Pacific Health hospitals across the Philippines">
+                            <img class="cta__image" src="/assets/images/pdh/MPH-Map.png" alt="Map of Metro Pacific Health hospitals across the Philippines">
                             <span class="cta__text">
                                 A Proud Member of Metro Pacific Health&nbsp;
                                 <svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
@@ -533,7 +538,7 @@ Critical &amp; Inpatient Care                                                   
 
 
 
-                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/about-us/"  style="background-image: url('http://127.0.0.1:5500/assets/images/pdh/PATIENT-SAFETY-1024x576.jpg');">
+                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/about-us/"  style="background-image: url('/assets/images/pdh/PATIENT-SAFETY-1024x576.jpg');">
                         <div class="item__text-container">
                             <h3 class="item__title"><span class="title-text">Patient Safety</span><svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
                                 <use xlink:href="#icon-chevron-right"></use>
@@ -545,7 +550,7 @@ Critical &amp; Inpatient Care                                                   
                         </div>
                     </a>
 
-                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/all-doctors/"  style="background-image: url('http://127.0.0.1:5500/assets/images/pdh/COMPASSION-AND-MEDICAL-EXPERTISE-1024x576.jpg');">
+                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/all-doctors/"  style="background-image: url('/assets/images/pdh/COMPASSION-AND-MEDICAL-EXPERTISE-1024x576.jpg');">
                         <div class="item__text-container">
                             <h3 class="item__title"><span class="title-text">Compassion &amp; Medical Expertise</span><svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
                                 <use xlink:href="#icon-chevron-right"></use>
@@ -557,7 +562,7 @@ Critical &amp; Inpatient Care                                                   
                         </div>
                     </a>
 
-                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/our-services/"  style="background-image: url('http://127.0.0.1:5500/assets/images/pdh/CUTTING-EDGE-SCIENCE-INNOVATION-1024x683.jpg');">
+                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/our-services/"  style="background-image: url('/assets/images/pdh/CUTTING-EDGE-SCIENCE-INNOVATION-1024x683.jpg');">
                         <div class="item__text-container">
                             <h3 class="item__title"><span class="title-text">Cutting-Edge Science &amp; Innovation</span><svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
                                 <use xlink:href="#icon-chevron-right"></use>
@@ -569,7 +574,7 @@ Critical &amp; Inpatient Care                                                   
                         </div>
                     </a>
 
-                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/our-services/"  style="background-image: url('http://127.0.0.1:5500/assets/images/pdh/ACCESSIBLE-AND-INCLUSIVE-CARE-1024x576.jpg');">
+                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/our-services/"  style="background-image: url('/assets/images/pdh/ACCESSIBLE-AND-INCLUSIVE-CARE-1024x576.jpg');">
                         <div class="item__text-container">
                             <h3 class="item__title"><span class="title-text">Accessible &amp; Inclusive Care</span><svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
                                 <use xlink:href="#icon-chevron-right"></use>
@@ -581,7 +586,7 @@ Critical &amp; Inpatient Care                                                   
                         </div>
                     </a>
 
-                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/pdh-news/"  style="background-image: url('http://127.0.0.1:5500/assets/images/pdh/COMMUNITY-CENTERED-SERVICES-1024x683.png');">
+                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/pdh-news/"  style="background-image: url('/assets/images/pdh/COMMUNITY-CENTERED-SERVICES-1024x683.png');">
                         <div class="item__text-container">
                             <h3 class="item__title"><span class="title-text">Community-Centered Service</span><svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
                                 <use xlink:href="#icon-chevron-right"></use>
@@ -597,8 +602,8 @@ Critical &amp; Inpatient Care                                                   
     </section>
     <section class="image-with-ctas"
                
-             style="background-image: url('http://127.0.0.1:5500/assets/images/pdh/PDH-CLEAN-FACADE-scaled.jpg');"
-             data-interchange="[http://127.0.0.1:5500/assets/images/pdh/PDH-CLEAN-FACADE-scaled.jpg, phone],[http://127.0.0.1:5500/assets/images/pdh/PDH-CLEAN-FACADE-scaled.jpg, tablet-l]"
+             style="background-image: url('/assets/images/pdh/PDH-CLEAN-FACADE-scaled.jpg');"
+             data-interchange="[/assets/images/pdh/PDH-CLEAN-FACADE-scaled.jpg, phone],[/assets/images/pdh/PDH-CLEAN-FACADE-scaled.jpg, tablet-l]"
               >
         <div class="content" data-in-view="once">
             <h2 class="title">Here for You, 24/7</h2>
@@ -661,72 +666,72 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
         <div class="pdh-partners__viewport">
             <div class="pdh-partners__track">
                 <ul class="pdh-partners__list">
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/Generali.png" alt="Generali" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/ROYALE-MARINERS_-HEALTHCARE-300x300.jpg" alt="Royale Mariners Healthcare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/LACSON-AND-LACSON.png" alt="Lacson &amp; Lacson" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/HMI-300x120.png" alt="HMI" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/WELLCARE-300x215.png" alt="Wellcare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/ICARE-300x115.png" alt="iCare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/Metrocare-300x150.png" alt="Metrocare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/HEALTHBRIDGE-300x129.jpg" alt="Healthbridge" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/MEDOCARE.png" alt="Medocare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/FORTUNE-LIFE-300x92.png" alt="Fortune Life" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/Optimum-300x62.png" alt="Optimum" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/IMS-WEALTH-CARE.png" alt="IMS Wellth Care" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/MEDASIA-300x80.png" alt="MedAsia" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/INTELLICARE-300x91.png" alt="Intellicare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/AMAPHIL-300x130.png" alt="Amaphil" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/GETWELL-HEALTH-SYSTEM-300x150.png" alt="Getwell Health System" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/PACIFIC-300x99.png" alt="Pacific Cross" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/Flexicare-300x68.png" alt="Flexicare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/ETIQA-300x158.png" alt="Etiqa" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/KAISER-300x49.png" alt="Kaiser" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/AVEGA-300x95.png" alt="Avega" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/PHILCARE-300x118.png" alt="PhilCare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/BENLIFE-300x97.png" alt="BenLife" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/EASTWEST-HEALTHCARE-300x106.png" alt="EastWest Healthcare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/COOPHEALTH.png" alt="CoopHealth" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/AsianCare.png" alt="AsianCare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/MAXICARE-300x97.png" alt="Maxicare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/VALUCARE-300x90.png" alt="ValuCare" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/MEDILINK-300x84.png" alt="Medilink" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/HPPI-300x138.png" alt="HPPI" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/MEDICARD-300x83.png" alt="MediCard" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/COCOLIFE-300x79.png" alt="Cocolife" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/Generali.png" alt="Generali" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/ROYALE-MARINERS_-HEALTHCARE-300x300.jpg" alt="Royale Mariners Healthcare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/LACSON-AND-LACSON.png" alt="Lacson &amp; Lacson" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/HMI-300x120.png" alt="HMI" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/WELLCARE-300x215.png" alt="Wellcare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/ICARE-300x115.png" alt="iCare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/Metrocare-300x150.png" alt="Metrocare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/HEALTHBRIDGE-300x129.jpg" alt="Healthbridge" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/MEDOCARE.png" alt="Medocare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/FORTUNE-LIFE-300x92.png" alt="Fortune Life" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/Optimum-300x62.png" alt="Optimum" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/IMS-WEALTH-CARE.png" alt="IMS Wellth Care" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/MEDASIA-300x80.png" alt="MedAsia" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/INTELLICARE-300x91.png" alt="Intellicare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/AMAPHIL-300x130.png" alt="Amaphil" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/GETWELL-HEALTH-SYSTEM-300x150.png" alt="Getwell Health System" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/PACIFIC-300x99.png" alt="Pacific Cross" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/Flexicare-300x68.png" alt="Flexicare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/ETIQA-300x158.png" alt="Etiqa" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/KAISER-300x49.png" alt="Kaiser" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/AVEGA-300x95.png" alt="Avega" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/PHILCARE-300x118.png" alt="PhilCare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/BENLIFE-300x97.png" alt="BenLife" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/EASTWEST-HEALTHCARE-300x106.png" alt="EastWest Healthcare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/COOPHEALTH.png" alt="CoopHealth" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/AsianCare.png" alt="AsianCare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/MAXICARE-300x97.png" alt="Maxicare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/VALUCARE-300x90.png" alt="ValuCare" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/MEDILINK-300x84.png" alt="Medilink" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/HPPI-300x138.png" alt="HPPI" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/MEDICARD-300x83.png" alt="MediCard" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/COCOLIFE-300x79.png" alt="Cocolife" loading="lazy"></li>
                 </ul>
                 <ul class="pdh-partners__list" aria-hidden="true">
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/Generali.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/ROYALE-MARINERS_-HEALTHCARE-300x300.jpg" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/LACSON-AND-LACSON.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/HMI-300x120.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/WELLCARE-300x215.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/ICARE-300x115.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/Metrocare-300x150.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/HEALTHBRIDGE-300x129.jpg" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/MEDOCARE.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/FORTUNE-LIFE-300x92.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/Optimum-300x62.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/IMS-WEALTH-CARE.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/MEDASIA-300x80.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/INTELLICARE-300x91.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/AMAPHIL-300x130.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/GETWELL-HEALTH-SYSTEM-300x150.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/PACIFIC-300x99.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/Flexicare-300x68.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/ETIQA-300x158.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/KAISER-300x49.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/AVEGA-300x95.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/PHILCARE-300x118.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/BENLIFE-300x97.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/EASTWEST-HEALTHCARE-300x106.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/COOPHEALTH.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/AsianCare.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/MAXICARE-300x97.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/VALUCARE-300x90.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/MEDILINK-300x84.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/HPPI-300x138.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/MEDICARD-300x83.png" alt="" loading="lazy"></li>
-                    <li><img src="http://127.0.0.1:5500/assets/images/pdh/COCOLIFE-300x79.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/Generali.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/ROYALE-MARINERS_-HEALTHCARE-300x300.jpg" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/LACSON-AND-LACSON.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/HMI-300x120.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/WELLCARE-300x215.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/ICARE-300x115.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/Metrocare-300x150.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/HEALTHBRIDGE-300x129.jpg" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/MEDOCARE.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/FORTUNE-LIFE-300x92.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/Optimum-300x62.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/IMS-WEALTH-CARE.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/MEDASIA-300x80.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/INTELLICARE-300x91.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/AMAPHIL-300x130.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/GETWELL-HEALTH-SYSTEM-300x150.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/PACIFIC-300x99.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/Flexicare-300x68.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/ETIQA-300x158.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/KAISER-300x49.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/AVEGA-300x95.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/PHILCARE-300x118.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/BENLIFE-300x97.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/EASTWEST-HEALTHCARE-300x106.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/COOPHEALTH.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/AsianCare.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/MAXICARE-300x97.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/VALUCARE-300x90.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/MEDILINK-300x84.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/HPPI-300x138.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/MEDICARD-300x83.png" alt="" loading="lazy"></li>
+                    <li><img src="/assets/images/pdh/COCOLIFE-300x79.png" alt="" loading="lazy"></li>
                 </ul>
             </div>
         </div>
@@ -738,7 +743,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
                     <div class="blurb__card">
                         <div class="blurb-image-wrapper">
                             <div class="blurb-image">
-                                <img src="http://127.0.0.1:5500/assets/images/pdh/EDITED3-2-1024x575.jpg" alt="PDH Nuclear Medicine treatment room" width="1024" height="575" />
+                                <img src="/assets/images/pdh/EDITED3-2-1024x575.jpg" alt="PDH Nuclear Medicine treatment room" width="1024" height="575" />
                             </div>
                         </div>
                         <div class="blurb-text-wrapper">
@@ -760,7 +765,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
                     <div class="blurb__card">
                         <div class="blurb-image-wrapper">
                             <div class="blurb-image">
-                                <img src="http://127.0.0.1:5500/assets/images/pdh/2D-ECHO-1024x575.jpg" alt="Echocardiogram machine at the PDH Multi Diagnostic Center" width="1024" height="575" />
+                                <img src="/assets/images/pdh/2D-ECHO-1024x575.jpg" alt="Echocardiogram machine at the PDH Multi Diagnostic Center" width="1024" height="575" />
                             </div>
                         </div>
                         <div class="blurb-text-wrapper">
@@ -782,7 +787,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
                     <div class="blurb__card">
                         <div class="blurb-image-wrapper">
                             <div class="blurb-image">
-                                <img src="http://127.0.0.1:5500/assets/images/pdh/REVISED-1-1-1-1024x614.jpg" alt="Dialysis chairs and machines at the PDH Hemodialysis Center" width="1024" height="614" />
+                                <img src="/assets/images/pdh/REVISED-1-1-1-1024x614.jpg" alt="Dialysis chairs and machines at the PDH Hemodialysis Center" width="1024" height="614" />
                             </div>
                         </div>
                         <div class="blurb-text-wrapper">
@@ -804,7 +809,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
                     <div class="blurb__card">
                         <div class="blurb-image-wrapper">
                             <div class="blurb-image">
-                                <img src="http://127.0.0.1:5500/assets/images/pdh/EDITED-1-3-1024x683.png" alt="Examination equipment at the PDH Eye Center" width="1024" height="683" />
+                                <img src="/assets/images/pdh/EDITED-1-3-1024x683.png" alt="Examination equipment at the PDH Eye Center" width="1024" height="683" />
                             </div>
                         </div>
                         <div class="blurb-text-wrapper">
@@ -833,7 +838,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
         <div class="related-content__tiles">
                 <div class="related-content__tile related-content__tile--img" data-in-view="once">
                     <a href="https://pdh.com.ph/neuro-talk-kick-off-empowering-barangay-napindan-with-life-saving-knowledge/">
-                        <img class="related-content__image" src="http://127.0.0.1:5500/assets/images/pdh/486602438_962025689442925_571307973842571642_n-1024x575.jpg" alt="PDH Neuro Talk with residents of Barangay Napindan">
+                        <img class="related-content__image" src="/assets/images/pdh/486602438_962025689442925_571307973842571642_n-1024x575.jpg" alt="PDH Neuro Talk with residents of Barangay Napindan">
                         <div class="related-content__text-wrap">
                             <span class="related-content__text">
                                 Neuro Talk Kick-Off: Empowering Barangay Napindan with Life-Saving Knowledge&nbsp;
@@ -846,7 +851,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
                 </div>
                 <div class="related-content__tile related-content__tile--img" data-in-view="once">
                     <a href="https://pdh.com.ph/im-family-health-talk-kick-off-building-stronger-families-one-health-talk-at-a-time/">
-                        <img class="related-content__image" src="http://127.0.0.1:5500/assets/images/pdh/486760285_959878922990935_3400198730582745199_n-1024x683.jpg" alt="PDH IM Family Health Talk">
+                        <img class="related-content__image" src="/assets/images/pdh/486760285_959878922990935_3400198730582745199_n-1024x683.jpg" alt="PDH IM Family Health Talk">
                         <div class="related-content__text-wrap">
                             <span class="related-content__text">
                                 IM Family Health Talk Kick-Off: Building Stronger Families, One Health Talk at a Time&nbsp;
@@ -859,7 +864,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
                 </div>
                 <div class="related-content__tile related-content__tile--img" data-in-view="once">
                     <a href="https://pdh.com.ph/keeping-hearts-healthy-pdhs-cardiovascular-health-talk-brings-awareness-to-the-community/">
-                        <img class="related-content__image" src="http://127.0.0.1:5500/assets/images/pdh/Keeping-Hearts-Healthy-1024x575.jpg" alt="PDH Cardiovascular Health Talk">
+                        <img class="related-content__image" src="/assets/images/pdh/Keeping-Hearts-Healthy-1024x575.jpg" alt="PDH Cardiovascular Health Talk">
                         <div class="related-content__text-wrap">
                             <span class="related-content__text">
                                 Keeping Hearts Healthy: PDH’s Cardiovascular Health Talk Brings Awareness to the Community&nbsp;
@@ -887,7 +892,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
     <footer id="footer" class="footer">
     <div class="footer__inner" data-in-view="once">
         <div class="footer__col">
-            <a href="/" class="footer__logo"><img src="http://127.0.0.1:5500/assets/images/pdh-logo.png" alt="Parañaque Doctors Hospital logo"></a>
+            <a href="/" class="footer__logo"><img src="/assets/images/pdh-logo.png" alt="Parañaque Doctors Hospital logo"></a>
             <div class="footer__meta">
                     <div class="footer__contact-info"><a href="tel:+63287760644">(02) 8776 0644</a></div>
                     <div class="footer__contact-info">175 Doña Soledad Ave., Better Living Subdivision, Parañaque, 1711 Metro Manila</div>
@@ -961,9 +966,9 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
                     <div class="footer-social">
                             <h2 class="footer-social__title">FOLLOW US ON SOCIAL MEDIA</h2>
                         <ul class="footer-social__list" role="list">
-                                <li><a href="https://www.facebook.com/paranaquedoctorshospitaluhbi/" class="footer-social__link" ><img src="/-/media/images/social-media-icons/facebook.svg?rev=df0821a9ac2443ca8cd3d28f46cf41a5" alt="PDH Official Facebook Page"></a></li>
-                                <li><a href="https://www.instagram.com/paranaquedoctorshospital/" class="footer-social__link" ><img src="/-/media/images/social-media-icons/instagram.svg?rev=c693ac2c09cf4fe8b98ba1e028974ee4" alt="PDH Official Instagram Account"></a></li>
-                                <li><a href="https://www.linkedin.com/company/paranaquedoctorshospital" class="footer-social__link" ><img src="/-/media/images/social-media-icons/linkedin.svg?rev=3c9bbda571b146a29af4a5dc5242fb20" alt="PDH Official LinkedIn Page"></a></li>
+                                <li><a href="https://www.facebook.com/paranaquedoctorshospitaluhbi/" class="footer-social__link" ><img src="/assets/images/icons/social/facebook.svg" alt="PDH Official Facebook Page"></a></li>
+                                <li><a href="https://www.instagram.com/paranaquedoctorshospital/" class="footer-social__link" ><img src="/assets/images/icons/social/instagram.svg" alt="PDH Official Instagram Account"></a></li>
+                                <li><a href="https://www.linkedin.com/company/paranaquedoctorshospital" class="footer-social__link" ><img src="/assets/images/icons/social/linkedin.svg" alt="PDH Official LinkedIn Page"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -986,7 +991,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
         'media-list': '/api/multimedia/GetMultimediaData'
     }
 </script>
-<script src="/assets/js/main.js?v=639306044380000000"></script>
+<script src="/assets/js/main.js"></script>
 
 
 

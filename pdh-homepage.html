@@ -42,10 +42,14 @@
 <style>
 /* PDH logo: the PDH lockup is wider (~4.7:1) than TGH's (~3:1), so widen the
    logo slot per breakpoint to keep a comparable visual height in the header. */
-.global-navigation .nav__logo { flex: 0 1 11.25rem; }
+.global-navigation .nav__logo { flex: 0 1 11.25rem; align-self: flex-start; }
 .global-navigation .nav__logo img { display: block; }
-@media screen and (min-width: 64em) { .global-navigation .nav__logo { flex: 0 1 16.25rem; } }
-@media screen and (min-width: 80em) { .global-navigation .nav__logo { flex: 0 0 18.75rem; } }
+@media screen and (min-width: 64em) { .global-navigation .nav__logo { flex: 0 0 16.25rem; align-self: auto; } }
+/* Wide screens: the badge spans both header rows (top of utility CTAs to bottom of main nav). */
+@media screen and (min-width: 80em) {
+    .global-navigation .nav__logo { flex: 0 0 auto; }
+    .global-navigation .nav__logo img { height: 5.5rem; width: auto; max-width: none; }
+}
 
 /* PDH HMO partners marquee: two identical lists scroll by -50% for a seamless loop. */
 .pdh-partners { background: #fff; padding: 3rem 0; overflow: hidden; text-align: center; }

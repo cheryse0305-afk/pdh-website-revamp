@@ -1,0 +1,1 @@
+(self.webpackChunkTGH=self.webpackChunkTGH||[]).push([[196],{5196:function(e,n,t){t.r(n);var i=t(2674),h=t.n(i);n.default={init:e=>{setTimeout(()=>{e.each(function(){var e=h()(this);0===e[0].innerText.length&&e.hide()})})}}}}]);
