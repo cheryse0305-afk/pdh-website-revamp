@@ -4,7 +4,10 @@
    Without JavaScript, or if the index fails to load, each search tab is a plain form that submits to
    /doctors/?q= or /services/?q=, the HMO tile links to the approval form and the video opens on Vimeo. */
 (function () {
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     setupVideo();
+    setupSlides();
+    setupTilt();
     var root = document.querySelector('[data-pdh-quickfind]');
     if (!root) return;
 
@@ -280,7 +283,7 @@
 
     // Numbers roll up from zero once, unless the visitor prefers reduced motion.
     function countUp() {
-        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (reducedMotion) return;
         [].forEach.call(document.querySelectorAll('[data-pdh-countup]'), function (el) {
             var target = parseInt(el.getAttribute('data-pdh-countup'), 10);
             var start = null;
@@ -368,6 +371,77 @@
             });
         })
         .catch(function () { /* keep the plain forms working */ });
+
+    // Hero core-values slideshow: cross-fades every 6 s; pauses on hover/focus, when the tab is hidden,
+    // or via the pause button (WCAG 2.2.2). With reduced motion it never advances on its own.
+    function setupSlides() {
+        var box = document.querySelector('[data-pdh-slides]');
+        if (!box) return;
+        var slides = [].slice.call(box.querySelectorAll('img[data-value]'));
+        var dots = [].slice.call(box.querySelectorAll('.pdh-arch__dot'));
+        var title = box.querySelector('[data-pdh-slide-title]');
+        var desc = box.querySelector('[data-pdh-slide-desc]');
+        var pause = box.querySelector('[data-pdh-pause]');
+        var current = 0, timer = null, paused = reducedMotion, hovering = false;
+
+        function show(i) {
+            current = (i + slides.length) % slides.length;
+            slides.forEach(function (img, n) {
+                img.classList.toggle('is-active', n === current);
+                if (n === (current + 1) % slides.length) img.loading = 'eager';  // preload the next slide
+            });
+            dots.forEach(function (d, n) {
+                d.classList.toggle('is-active', n === current);
+                if (n === current) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+            });
+            title.textContent = slides[current].getAttribute('data-value');
+            desc.textContent = slides[current].getAttribute('data-desc');
+        }
+        function schedule() {
+            clearTimeout(timer);
+            if (!paused && !hovering && !document.hidden) timer = setTimeout(function () { show(current + 1); schedule(); }, 6000);
+        }
+        function setPaused(value) {
+            paused = value;
+            box.classList.toggle('is-paused', paused);
+            pause.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+            pause.innerHTML = paused
+                ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
+                : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>';
+            schedule();
+        }
+        dots.forEach(function (d, n) { d.addEventListener('click', function () { show(n); schedule(); }); });
+        pause.addEventListener('click', function () { setPaused(!paused); });
+        box.addEventListener('mouseenter', function () { hovering = true; schedule(); });
+        box.addEventListener('mouseleave', function () { hovering = false; schedule(); });
+        box.addEventListener('focusin', function () { hovering = true; schedule(); });
+        box.addEventListener('focusout', function () { hovering = false; schedule(); });
+        document.addEventListener('visibilitychange', schedule);
+        setPaused(paused);
+    }
+
+    // Subtle 3D tilt of the hero photo and its floating cards toward the cursor (desktop mouse only).
+    function setupTilt() {
+        var el = document.querySelector('[data-pdh-tilt]');
+        if (!el || reducedMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        var frame = null;
+        el.classList.add('is-tiltable');
+        el.addEventListener('pointermove', function (ev) {
+            var r = el.getBoundingClientRect();
+            var x = (ev.clientX - r.left) / r.width - 0.5;
+            var y = (ev.clientY - r.top) / r.height - 0.5;
+            cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(function () {
+                el.style.setProperty('--tilt-x', (-y * 6).toFixed(2) + 'deg');
+                el.style.setProperty('--tilt-y', (x * 6).toFixed(2) + 'deg');
+            });
+        });
+        el.addEventListener('pointerleave', function () {
+            cancelAnimationFrame(frame);
+            el.style.setProperty('--tilt-x', '0deg');
+            el.style.setProperty('--tilt-y', '0deg');
+        });
+    }
 
     // "Our Story": load the Vimeo player only when the visitor presses play (no autoplaying video,
     // no Vimeo requests or data use until then). With sound, since the visitor chose to watch.

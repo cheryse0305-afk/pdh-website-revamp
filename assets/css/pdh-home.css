@@ -136,13 +136,37 @@ html:not(.no-js) .pdh-qf__title { clip: rect(0 0 0 0); height: 1px; margin: -1px
     inset: 1rem -.75rem -1rem 1rem; position: absolute; z-index: 0; }
 .pdh-arch { aspect-ratio: 4 / 3.4; border-radius: 12rem 12rem 1.5rem 1.5rem; box-shadow: 0 30px 60px -20px rgba(13, 59, 64, .35);
     margin: 0; overflow: hidden; position: relative; z-index: 1; }
-.pdh-arch img { display: block; height: 100%; object-fit: cover; width: 100%; }
+/* Core-values slideshow: stacked photos cross-fade; a soft gradient keeps the caption readable. */
+.pdh-arch img { display: block; height: 100%; inset: 0; object-fit: cover; opacity: 0; position: absolute; transition: opacity 1.2s ease; width: 100%; }
+.pdh-arch img.is-active { opacity: 1; }
+.pdh-arch::after { background: linear-gradient(180deg, transparent 50%, rgba(13, 59, 64, .45)); content: ""; inset: 0; pointer-events: none; position: absolute; }
+.pdh-arch__caption { -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); background: rgba(255, 255, 255, .9); border-radius: 1rem;
+    bottom: 1rem; box-shadow: 0 12px 28px -12px rgba(13, 59, 64, .4); color: var(--qf-ink); display: flex; flex-direction: column; gap: .125rem;
+    max-width: 15rem; padding: .75rem .875rem; position: absolute; right: 1rem; z-index: 2; }
+.pdh-arch__kicker { color: var(--qf-teal); font-size: .6875rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.pdh-arch__caption strong { font-family: "Barlow Condensed", sans-serif; font-size: 1.5rem; line-height: 1.05; }
+.pdh-arch__desc { color: var(--qf-muted); font-size: .8125rem; line-height: 1.35; }
+.pdh-arch__controls { align-items: center; display: flex; gap: .5rem; justify-content: space-between; margin-top: .5rem; }
+.pdh-arch__dots { display: flex; gap: .375rem; }
+.pdh-arch__dot { background: rgba(13, 59, 64, .25); border: 0; border-radius: 999px; cursor: pointer; height: .5rem; padding: 0;
+    transition: width .3s, background .3s; width: .5rem; }
+.pdh-arch__dot.is-active { background: var(--qf-teal); width: 1.5rem; }
+.pdh-arch__pause { align-items: center; background: rgba(13, 59, 64, .08); border: 0; border-radius: 50%; color: var(--qf-ink); cursor: pointer;
+    display: inline-flex; height: 1.75rem; justify-content: center; padding: 0; width: 1.75rem; }
+.pdh-arch__pause svg { fill: currentColor; height: .875rem; width: .875rem; }
+.pdh-arch__dot:focus-visible, .pdh-arch__pause:focus-visible { outline: 3px solid var(--qf-orange); outline-offset: 2px; }
+
+/* 3D tilt toward the cursor (enabled by JS for mouse users only); floating cards sit in front for depth. */
+.pdh-hero__visual.is-tiltable { transform: perspective(1100px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transform-style: preserve-3d; transition: transform .45s cubic-bezier(.2, .7, .2, 1); }
+.pdh-hero__visual.is-tiltable .pdh-float { transform: translateZ(60px); }
+.pdh-hero__visual.is-tiltable .pdh-arch__caption { transform: translateZ(30px); }
 .pdh-float { -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); background: rgba(255, 255, 255, .9); border: 1px solid rgba(255, 255, 255, .8);
     border-radius: 1rem; box-shadow: 0 16px 36px -12px rgba(13, 59, 64, .3); color: var(--qf-ink); margin: 0; position: absolute; z-index: 2; }
 .pdh-float--since { display: flex; flex-direction: column; left: .75rem; padding: .625rem .875rem; top: 1.5rem; }
 .pdh-float--since strong { color: var(--qf-teal); font-family: "Barlow Condensed", sans-serif; font-size: 1.5rem; line-height: 1; }
 .pdh-float--since span { color: var(--qf-muted); font-size: .8125rem; }
-.pdh-float--today { margin: -3.5rem .75rem 0; padding: 1rem 1.125rem; position: relative; }
+.pdh-float--today { margin: .75rem 0 0; padding: 1rem 1.125rem; position: relative; }
 .pdh-float__title { color: var(--qf-muted); font-family: "DM Sans", sans-serif; font-size: .8125rem; font-weight: 700; letter-spacing: .06em;
     margin: 0 0 .25rem; text-transform: uppercase; }
 .pdh-float__big { font-size: .9375rem; margin: 0 0 .75rem; }
@@ -231,8 +255,10 @@ html:not(.no-js) .pdh-qf__title { clip: rect(0 0 0 0); height: 1px; margin: -1px
 /* ---------- Motion (only for visitors who haven't asked for reduced motion) ---------- */
 @keyframes pdh-ping { 75%, 100% { opacity: 0; transform: scale(2.4); } }
 @keyframes pdh-beacon { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.6); } }
-@keyframes pdh-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-@keyframes pdh-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+/* rise/bob animate `translate`, not `transform`, so they never fight the 3D tilt transform. */
+@keyframes pdh-rise { from { opacity: 0; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }
+@keyframes pdh-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+@keyframes pdh-zoom { from { transform: scale(1.08); } to { transform: scale(1); } }
 @media (prefers-reduced-motion: no-preference) {
     .pdh-rise { animation: pdh-rise .75s cubic-bezier(.2, .7, .2, 1) both; }
     .pdh-hero__main > .pdh-rise:nth-child(2) { animation-delay: .06s; }
@@ -245,6 +271,7 @@ html:not(.no-js) .pdh-qf__title { clip: rect(0 0 0 0); height: 1px; margin: -1px
     .pdh-tiles > .pdh-rise:nth-child(3) { animation-delay: .46s; }
     .pdh-tiles > .pdh-rise:nth-child(4) { animation-delay: .54s; }
     .pdh-float--since { animation: pdh-bob 6s ease-in-out infinite; }
+    .pdh-arch img.is-active { animation: pdh-zoom 7s ease-out both; }
 }
 @media (prefers-reduced-motion: reduce) {
     .pdh-pill__dot::after, .pdh-live::after, .pdh-tile--emergency .pdh-tile__badge::after { animation: none; display: none; }
