@@ -259,7 +259,9 @@ def load_terms(doctors, services, contacts):
         count = sum(target_matches(group["target"], d) for d in doctors)
         if count == 0:
             errors.append(f"specialty target {group['target']} matches no doctors")
-        specialties.append({"label": group["label"], "url": target_url(group["target"]), "count": count, "terms": group["terms"]})
+        specialties.append({"label": group["label"], "url": target_url(group["target"]), "count": count, "terms": group["terms"],
+                            # positions in search-index "doctors" (same order as doctors.json), for the concierge
+                            "ix": [i for i, d in enumerate(doctors) if target_matches(group["target"], d)]})
     service_terms = {}
     for group in raw["services"]:
         if group["service"] not in service_ids:
@@ -380,7 +382,7 @@ def search_index(doctors, services, raw_terms, specialties, service_terms, hotli
             depts[d["department"]] = depts.get(d["department"], 0) + 1
     return {
         "doctors": [{"id": d["id"], "n": d["name"], "s": d["specialty"], "d": d["department"], "days": d["days"] or [],
-                     "oc": d["on_call"]} for d in doctors],
+                     "oc": d["on_call"], "sch": d["schedule"]} for d in doctors],
         "departments": [{"name": k, "count": v, "url": target_url({"dept": k})} for k, v in sorted(depts.items(), key=lambda x: -x[1])],
         "faces": faces,
         "specialty_count": len({d["specialty"] for d in doctors if d["specialty"]}),

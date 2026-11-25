@@ -31,6 +31,16 @@ Keep `data/*.json` (doctors, services, contacts, hospital profile, HMO partners)
 ## Security headers (`vercel.json`)
 The Content-Security-Policy only allows our own files plus Google Fonts, Vimeo (the "Our Story" video) and pdh.com.ph images. If you add a new external service (e.g. a chat widget, analytics, a map embed), add its domain to the matching directive or it will be silently blocked. The one inline script in `index.html` (`window.JSON_ENDPOINTS`) is allowed by its SHA-256 hash: if that block is edited, recompute the hash and update `script-src`, or the script will be blocked.
 
+## Kriss concierge (prototype chat widget)
+`assets/js/pdh-concierge.js` and `assets/css/pdh-concierge.css` are loaded on every page; the server side is `api/chat.js` (a Vercel function, no npm dependencies).
+- **AI on or off:** with `ANTHROPIC_API_KEY` set in Vercel → Settings → Environment Variables (then redeploy), answers come from Claude Haiku 5.5 (`claude-haiku-5-5`), grounded only in `data/*.json`. Without it, `/api/chat` returns 503 `not_configured` and the widget answers in "guided" mode from `data/search-index.json` and `data/contacts.json`. The chat header says which mode is active. Never put the key in a file or in chat.
+- **Data refresh = Kriss refresh:** `api/chat.js` bundles the data files at deploy time, so after refreshing the data run `python tools/build_pages.py` and deploy; Kriss then answers from the new data.
+- **Safety:** emergency and crisis phrases in `data/search-terms.json` always show the ER / NCMH hotline card first, in both modes.
+- **Limits:** about 20 messages per visitor IP per 10 minutes (per warm server instance; best effort), 600 characters per message, last 12 messages sent. Only token usage is logged, never message text.
+- **Cost:** the knowledge prompt is about 16k tokens and cached; check usage in the Anthropic Console after enabling.
+- **Before launch:** the prototype notice says the data is not yet verified. When the PDH reviewer has verified the data, update that notice in `pdh-concierge.js` and the instructions in `api/chat.js`.
+- **Testing locally:** a static server (`python -m http.server`) can't run `/api/chat`, so the widget falls back to guided mode. That's expected.
+
 ## Going live on pdh.com.ph
 1. Point the pdh.com.ph domain at this Vercel project (Vercel → Settings → Domains) and confirm the site loads on it.
 2. Redirect important old WordPress URLs to their new equivalents (e.g. `/all-doctors/` → `/doctors/`, `/our-services/` → `/services/`, `/doctor/<name>/` → `/doctors/<name>/`) so existing search results and bookmarks keep working.

@@ -1,0 +1,103 @@
+/* Kriss concierge widget (markup built by assets/js/pdh-concierge.js). PDH teal/orange; own SVG strokes
+   because global.css strokes every svg black. Phones: round launcher above the quick-contact bar, full-screen
+   chat. Desktop: "Ask Kriss" pill bottom-right (the Messenger button moves above it), floating chat panel. */
+.pdh-kriss { --k-ink: #0d3b40; --k-teal: #007f86; --k-bright: #0aa1a5; --k-orange: #f47a20; --k-line: #d5e6e7; --k-soft: #eef7f7; color: var(--k-ink); }
+.pdh-kriss svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+.pdh-kriss__sr { clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
+
+/* Launcher */
+.pdh-kriss__launcher { align-items: center; background: linear-gradient(135deg, #0aa1a5, #007f86 60%, #0d3b40); border: 0; border-radius: 999px;
+    bottom: calc(4.25rem + env(safe-area-inset-bottom) + .75rem); box-shadow: 0 14px 30px -10px rgba(13, 59, 64, .55); color: #fff; cursor: pointer;
+    display: flex; gap: .625rem; height: 3.5rem; justify-content: center; padding: 0; position: fixed; right: 1rem; width: 3.5rem; z-index: 6; }
+.pdh-kriss__launcher svg { height: 1.625rem; width: 1.625rem; }
+.pdh-kriss__launcher svg path:last-child { stroke: #ffd2ad; stroke-width: 2.2; }
+.pdh-kriss__launcher:hover { box-shadow: 0 18px 34px -10px rgba(13, 59, 64, .65); }
+.pdh-kriss__launcher:focus-visible, .pdh-kriss button:focus-visible, .pdh-kriss a:focus-visible, .pdh-kriss textarea:focus-visible {
+    outline: 3px solid var(--k-orange); outline-offset: 2px; }
+.pdh-kriss__launch-text { display: none; }
+.pdh-kriss.is-open .pdh-kriss__launcher { display: none; }
+
+/* Panel: full screen on phones */
+.pdh-kriss__panel { background: #fff; display: flex; flex-direction: column; inset: 0; position: fixed; z-index: 10000; }
+.pdh-kriss__panel[hidden] { display: none; }
+@media screen and (max-width: 63.99em) { html.pdh-kriss-open, html.pdh-kriss-open body { overflow: hidden; } }
+
+.pdh-kriss__head { align-items: center; background: radial-gradient(18rem 10rem at 100% 0, rgba(10, 161, 165, .55), transparent 70%), linear-gradient(135deg, #0d3b40, #0a5a60);
+    color: #fff; display: flex; gap: .75rem; padding: .875rem 1rem; padding-top: calc(.875rem + env(safe-area-inset-top)); }
+.pdh-kriss__avatar { align-items: center; background: #fff; border-radius: 50%; box-shadow: 0 0 0 3px rgba(255, 255, 255, .25); display: inline-flex; flex: none;
+    height: 2.5rem; justify-content: center; width: 2.5rem; }
+.pdh-kriss__avatar svg { fill: var(--k-orange); height: 1.375rem; stroke: none; width: 1.375rem; }
+.pdh-kriss__title { flex: 1; min-width: 0; }
+.pdh-kriss__title h2 { color: #fff; font-family: "Barlow Condensed", sans-serif; font-size: 1.5rem; letter-spacing: .01em; line-height: 1; margin: 0; }
+.pdh-kriss__title p { color: #bfeeed; font-size: .8125rem; margin: .25rem 0 0; }
+.pdh-kriss__close { align-items: center; background: rgba(255, 255, 255, .12); border: 0; border-radius: 50%; color: #fff; cursor: pointer; display: inline-flex;
+    height: 2.5rem; justify-content: center; width: 2.5rem; }
+.pdh-kriss__close:hover { background: rgba(255, 255, 255, .22); }
+.pdh-kriss__close svg { height: 1.25rem; width: 1.25rem; }
+
+.pdh-kriss__notice { background: #fff6ee; border-bottom: 1px solid #fde0c6; color: #6b3a12; font-size: .75rem; line-height: 1.45; margin: 0; padding: .5rem 1rem; }
+.pdh-kriss__notice a { color: #b42318; font-weight: 700; }
+
+.pdh-kriss__log { background: linear-gradient(180deg, var(--k-soft), #fff 12rem); display: flex; flex: 1; flex-direction: column; gap: .625rem;
+    overflow-y: auto; overscroll-behavior: contain; padding: 1rem; }
+.pdh-kriss__msg { display: flex; }
+.pdh-kriss__msg--user { justify-content: flex-end; }
+.pdh-kriss__bubble { border-radius: 1rem; font-size: .9375rem; line-height: 1.5; max-width: 88%; overflow-wrap: anywhere; padding: .625rem .875rem; }
+.pdh-kriss__msg--assistant .pdh-kriss__bubble { background: #fff; border: 1px solid var(--k-line); border-bottom-left-radius: .25rem; box-shadow: 0 6px 16px -12px rgba(13, 59, 64, .35); }
+.pdh-kriss__msg--user .pdh-kriss__bubble { background: var(--k-teal); border-bottom-right-radius: .25rem; color: #fff; white-space: pre-wrap; }
+.pdh-kriss__msg--alert .pdh-kriss__bubble { background: #fdecea; border: 1px solid #f5b7b1; border-left: 4px solid #b42318; color: #5c130d; max-width: 100%; }
+.pdh-kriss__bubble p { margin: 0 0 .5rem; }
+.pdh-kriss__bubble p:last-child, .pdh-kriss__bubble ul:last-child, .pdh-kriss__bubble ol:last-child { margin-bottom: 0; }
+.pdh-kriss__bubble ul, .pdh-kriss__bubble ol { margin: 0 0 .5rem; padding-left: 1.125rem; }
+.pdh-kriss__bubble ul { list-style: disc; }
+.pdh-kriss__bubble ol { list-style: decimal; }
+.pdh-kriss__bubble li { margin: 0 0 .25rem; }
+.pdh-kriss__bubble a { color: var(--k-teal); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.pdh-kriss__msg--alert .pdh-kriss__bubble a { color: #b42318; }
+
+.pdh-kriss__typing .pdh-kriss__bubble { align-items: center; display: inline-flex; gap: .25rem; padding: .875rem 1rem; }
+.pdh-kriss__typing i { animation: pdh-kriss-dot 1.2s infinite ease-in-out; background: var(--k-bright); border-radius: 50%; display: block; height: .5rem; width: .5rem; }
+.pdh-kriss__typing i:nth-child(3) { animation-delay: .15s; }
+.pdh-kriss__typing i:nth-child(4) { animation-delay: .3s; }
+@keyframes pdh-kriss-dot { 0%, 60%, 100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+
+.pdh-kriss__chips { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0 1rem .75rem; }
+.pdh-kriss__chips[hidden] { display: none; }
+.pdh-kriss__chips button { background: #fff; border: 1px solid var(--k-bright); border-radius: 999px; color: var(--k-teal); cursor: pointer; font-size: .8125rem;
+    font-weight: 700; padding: .4375rem .75rem; }
+.pdh-kriss__chips button:hover { background: var(--k-soft); }
+
+.pdh-kriss__form { align-items: flex-end; border-top: 1px solid var(--k-line); display: flex; gap: .5rem; padding: .75rem 1rem; }
+.pdh-kriss__form textarea { border: 1px solid var(--k-line); border-radius: 1.25rem; box-shadow: none; color: var(--k-ink); flex: 1; font: inherit; font-size: 1rem;
+    height: auto; line-height: 1.4; margin: 0; max-height: 7.5rem; min-height: 2.75rem; padding: .625rem 1rem; resize: none; }
+.pdh-kriss__form textarea:focus { border-color: var(--k-bright); }
+.pdh-kriss__send { align-items: center; background: var(--k-orange); border: 0; border-radius: 50%; color: #fff; cursor: pointer; display: inline-flex; flex: none;
+    height: 2.75rem; justify-content: center; width: 2.75rem; }
+.pdh-kriss__send:hover { background: #d9650f; }
+.pdh-kriss__send:disabled { cursor: wait; opacity: .55; }
+.pdh-kriss__send svg { height: 1.25rem; stroke-width: 2; width: 1.25rem; }
+.pdh-kriss__foot { color: #48606a; font-size: .75rem; margin: 0; padding: 0 1rem calc(.75rem + env(safe-area-inset-bottom)); }
+.pdh-kriss__foot a { color: var(--k-teal); font-weight: 700; }
+
+/* Desktop: pill launcher, floating panel; the Messenger button sits above the launcher. */
+@media screen and (min-width: 64em) {
+    .pdh-kriss__launcher { bottom: 1.5rem; height: auto; padding: .5rem 1.25rem .5rem .5rem; right: 1.5rem; width: auto; }
+    .pdh-kriss__launcher > svg { background: rgba(255, 255, 255, .16); border-radius: 50%; box-sizing: content-box; padding: .5rem; }
+    .pdh-kriss__launch-text { display: flex; flex-direction: column; line-height: 1.15; text-align: left; }
+    .pdh-kriss__launch-text strong { font-size: 1rem; }
+    .pdh-kriss__launch-text span { color: #c9f1f0; font-size: .75rem; }
+    .pdh-kriss__panel { border-radius: 1.25rem; box-shadow: 0 30px 60px -20px rgba(13, 59, 64, .5), 0 0 0 1px rgba(13, 59, 64, .08);
+        height: min(40rem, calc(100vh - 3rem)); inset: auto 1.5rem 1.5rem auto; overflow: hidden; width: 25rem; }
+    .pdh-kriss__head { padding-top: .875rem; }
+    body .pdh-quickbar { bottom: 5.75rem; }
+    html.pdh-kriss-open .pdh-quickbar { display: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .pdh-kriss__launcher { transition: box-shadow .2s, transform .2s; }
+    .pdh-kriss__launcher:hover { transform: translateY(-2px); }
+    .pdh-kriss.is-open .pdh-kriss__panel { animation: pdh-kriss-in .22s ease-out; }
+    @keyframes pdh-kriss-in { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) { .pdh-kriss__typing i { animation: none; opacity: .6; } }
+@media print { .pdh-kriss { display: none; } }
