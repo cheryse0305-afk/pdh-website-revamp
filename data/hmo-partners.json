@@ -1,0 +1,370 @@
+{
+  "meta": {
+    "generated_by": "tools/build_pdh_data.py",
+    "generated_at": "2026-11-25T06:31:45+00:00",
+    "sources": [
+      "https://pdh.com.ph/",
+      "index.html (HMO partners marquee)"
+    ],
+    "records": 32,
+    "review_summary": {
+      "pending": 32,
+      "verified": 0,
+      "changed": 0
+    }
+  },
+  "items": [
+    {
+      "id": "generali",
+      "name": "Generali",
+      "logo": "/assets/images/pdh/Generali.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "1fa8b5f0552a781f",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "royale-mariners-healthcare",
+      "name": "Royale Mariners Healthcare",
+      "logo": "/assets/images/pdh/ROYALE-MARINERS_-HEALTHCARE-300x300.jpg",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "e6ac2a585034bbaa",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "lacson-lacson",
+      "name": "Lacson & Lacson",
+      "logo": "/assets/images/pdh/LACSON-AND-LACSON.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "bb6982a670b4bcdb",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "hmi",
+      "name": "HMI",
+      "logo": "/assets/images/pdh/HMI-300x120.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "196779ea28ce86bd",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "wellcare",
+      "name": "Wellcare",
+      "logo": "/assets/images/pdh/WELLCARE-300x215.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "e1281e96af6fcc81",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "icare",
+      "name": "iCare",
+      "logo": "/assets/images/pdh/ICARE-300x115.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "03d0176c5c09cddd",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "metrocare",
+      "name": "Metrocare",
+      "logo": "/assets/images/pdh/Metrocare-300x150.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "8b56214e464b8081",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "healthbridge",
+      "name": "Healthbridge",
+      "logo": "/assets/images/pdh/HEALTHBRIDGE-300x129.jpg",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "09920ad5bc8dcca1",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "medocare",
+      "name": "Medocare",
+      "logo": "/assets/images/pdh/MEDOCARE.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "add4b55136edb497",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "fortune-life",
+      "name": "Fortune Life",
+      "logo": "/assets/images/pdh/FORTUNE-LIFE-300x92.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "e9143692bbf249d8",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "optimum",
+      "name": "Optimum",
+      "logo": "/assets/images/pdh/Optimum-300x62.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "e33544fee75431cc",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "ims-wellth-care",
+      "name": "IMS Wellth Care",
+      "logo": "/assets/images/pdh/IMS-WEALTH-CARE.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "88e5390cad14c0c9",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "medasia",
+      "name": "MedAsia",
+      "logo": "/assets/images/pdh/MEDASIA-300x80.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "a11b69a839852f75",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "intellicare",
+      "name": "Intellicare",
+      "logo": "/assets/images/pdh/INTELLICARE-300x91.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "8654ba809a187524",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "amaphil",
+      "name": "Amaphil",
+      "logo": "/assets/images/pdh/AMAPHIL-300x130.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "b620e1f3118102e4",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "getwell-health-system",
+      "name": "Getwell Health System",
+      "logo": "/assets/images/pdh/GETWELL-HEALTH-SYSTEM-300x150.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "76bc7e66e84e3d25",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "pacific-cross",
+      "name": "Pacific Cross",
+      "logo": "/assets/images/pdh/PACIFIC-300x99.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "503baf9f50a70e59",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "flexicare",
+      "name": "Flexicare",
+      "logo": "/assets/images/pdh/Flexicare-300x68.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "4710fa56d3104de2",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "etiqa",
+      "name": "Etiqa",
+      "logo": "/assets/images/pdh/ETIQA-300x158.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "1574cb516becefaf",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "kaiser",
+      "name": "Kaiser",
+      "logo": "/assets/images/pdh/KAISER-300x49.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "c4e7d9ba066aafb0",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "avega",
+      "name": "Avega",
+      "logo": "/assets/images/pdh/AVEGA-300x95.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "e811074e774cad33",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "philcare",
+      "name": "PhilCare",
+      "logo": "/assets/images/pdh/PHILCARE-300x118.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "a710519e555a6fbe",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "benlife",
+      "name": "BenLife",
+      "logo": "/assets/images/pdh/BENLIFE-300x97.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "bda6c97adc5bab8e",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "eastwest-healthcare",
+      "name": "EastWest Healthcare",
+      "logo": "/assets/images/pdh/EASTWEST-HEALTHCARE-300x106.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "d5f2db84609d7e54",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "coophealth",
+      "name": "CoopHealth",
+      "logo": "/assets/images/pdh/COOPHEALTH.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "f49f31732014c472",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "asiancare",
+      "name": "AsianCare",
+      "logo": "/assets/images/pdh/AsianCare.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "a90e3129119c9840",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "maxicare",
+      "name": "Maxicare",
+      "logo": "/assets/images/pdh/MAXICARE-300x97.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "705e0d0cb127d15e",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "valucare",
+      "name": "ValuCare",
+      "logo": "/assets/images/pdh/VALUCARE-300x90.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "0610216543862a7b",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "medilink",
+      "name": "Medilink",
+      "logo": "/assets/images/pdh/MEDILINK-300x84.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "374aa553c7d463da",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "hppi",
+      "name": "HPPI",
+      "logo": "/assets/images/pdh/HPPI-300x138.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "1f370402ff75bb2d",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "medicard",
+      "name": "MediCard",
+      "logo": "/assets/images/pdh/MEDICARD-300x83.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "1a799a7043676075",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    },
+    {
+      "id": "cocolife",
+      "name": "Cocolife",
+      "logo": "/assets/images/pdh/COCOLIFE-300x79.png",
+      "name_source": "inferred from logo filename (old site has no names)",
+      "fingerprint": "ef0a5a66786653a5",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    }
+  ]
+}

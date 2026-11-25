@@ -115,8 +115,9 @@ Ordered by severity.
    - `doctors.json`: name, specialty, sub-specialty, clinic schedule, phone, photo. Source: the paginated `/all-doctors/` directory plus the API.
    - `contacts.json`: hotlines, address, email.
    - `hmo-partners.json`: name and logo.
-   - `faq.json`: only answers PDH has verified. Start empty and fill it from hospital staff.
-8. **`tools/export_pdh_doctors.py`:** a new tool that scrapes the paginated directory, merges it with API data and writes `doctors.json`. Re-running it refreshes the data.
+   - `hospital.json`: profile, mission, vision, core values, leadership, barangay partners.
+   - `faq.json`: only answers PDH has verified. Created later, filled by hospital staff (not generated).
+8. **`tools/build_pdh_data.py`** (built 25 Nov 2026): scrapes the paginated doctor directory and the services, contact and About pages, and writes all `data/*.json` files. Each record carries `review_status` (`pending` / `verified`), `reviewed_by`, `reviewed_at` and a content fingerprint. Re-running keeps review status for unchanged records and resets changed ones to `pending` with `changed_since_review: true`.
 9. **A human review step:** someone at PDH signs off on the JSON before it's used by the chatbot. This is the "verified hospital information" requirement in goal A.
 
 ### Phase 2: Lead generation and Doctor Finder (goals B and C)
@@ -212,9 +213,9 @@ Ordered by severity.
 | `assets/js/pdh-concierge.js` | Chat widget and voice. |
 | `api/inquiry.js` | Lead intake, validation, categorisation, storage, notification. |
 | `api/chat.js` | AI concierge and natural-language search. |
-| `data/services.json`, `doctors.json`, `contacts.json`, `hmo-partners.json`, `faq.json` | Verified knowledge base. |
+| `data/services.json`, `doctors.json`, `contacts.json`, `hospital.json`, `hmo-partners.json`, `faq.json` | Verified knowledge base. |
 | `doctors/index.html`, `doctors/<slug>/index.html` | Doctor Finder and profile pages (generated). |
-| `tools/export_pdh_doctors.py`, `tools/build_doctor_pages.py` | Data export and page generation. |
+| `tools/build_pdh_data.py`, `tools/build_doctor_pages.py` | Data export and page generation. |
 | `robots.txt`, `sitemap.xml`, `llms.txt`, `favicon.ico` | SEO and discoverability. |
 | `workflows/*.md` | Procedures for refreshing data and regenerating pages. Created only with your approval, per the project rules. |
 

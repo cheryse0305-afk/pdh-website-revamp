@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "generated_by": "tools/build_pdh_data.py",
+    "generated_at": "2026-11-25T06:31:45+00:00",
+    "sources": [
+      "https://pdh.com.ph/about-us/"
+    ],
+    "records": 1,
+    "review_summary": {
+      "pending": 1,
+      "verified": 0,
+      "changed": 0
+    }
+  },
+  "items": [
+    {
+      "id": "hospital",
+      "name": "Parañaque Doctors Hospital",
+      "short_name": "PDH",
+      "intro": [
+        "Parañaque Doctors Hospital (PDH) is a premier Level 2 healthcare institution located in the heart of Parañaque City. It is committed to ensuring the well-being of its community by continuously providing high-quality and affordable healthcare services.",
+        "Founded on May 8, 2007, by visionary doctors, PDH officially became a member of the Metro Pacific Health (MPH) Group in 2024 — the largest Philippine private hospital network in the country under the Metro Pacific Investments Corporation (MPIC), led by Mr. Manuel V. Pangilinan.",
+        "As member of the MPH network, PDH shares the same goal in providing medical excellence and compassionate care to all our patients.",
+        "PDH is a pillar of trust in healthcare for its neighboring community, driven by a deep passion for delivering patient-centered care across generations. With a comprehensive range of medical facilities—including a 94-bed inpatient facility, Emergency Room (ER), Intensive Care Unit (ICU), Neonatal Intensive Care Unit (NICU), Operating Room (OR), Delivery Room (DR), Laboratory, and Radiology, PDH is also accredited by the Department of Health (DOH), PhilHealth, and various Health Maintenance Organizations (HMOs), ensuring accessible healthcare and full compliance with government-regulated standards.",
+        "More than just a healthcare provider, PDH is a steadfast partner in the community’s journey to wellness."
+      ],
+      "mission": "To deliver “Alagang PDH”, our unique way of delivering high quality and compassionate care that is affordable, accessible, and patient-centered.",
+      "vision": "To be the leading healthcare provider, renowned for medical excellence, compassionate care, innovative healthcare services, and dedicated commitment to the well-being of the community.",
+      "goal": "To provide healthcare services that combine exceptional quality with affordability, making every experience at PDH truly worth it for our patients and their families.",
+      "core_values": [
+        {
+          "name": "Excellence",
+          "description": "Striving for the highest standards in healthcare delivery"
+        },
+        {
+          "name": "Compassion",
+          "description": "Delivering care with empathy and understanding"
+        },
+        {
+          "name": "Innovation",
+          "description": "Embracing modern medical advancements to enhance patient care"
+        },
+        {
+          "name": "Integrity",
+          "description": "Upholding transparency and ethical practices in all aspects of our operations"
+        },
+        {
+          "name": "Teamwork",
+          "description": "Collaborating effectively to achieve shared goals"
+        }
+      ],
+      "leadership_intro": [
+        "Guided by Purpose. Driven by Passion.",
+        "At PDH, our leadership team is the heart of our progress. With diverse backgrounds and a shared commitment to excellence, they bring together experience, innovation, and compassion to lead our hospital toward a future of patient-centered care and continuous growth."
+      ],
+      "leadership": [
+        {
+          "name": "Juan Alberto B. Goyena",
+          "title": "President and Chief Executive Officer"
+        },
+        {
+          "name": "Bernadette A. San Jose",
+          "title": "Financial Controller"
+        },
+        {
+          "name": "Dr. Frederick G. Tan, MD",
+          "title": "Chief Medical Officer"
+        },
+        {
+          "name": "Maria Franches Stephanie A. Grape",
+          "title": "Human Resources Manager"
+        },
+        {
+          "name": "Diana Ern V. Cleofe",
+          "title": "Sales and Marketing Manager"
+        },
+        {
+          "name": "Aleli Rose I. Sayco",
+          "title": "Ancillary Services Manager"
+        },
+        {
+          "name": "Arch. Antonieto P. Semorlan",
+          "title": "Engineering & Facilities Manager"
+        },
+        {
+          "name": "John Manuel M. Borjal",
+          "title": "MIS Manager"
+        },
+        {
+          "name": "Fabian T. Palomar",
+          "title": "Purchasing and Procurement Manager"
+        },
+        {
+          "name": "Robaldo T. Galon, RN, MAN",
+          "title": "Chief Nurse"
+        }
+      ],
+      "barangay_partners": [
+        {
+          "name": "Barangay Don Bosco",
+          "description": "We’re thrilled to partner with Barangay Don Bosco! Through our Memorandum of Agreement, we are committed to improving healthcare access for the community. Just present your Barangay ID or any valid ID to enjoy exclusive PDH benefits."
+        },
+        {
+          "name": "Barangay Sun Valley",
+          "description": "PDH has partnered with Barangay Sun Valley to enhance healthcare access and wellness. Present proof of residence, like your Barangay ID, and enjoy exclusive health benefits at PDH."
+        },
+        {
+          "name": "Barangay Marcelo Green",
+          "description": "Parañaque Doctors Hospital is proud to partner with Barangay Marcelo Green, marking a step towards better healthcare for the community. Simply show your Barangay ID for special benefits."
+        },
+        {
+          "name": "Barangay San Antonio",
+          "description": "We’ve teamed up with Barangay San Antonio to bring better healthcare to the community. This partnership reaffirms PDH’s dedication to accessible healthcare and wellness."
+        },
+        {
+          "name": "Barangay Upper Bicutan",
+          "description": "PDH has partnered with Barangay Upper Bicutan to bring quality healthcare closer to you. Just present your Barangay ID or government-issued ID to enjoy exclusive benefits."
+        },
+        {
+          "name": "Barangay Napindan",
+          "description": "We’re excited to partner with Barangay Napindan to expand healthcare access. Stay tuned for more initiatives like health education and medical missions to better serve the community."
+        },
+        {
+          "name": "Barangay Moonwalk",
+          "description": "PDH has officially partnered with Barangay Moonwalk to launch health education programs and community wellness initiatives. Stay tuned for more updates on our joint efforts for a healthier community."
+        }
+      ],
+      "fingerprint": "5d5d294f93fab38a",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    }
+  ]
+}

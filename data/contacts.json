@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "generated_by": "tools/build_pdh_data.py",
+    "generated_at": "2026-11-25T06:31:43+00:00",
+    "sources": [
+      "https://pdh.com.ph/contact-2/"
+    ],
+    "records": 1,
+    "review_summary": {
+      "pending": 1,
+      "verified": 0,
+      "changed": 0
+    }
+  },
+  "items": [
+    {
+      "id": "contacts",
+      "hotlines": [
+        {
+          "id": "information-services",
+          "name": "Information Services",
+          "numbers": "8776 0644/51 to local 7000 or 0998 520 7295",
+          "mobile": "0998 520 7295"
+        },
+        {
+          "id": "emergency",
+          "name": "Emergency",
+          "numbers": "8776 0645 to local 8106 or 0921 572 0589",
+          "mobile": "0921 572 0589"
+        },
+        {
+          "id": "admitting-department",
+          "name": "Admitting Department",
+          "numbers": "8776 0646 to local 8728 or 0947 236 9827",
+          "mobile": "0947 236 9827"
+        },
+        {
+          "id": "hmo-hub",
+          "name": "HMO Hub",
+          "numbers": "8776 0647 to local 8945 or 0921 567 2709",
+          "mobile": "0921 567 2709"
+        },
+        {
+          "id": "hr-department",
+          "name": "HR Department",
+          "numbers": "8776 0644 to local 8207 or 0947 341 5241",
+          "mobile": "0947 341 5241"
+        }
+      ],
+      "emails": [
+        "marketing@pdh.com.ph"
+      ],
+      "address": "175 Doña Soledad Ave., Better Living Subdivision, Parañaque, 1711, Metro Manila",
+      "fingerprint": "583b5f003a177c1c",
+      "review_status": "pending",
+      "reviewed_by": null,
+      "reviewed_at": null,
+      "review_notes": null
+    }
+  ]
+}
