@@ -215,7 +215,7 @@ Ordered by severity.
 | `api/chat.js` | AI concierge and natural-language search. |
 | `data/services.json`, `doctors.json`, `contacts.json`, `hospital.json`, `hmo-partners.json`, `faq.json` | Verified knowledge base. |
 | `doctors/index.html`, `doctors/<slug>/index.html` | Doctor Finder and profile pages (generated). |
-| `tools/build_pdh_data.py`, `tools/build_doctor_pages.py` | Data export and page generation. |
+| `tools/build_pdh_data.py`, `tools/build_pages.py` | Data export; generation of doctor pages, services directory and the homepage search index. |
 | `robots.txt`, `sitemap.xml`, `llms.txt`, `favicon.ico` | SEO and discoverability. |
 | `workflows/*.md` | Procedures for refreshing data and regenerating pages. Created only with your approval, per the project rules. |
 

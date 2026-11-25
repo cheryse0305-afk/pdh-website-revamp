@@ -14,9 +14,10 @@
     var shown = pageSize;
     var timer;
 
-    // Lowercase and strip accents; mirrors fold() in tools/build_doctor_pages.py.
-    function fold(text) {
-        return (text || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    // Lowercase, strip accents and punctuation; mirrors words() in tools/build_pages.py.
+    function words(text) {
+        return (text || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+            .replace(/['’]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
     }
 
     function values() {
@@ -31,12 +32,14 @@
         if (v.spec && d.spec !== v.spec) return false;
         if (v.day === 'oncall' && !d.oncall) return false;
         if (v.day && v.day !== 'oncall' && (' ' + d.days + ' ').indexOf(' ' + v.day + ' ') === -1) return false;
-        return terms.every(function (t) { return d.search.indexOf(t) !== -1; });
+        // Word-prefix match: "santos" finds "Delos Santos" but not "Yarisantos".
+        var haystack = ' ' + d.search;
+        return terms.every(function (t) { return haystack.indexOf(' ' + t) !== -1; });
     }
 
     function render() {
         var v = values();
-        var terms = fold(v.q).split(/\s+/).filter(Boolean);
+        var terms = words(v.q).split(' ').filter(Boolean);
         var hits = 0;
         cards.forEach(function (card) {
             var ok = matches(card, v, terms);

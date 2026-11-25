@@ -21,13 +21,19 @@ Keep `data/*.json` (doctors, services, contacts, hospital profile, HMO partners)
 2. Read the summary line for each file, e.g. `data/doctors.json: 289 records ({'pending': 289, 'verified': 0, 'changed': 0})`.
    - A sudden drop in record counts means the old site's layout changed. Don't commit; see the edge cases below.
    - `changed > 0` means previously verified records changed at the source and need re-review.
-3. Regenerate the Doctor Finder and profile pages from the new data:
+3. Regenerate the Doctor Finder, profile pages, services directory and homepage search index:
    ```
-   python tools/build_doctor_pages.py
+   python tools/build_pages.py
    ```
-   Also run this after any change to the header, navigation or footer in `index.html`, because the doctor pages copy them from there. `doctors/` is generated output: never edit it by hand.
+   Also run this after any change to the header, navigation or footer in `index.html` (the generated pages copy them from there) and after editing `data/search-terms.json`. `doctors/`, `services/` and `data/search-index.json` are generated output: never edit them by hand. The tool stops with an error if a search-terms target no longer matches the data (e.g. a specialty was renamed); fix the term file and re-run.
 4. Review with `git diff data/` before committing.
-5. Commit the data files and `doctors/`. Pushing to `main` deploys to production, so confirm with the project owner first.
+5. Commit the data files, `doctors/` and `services/`. Pushing to `main` deploys to production, so confirm with the project owner first.
+
+## Search vocabulary (`data/search-terms.json`)
+Hand-written, not generated. It maps everyday English/Filipino words to specialties and services ("puso" to Cardiology, "gamot" to Pharmacy), and lists the emergency and crisis phrases that trigger the homepage safety banners.
+- Add words patients actually use; keep targets exact (`spec` / `dept` must match `doctors.json` spelling).
+- Emergency banner uses the "Emergency" hotline from `contacts.json`. The crisis banner uses the NCMH hotline numbers in the file (verified via web sources on 2026-11-25); PDH should confirm them before launch.
+- The file has its own `review_status`; a clinician or the PDH data owner should review the term mappings and phrases.
 
 ## Reviewing records (PDH data owner)
 Edit the record in the JSON file and set:

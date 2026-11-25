@@ -40,6 +40,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
 <link rel="stylesheet" href="/assets/css/global.css">
+<link rel="stylesheet" href="/assets/css/pdh-search.css">
 <style>
 /* PDH logo: the PDH lockup is wider (~4.7:1) than TGH's (~3:1), so widen the
    logo slot per breakpoint to keep a comparable visual height in the header. */
@@ -100,7 +101,7 @@
 
                                 </li>
                                 <li class="nav-main__item">
-                                    <a href="https://pdh.com.ph/our-services/"  class="nav-main__link js-nav-main-link">Our Services</a>
+                                    <a href="/services/"  class="nav-main__link js-nav-main-link">Our Services</a>
 
                                         <ul class="nav-main__flyout menu">
                                             <li class="flyout__content-wrapper">
@@ -163,7 +164,7 @@ Critical &amp; Inpatient Care                                                   
                                                                 </div>
                                                                 <ul class="flyout__links" role="none">
                                                                         <li class="flyout__item">
-                                                                            <a href="https://pdh.com.ph/our-services/"  class="flyout__link">
+                                                                            <a href="/services/#emergency-room-er"  class="flyout__link">
                                                                                 <span>Emergency Room</span> <svg width="8" height="16" viewBox="0 0 8 16" class="icon icon--chevron-right" aria-hidden="true"><use xlink:href="#icon-chevron-right"></use></svg>
                                                                             </a>
                                                                         </li>
@@ -206,7 +207,7 @@ Critical &amp; Inpatient Care                                                   
                                         </ul>
                                 </li>
                                 <li class="nav-main__item">
-                                    <a href="https://pdh.com.ph/our-services/"  class="nav-main__link js-nav-main-link">Patients &amp; Visitors</a>
+                                    <a href="/services/"  class="nav-main__link js-nav-main-link">Patients &amp; Visitors</a>
 
                                         <ul class="nav-main__flyout menu">
                                             <li class="flyout__content-wrapper">
@@ -329,16 +330,16 @@ Critical &amp; Inpatient Care                                                   
 </li>
 
 <li class="nav-mobile__item">
-    <a href="https://pdh.com.ph/our-services/" class="nav-mobile__link">Our Services</a>
+    <a href="/services/" class="nav-mobile__link">Our Services</a>
     <ul class="nav-mobile__l2">
         <li class="nav-mobile__l2-item">
             <a href="https://pdh.com.ph/our-services/" class="nav-mobile__l2-link">Our Packages</a>
         </li>
         <li class="nav-mobile__l2-item">
-            <a href="https://pdh.com.ph/our-services/" class="nav-mobile__l2-link">Our Services</a>
+            <a href="/services/" class="nav-mobile__l2-link">Our Services</a>
         </li>
         <li class="nav-mobile__l2-item">
-            <a href="https://pdh.com.ph/our-services/" class="nav-mobile__l2-link">Our Facilities</a>
+            <a href="/services/?cat=facility" class="nav-mobile__l2-link">Our Facilities</a>
         </li>
         <li class="nav-mobile__l2-item">
             <a href="https://pdh.com.ph/our-services/room-gallery/" class="nav-mobile__l2-link">Room Gallery</a>
@@ -404,26 +405,59 @@ Critical &amp; Inpatient Care                                                   
 <h1 class="hero__title">Trusted Care.<br /> Compassionate Healing.</h1>
             </div>
 
-                <div class="hero-search">
-                    <div class="search-ctas">
-<a href="https://pdh.com.ph/our-services/" class="cta__link button">Explore Our Services</a>
-<a href="/doctors/" class="cta__link button">Find a Doctor</a>
-<a href="https://pdh.com.ph/contact-2/" class="cta__link button">Contact Us</a>
-                    </div>
+                <div class="pdh-quickfind" data-pdh-quickfind>
+                    <form class="pdh-qf" action="/doctors/" method="get" role="search" aria-labelledby="pdh-qf-doc-title" data-kind="doctor">
+                        <h2 class="pdh-qf__title" id="pdh-qf-doc-title">
+                            <svg class="pdh-qf__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21v-1a7 7 0 0 1 14 0v1"/><path d="M12 14v4M10 16h4"/></svg>
+                            Find a doctor
+                        </h2>
+                        <div class="pdh-qf__box">
+                            <svg class="pdh-qf__glass" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><use xlink:href="#icon-search"></use></svg>
+                            <label class="show-for-sr" for="pdh-qf-doc">Search doctors by name, specialty or health concern</label>
+                            <input id="pdh-qf-doc" name="q" type="search" autocomplete="off" placeholder="Try &ldquo;heart&rdquo;, &ldquo;buntis&rdquo; or a name" aria-controls="pdh-qf-doc-panel" aria-expanded="false">
+                            <button class="pdh-qf__go" type="submit">Search</button>
+                        </div>
+                        <div class="pdh-qf__alert" role="alert" data-pdh-alert></div>
+                        <div class="pdh-qf__panel" id="pdh-qf-doc-panel" data-pdh-panel hidden></div>
+                        <ul class="pdh-qf__chips" aria-label="Popular departments">
+                            <li><a href="/doctors/?dept=Internal+Medicine">Internal Medicine <span data-pdh-chip-count></span></a></li>
+                            <li><a href="/doctors/?dept=Pediatrics">Pediatrics <span data-pdh-chip-count></span></a></li>
+                            <li><a href="/doctors/?dept=Obstetrics+%26+Gynecology">Obstetrics &amp; Gynecology <span data-pdh-chip-count></span></a></li>
+                            <li><a href="/doctors/?spec=Cardiology">Cardiology <span data-pdh-chip-count></span></a></li>
+                            <li><a href="/doctors/?spec=General+Surgery">General Surgery <span data-pdh-chip-count></span></a></li>
+                        </ul>
+                        <div class="pdh-qf__foot">
+                            <p class="pdh-qf__stat" data-pdh-today><a href="/doctors/">Browse all doctors and clinic schedules</a></p>
+                            <p class="pdh-qf__note">From published schedules, which can change. Please call <a href="tel:+63287760644">(02) 8776 0644 to 46</a> to confirm.</p>
+                        </div>
+                    </form>
 
-                            <form action="https://pdh.com.ph/" class="search-form">
-            <field class="form__field">
-          <label for="hero-search-id" class="show-for-sr">Search PDH services and facilities</label>
-                <input class="form__input form__input--text form__input_search" type="text" id="hero-search-id" name="s" placeholder="Search services, packages, or facilities...">
-            <button type="submit" class="form__submit" aria-label="Submit search">
-                <span class="show-for-sr">Submit Search</span>
-                <svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
-                    <use xlink:href="#icon-chevron-right"></use>
-                </svg>
-            </button>
-        </form>
-
-
+                    <form class="pdh-qf" action="/services/" method="get" role="search" aria-labelledby="pdh-qf-svc-title" data-kind="service">
+                        <h2 class="pdh-qf__title" id="pdh-qf-svc-title">
+                            <svg class="pdh-qf__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 7v6M9 10h6M9 21v-4h6v4"/></svg>
+                            Find a service
+                        </h2>
+                        <div class="pdh-qf__box">
+                            <svg class="pdh-qf__glass" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><use xlink:href="#icon-search"></use></svg>
+                            <label class="show-for-sr" for="pdh-qf-svc">Search services, tests and facilities</label>
+                            <input id="pdh-qf-svc" name="q" type="search" autocomplete="off" placeholder="Try &ldquo;X-ray&rdquo;, &ldquo;dialysis&rdquo; or &ldquo;pharmacy&rdquo;" aria-controls="pdh-qf-svc-panel" aria-expanded="false">
+                            <button class="pdh-qf__go" type="submit">Search</button>
+                        </div>
+                        <div class="pdh-qf__alert" role="alert" data-pdh-alert></div>
+                        <div class="pdh-qf__panel" id="pdh-qf-svc-panel" data-pdh-panel hidden></div>
+                        <ul class="pdh-qf__chips" aria-label="Popular services">
+                            <li><a href="/services/#laboratory">Laboratory</a></li>
+                            <li><a href="/services/#radiology">X-ray &amp; CT</a></li>
+                            <li><a href="/services/?q=ultrasound">Ultrasound</a></li>
+                            <li><a href="/services/#hemodialysis-center">Dialysis</a></li>
+                            <li><a href="/services/#multi-diagnostic-center">ECG &amp; Echo</a></li>
+                            <li><a href="/services/#pharmacy">Pharmacy</a></li>
+                        </ul>
+                        <div class="pdh-qf__foot">
+                            <p class="pdh-qf__stat" data-pdh-open247><a href="/services/?cat=service&amp;open=24-7">See which medical services are open 24/7</a></p>
+                            <p class="pdh-qf__note">Every service shows its location, opening hours and the number to call.</p>
+                        </div>
+                    </form>
                 </div>
         </div>
     </section>
@@ -473,7 +507,7 @@ Critical &amp; Inpatient Care                                                   
                                     </a>
                                 </li>
                                 <li class="list__item">
-                                    <a href="https://pdh.com.ph/our-services/"  class="cta__link ga-link-10">
+                                    <a href="/services/"  class="cta__link ga-link-10">
                                         <span class="cta__text">Our Services</span>&nbsp;
                                         <svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
                                             <use xlink:href="#icon-chevron-right"></use>
@@ -528,7 +562,7 @@ Critical &amp; Inpatient Care                                                   
                 <div class="grid-item grid-item--text">
                     <h2 class="title">Why PDH?</h2>
                     <p class="teaser">PDH is a pillar of trust in healthcare for its neighboring community, driven by a deep passion for delivering patient-centered care across generations. With a comprehensive range of medical facilities—including a 94-bed inpatient facility, Emergency Room (ER), Intensive Care Unit (ICU), Neonatal Intensive Care Unit (NICU), Operating Room (OR), Delivery Room (DR), Laboratory, and Radiology, PDH is also accredited by the Department of Health (DOH), PhilHealth, and various Health Maintenance Organizations (HMOs), ensuring accessible healthcare and full compliance with government-regulated standards.</p>
-                                            <a href="https://pdh.com.ph/our-services/"  class="item__cta">
+                                            <a href="/services/"  class="item__cta">
                             Explore Our Services
                             <svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
                                 <use xlink:href="#icon-chevron-right"></use>
@@ -562,7 +596,7 @@ Critical &amp; Inpatient Care                                                   
                         </div>
                     </a>
 
-                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/our-services/"  style="background-image: url('/assets/images/pdh/CUTTING-EDGE-SCIENCE-INNOVATION-1024x683.jpg');">
+                    <a class="grid-item grid-item--tile" href="/services/"  style="background-image: url('/assets/images/pdh/CUTTING-EDGE-SCIENCE-INNOVATION-1024x683.jpg');">
                         <div class="item__text-container">
                             <h3 class="item__title"><span class="title-text">Cutting-Edge Science &amp; Innovation</span><svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
                                 <use xlink:href="#icon-chevron-right"></use>
@@ -574,7 +608,7 @@ Critical &amp; Inpatient Care                                                   
                         </div>
                     </a>
 
-                    <a class="grid-item grid-item--tile" href="https://pdh.com.ph/our-services/"  style="background-image: url('/assets/images/pdh/ACCESSIBLE-AND-INCLUSIVE-CARE-1024x576.jpg');">
+                    <a class="grid-item grid-item--tile" href="/services/"  style="background-image: url('/assets/images/pdh/ACCESSIBLE-AND-INCLUSIVE-CARE-1024x576.jpg');">
                         <div class="item__text-container">
                             <h3 class="item__title"><span class="title-text">Accessible &amp; Inclusive Care</span><svg width="8" height="13" viewBox="0 0 8 13" class="icon icon--chevron-right" aria-hidden="true">
                                 <use xlink:href="#icon-chevron-right"></use>
@@ -931,7 +965,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
                             <li class="footer__nav-item">
                                 <h2 class="footer__nav-item__title">For Patients</h2>
                                     <ul class="menu vertical nested">
-                                            <li><a href="https://pdh.com.ph/our-services/" >Our Services</a></li>
+                                            <li><a href="/services/" >Our Services</a></li>
                                             <li><a href="/doctors/" >Find a Doctor</a></li>
                                             <li><a href="https://pdh.com.ph/online-lab-result/" >Online Lab Results</a></li>
                                             <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfGbbyaFRjyniWhqtGDN7iIRPqERjcXCGzobQlQkLESc1JbFg/viewform" target="_blank">HMO Online Approval</a></li>
@@ -992,6 +1026,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
     }
 </script>
 <script src="/assets/js/main.js"></script>
+<script src="/assets/js/pdh-search.js" defer></script>
 
 
 
