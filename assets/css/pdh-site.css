@@ -33,3 +33,19 @@
 }
 
 @media print { .pdh-quickbar { display: none; } }
+
+/* PDH footer (replaces TGH's navy/yellow palette on every page) */
+body .footer { background: radial-gradient(60rem 30rem at 100% 0%, rgba(10, 161, 165, .22), transparent 60%),
+    linear-gradient(180deg, #0d3b40 0%, #082a2e 100%); border-top: 4px solid #0aa1a5; color: #fff; }
+body .footer .footer__nav-item .footer__nav-item__title { color: #8fe3e0; letter-spacing: .06em; }
+body .footer .footer__nav-item a { color: rgba(255, 255, 255, .86); }
+body .footer .footer__nav-item a:hover, body .footer .footer__nav-util a:hover { color: #fff; text-decoration: underline; }
+body .footer .footer__contact-info a { color: #8fe3e0; }
+body .footer .footer__contact-info::before { border-color: rgba(255, 255, 255, .6); }
+body .footer .footer__contact-link { border-color: #0aa1a5; color: #fff; }
+body .footer .footer__contact-link:hover { background: #0aa1a5; border-color: #0aa1a5; color: #0d3b40; }
+body .footer .footer-social { border-color: rgba(255, 255, 255, .16); }
+body .footer .footer-social__title { color: #8fe3e0; }
+body .footer .footer-social__link { border-color: #0aa1a5; }
+body .footer .footer__footer, body .footer .footer__nav-util a { color: rgba(255, 255, 255, .7); }
+body .footer a:focus-visible { outline: 3px solid #f47a20; outline-offset: 3px; }

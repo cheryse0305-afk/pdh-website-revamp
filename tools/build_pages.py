@@ -65,6 +65,9 @@ def page(head, body_top, footer, *, title, description, path, extra_head="", mai
         head = re.sub(rf'(<meta name="{attr}" content=")[^"]*', lambda m: m.group(1) + e(value), head)
     head = re.sub(r'(<meta name="description" content=")[^"]*', lambda m: m.group(1) + e(description), head)
     head = re.sub(r'(<link rel="canonical" href=")[^"]*', lambda m: m.group(1) + url, head)
+    # homepage-only assets (hero, sections, quick search) aren't needed on generated pages
+    head = re.sub(r'<link rel="stylesheet" href="/assets/css/pdh-(?:home|sections)\.css">\n?', "", head)
+    footer = re.sub(r'<script src="/assets/js/pdh-home\.js" defer></script>\n?', "", footer)
     head += '<link rel="stylesheet" href="/assets/css/pdh-pages.css">\n' + extra_head
     body_top = body_top.replace('<body id="body" data-theme="tgh">', '<body id="body" data-theme="tgh" class="u-no-hero">', 1)
     footer = footer.replace("</body>", scripts + "</body>", 1)

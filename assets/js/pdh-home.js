@@ -5,6 +5,8 @@
    /doctors/?q= or /services/?q=, the HMO tile links to the approval form and the video opens on Vimeo. */
 (function () {
     var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.documentElement.classList.add('pdh-js');  // scroll-reveal CSS only applies while this script runs
+    setupReveal();
     setupVideo();
     setupSlides();
     setupTilt();
@@ -272,6 +274,12 @@
             trust.innerHTML = '<strong>' + index.doctors.length + ' doctors</strong> across ' + index.specialty_count +
                 ' specialties <a href="/doctors/">Meet them</a>';
         }
+        // "Why PDH?" stats: keep doctor/specialty totals in sync with the data.
+        var stats = { doctors: index.doctors.length, specialties: index.specialty_count };
+        [].forEach.call(document.querySelectorAll('[data-pdh-stat]'), function (el) {
+            var v = stats[el.getAttribute('data-pdh-stat')];
+            if (v) el.textContent = v;
+        });
         var open = document.querySelector('[data-pdh-open247]');
         if (open) {
             var n247 = index.services.filter(function (s) { return s.cat === 'service' && s.open247; }).length;
@@ -371,6 +379,21 @@
             });
         })
         .catch(function () { /* keep the plain forms working */ });
+
+    // Sections fade/rise in as they scroll into view. Without IntersectionObserver everything is shown at once.
+    function setupReveal() {
+        var els = [].slice.call(document.querySelectorAll('.pdh-reveal'));
+        if (!('IntersectionObserver' in window) || reducedMotion) {
+            els.forEach(function (el) { el.classList.add('is-visible'); });
+            return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+            });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        els.forEach(function (el) { io.observe(el); });
+    }
 
     // Hero core-values slideshow: cross-fades every 6 s; pauses on hover/focus, when the tab is hidden,
     // or via the pause button (WCAG 2.2.2). With reduced motion it never advances on its own.
