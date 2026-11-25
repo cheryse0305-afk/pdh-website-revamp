@@ -40,7 +40,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
 <link rel="stylesheet" href="/assets/css/global.css">
-<link rel="stylesheet" href="/assets/css/pdh-search.css">
+<link rel="stylesheet" href="/assets/css/pdh-home.css">
 <style>
 /* PDH logo: the PDH lockup is wider (~4.7:1) than TGH's (~3:1), so widen the
    logo slot per breakpoint to keep a comparable visual height in the header. */
@@ -77,7 +77,7 @@
     
 </head>
 
-<body id="body" data-theme="tgh">
+<body id="body" data-theme="tgh" class="u-no-hero">
     
     <nav class="skip-links">
         <a href="#main" class="show-on-focus js-skip-link">Skip to main content</a>
@@ -388,25 +388,19 @@ Critical &amp; Inpatient Care                                                   
         <section class="content-block">
             
             
-    <section class="homepage-hero js-hero js-homepage-hero"
-              >
-<div class="pdh-hero-video" style="position:absolute; inset:0; overflow:hidden; z-index:1; pointer-events:none;">
-    <iframe
-        src="https://player.vimeo.com/video/1071704173?background=1&autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0"
-        style="position:absolute; top:50%; left:50%; width:177.78vh; min-width:100%; height:56.25vw; min-height:100%; transform:translate(-50%,-50%); border:0;"
-        allow="autoplay; fullscreen; picture-in-picture"
-        aria-hidden="true"
-        tabindex="-1">
-    </iframe>
-</div>
-        <div class="hero-content" data-in-view="once">
-            <div class="hero-text">
-<span class="hero__subtitle">Your Health, Our Commitment</span>
-<h1 class="hero__title">Trusted Care.<br /> Compassionate Healing.</h1>
-            </div>
+    <section class="pdh-hero" aria-labelledby="pdh-hero-title">
+        <div class="pdh-hero__inner">
+            <div class="pdh-hero__main">
+                <p class="pdh-hero__eyebrow">Your Health, Our Commitment</p>
+                <h1 class="pdh-hero__title" id="pdh-hero-title">Trusted Care. Compassionate Healing.</h1>
+                <p class="pdh-hero__lede">A 94-bed hospital in Parañaque, accredited by DOH and PhilHealth, and a proud member of Metro Pacific Health.</p>
 
                 <div class="pdh-quickfind" data-pdh-quickfind>
-                    <form class="pdh-qf" action="/doctors/" method="get" role="search" aria-labelledby="pdh-qf-doc-title" data-kind="doctor">
+                    <div class="pdh-tabs" role="tablist" aria-label="Search for">
+                        <button class="pdh-tabs__tab" id="pdh-tab-doc" type="button" role="tab" aria-selected="true" aria-controls="pdh-tab-doc-panel">Find a doctor</button>
+                        <button class="pdh-tabs__tab" id="pdh-tab-svc" type="button" role="tab" aria-selected="false" aria-controls="pdh-tab-svc-panel" tabindex="-1">Find a service</button>
+                    </div>
+                    <form class="pdh-qf" id="pdh-tab-doc-panel" role="tabpanel" aria-labelledby="pdh-tab-doc" action="/doctors/" method="get" role="search" aria-labelledby="pdh-qf-doc-title" data-kind="doctor">
                         <h2 class="pdh-qf__title" id="pdh-qf-doc-title">
                             <svg class="pdh-qf__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21v-1a7 7 0 0 1 14 0v1"/><path d="M12 14v4M10 16h4"/></svg>
                             Find a doctor
@@ -426,13 +420,9 @@ Critical &amp; Inpatient Care                                                   
                             <li><a href="/doctors/?spec=Cardiology">Cardiology <span data-pdh-chip-count></span></a></li>
                             <li><a href="/doctors/?spec=General+Surgery">General Surgery <span data-pdh-chip-count></span></a></li>
                         </ul>
-                        <div class="pdh-qf__foot">
-                            <p class="pdh-qf__stat" data-pdh-today><a href="/doctors/">Browse all doctors and clinic schedules</a></p>
-                            <p class="pdh-qf__note">From published schedules, which can change. Please call <a href="tel:+63287760644">(02) 8776 0644 to 46</a> to confirm.</p>
-                        </div>
                     </form>
 
-                    <form class="pdh-qf" action="/services/" method="get" role="search" aria-labelledby="pdh-qf-svc-title" data-kind="service">
+                    <form class="pdh-qf" id="pdh-tab-svc-panel" role="tabpanel" aria-labelledby="pdh-tab-svc" action="/services/" method="get" role="search" aria-labelledby="pdh-qf-svc-title" data-kind="service">
                         <h2 class="pdh-qf__title" id="pdh-qf-svc-title">
                             <svg class="pdh-qf__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 7v6M9 10h6M9 21v-4h6v4"/></svg>
                             Find a service
@@ -453,12 +443,47 @@ Critical &amp; Inpatient Care                                                   
                             <li><a href="/services/#multi-diagnostic-center">ECG &amp; Echo</a></li>
                             <li><a href="/services/#pharmacy">Pharmacy</a></li>
                         </ul>
-                        <div class="pdh-qf__foot">
-                            <p class="pdh-qf__stat" data-pdh-open247><a href="/services/?cat=service&amp;open=24-7">See which medical services are open 24/7</a></p>
-                            <p class="pdh-qf__note">Every service shows its location, opening hours and the number to call.</p>
-                        </div>
                     </form>
                 </div>
+            </div>
+
+            <div class="pdh-hero__side">
+                <figure class="pdh-tile pdh-tile--photo">
+                    <img src="/assets/images/pdh/Lobby1-scaled.jpg" alt="The main lobby and information desk of Parañaque Doctors Hospital" width="2560" height="1437" fetchpriority="high">
+                </figure>
+
+                <div class="pdh-tiles">
+                    <section class="pdh-tile pdh-tile--emergency" aria-labelledby="pdh-tile-er">
+                        <h2 class="pdh-tile__title" id="pdh-tile-er">Emergency Room</h2>
+                        <p class="pdh-tile__meta">Open 24/7 &middot; Ground Floor</p>
+                        <a class="pdh-tile__call" href="tel:+639215720589">Call 0921 572 0589</a>
+                        <p class="pdh-tile__small">or (02) 8776 0645 local 8106</p>
+                    </section>
+
+                    <section class="pdh-tile pdh-tile--today" aria-labelledby="pdh-tile-today" data-pdh-today-tile>
+                        <h2 class="pdh-tile__title" id="pdh-tile-today">In clinic today</h2>
+                        <p class="pdh-tile__big" data-pdh-today-count></p>
+                        <p class="pdh-tile__meta" data-pdh-today-detail>Doctors' clinic schedules</p>
+                        <a class="pdh-tile__link" href="/doctors/" data-pdh-today-link>View schedules</a>
+                    </section>
+
+                    <section class="pdh-tile pdh-tile--hmo" aria-labelledby="pdh-tile-hmo">
+                        <h2 class="pdh-tile__title" id="pdh-tile-hmo">Is my HMO accepted?</h2>
+                        <form class="pdh-hmo" data-pdh-hmo action="https://docs.google.com/forms/d/e/1FAIpQLSfGbbyaFRjyniWhqtGDN7iIRPqERjcXCGzobQlQkLESc1JbFg/viewform" target="_blank">
+                            <label class="show-for-sr" for="pdh-hmo-q">Type your HMO</label>
+                            <input id="pdh-hmo-q" type="search" autocomplete="off" placeholder="Type your HMO, e.g. Maxicare" list="pdh-hmo-list">
+                            <datalist id="pdh-hmo-list"></datalist>
+                            <p class="pdh-hmo__result" aria-live="polite" data-pdh-hmo-result>We work with 32 HMO partners.</p>
+                        </form>
+                    </section>
+
+                    <section class="pdh-tile pdh-tile--where" aria-labelledby="pdh-tile-where">
+                        <h2 class="pdh-tile__title" id="pdh-tile-where">Find us</h2>
+                        <p class="pdh-tile__meta">175 Doña Soledad Ave., Better Living Subdivision, Parañaque</p>
+                        <a class="pdh-tile__link" href="https://www.google.com/maps/search/?api=1&amp;query=Para%C3%B1aque+Doctors+Hospital%2C+175+Do%C3%B1a+Soledad+Ave%2C+Para%C3%B1aque" target="_blank" rel="noopener">Get directions</a>
+                    </section>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -631,6 +656,22 @@ Critical &amp; Inpatient Care                                                   
                             </svg>
                         </div>
                     </a>
+            </div>
+        </div>
+    </section>
+    <section class="pdh-story" aria-labelledby="pdh-story-title">
+        <div class="pdh-story__inner">
+            <div class="pdh-story__text">
+                <p class="pdh-hero__eyebrow">Our Story</p>
+                <h2 class="pdh-story__title" id="pdh-story-title">Alagang PDH Ako</h2>
+                <p>Our mission is to deliver &ldquo;Alagang PDH&rdquo;, our unique way of delivering high quality and compassionate care that is affordable, accessible, and patient-centered.</p>
+                <p><a class="pdh-story__link" href="https://pdh.com.ph/about-us/">More about PDH</a></p>
+            </div>
+            <div class="pdh-story__media" data-pdh-video="1071704173">
+                <a class="pdh-story__play" href="https://vimeo.com/1071704173" target="_blank" rel="noopener">
+                    <img src="/assets/images/pdh/alagang-pdh-ako-poster.webp" alt="" width="1920" height="1080" loading="lazy">
+                    <span class="pdh-story__btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Play the Alagang PDH Ako video</span></span>
+                </a>
             </div>
         </div>
     </section>
@@ -1026,7 +1067,7 @@ Need HMO approval for your check-up, lab tests, or procedures? Skip the long lin
     }
 </script>
 <script src="/assets/js/main.js"></script>
-<script src="/assets/js/pdh-search.js" defer></script>
+<script src="/assets/js/pdh-home.js" defer></script>
 
 
 

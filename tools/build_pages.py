@@ -7,7 +7,7 @@ Outputs:
     doctors/index.html            Doctor Finder
     doctors/<id>/index.html       one profile page per doctor
     services/index.html           Services directory ("Where is it?")
-    data/search-index.json        compact index for the homepage quick search (assets/js/pdh-search.js)
+    data/search-index.json        compact index for the homepage search and tiles (assets/js/pdh-home.js)
 
 Reads data/doctors.json, services.json, contacts.json and search-terms.json; every search-terms target is
 validated against the data. The header, navigation and footer are taken from index.html on every run, so the
@@ -345,7 +345,11 @@ def services_page(services, service_terms):
 
 # ---------------------------------------------------------------- homepage search index
 
-def search_index(doctors, services, raw_terms, specialties, service_terms, hotline):
+HMO_APPROVAL_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfGbbyaFRjyniWhqtGDN7iIRPqERjcXCGzobQlQkLESc1JbFg/viewform"
+
+
+def search_index(doctors, services, raw_terms, specialties, service_terms, hotline, hmos, contacts):
+    hub = next((h for h in contacts["hotlines"] if h["id"] == "hmo-hub"), None)
     depts = {}
     for d in doctors:
         if d["department"]:
@@ -362,6 +366,8 @@ def search_index(doctors, services, raw_terms, specialties, service_terms, hotli
                       "hotline": {"name": hotline["name"], "mobile": hotline["mobile"], "tel": tel(hotline["mobile"])}},
         "crisis": {k: raw_terms["crisis"][k] for k in ("phrases", "message", "hotlines")},
         "appointments": {"label": APPOINTMENT_LINE[0], "tel": APPOINTMENT_LINE[1]},
+        "hmo": {"partners": sorted(h["name"] for h in hmos), "approval_url": HMO_APPROVAL_URL,
+                "hub": {"mobile": hub["mobile"], "tel": tel(hub["mobile"])} if hub and hub["mobile"] else None},
     }
 
 
@@ -412,7 +418,7 @@ def main():
     ))
     print(f"Wrote services/index.html ({len(services)} services and facilities)")
 
-    index = search_index(doctors, services, raw_terms, specialties, service_terms, hotline)
+    index = search_index(doctors, services, raw_terms, specialties, service_terms, hotline, load("hmo-partners"), contacts)
     with open(os.path.join(ROOT, "data", "search-index.json"), "w", encoding="utf-8", newline="\n") as f:
         json.dump(index, f, ensure_ascii=False, separators=(",", ":"))
     print(f"Wrote data/search-index.json ({os.path.getsize(os.path.join(ROOT, 'data', 'search-index.json')) // 1024} KB)")

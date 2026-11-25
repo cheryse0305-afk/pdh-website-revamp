@@ -1,8 +1,10 @@
-/* Homepage quick search ("Find a doctor" / "Find a service" cards in the hero).
+/* Homepage: hero quick search (doctor/service tabs), "In clinic today" and HMO tiles, and the
+   click-to-play "Our Story" video.
    Data: /data/search-index.json (built by tools/build_pages.py from data/*.json and data/search-terms.json).
-   Without JavaScript, or if the index fails to load, each card is a plain form that submits to
-   /doctors/?q= or /services/?q=. */
+   Without JavaScript, or if the index fails to load, each search tab is a plain form that submits to
+   /doctors/?q= or /services/?q=, the HMO tile links to the approval form and the video opens on Vimeo. */
 (function () {
+    setupVideo();
     var root = document.querySelector('[data-pdh-quickfind]');
     if (!root) return;
 
@@ -229,22 +231,86 @@
             if (counts[href] != null) span.textContent = counts[href];
         });
 
+        // "In clinic today" tile: count and busiest departments, by the day in the Philippines.
         var today = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: 'Asia/Manila' }).format(new Date());
-        var n = index.doctors.filter(function (d) { return d.days.indexOf(today) !== -1; }).length;
-        var todayEl = root.querySelector('[data-pdh-today]');
-        if (todayEl && WEEKDAYS[today]) {
-            todayEl.innerHTML = '<span><strong>' + n + '</strong> ' + (n === 1 ? 'doctor' : 'doctors') + ' in clinic today, ' +
-                WEEKDAYS[today] + '</span> <a href="/doctors/?day=' + today + '">View today’s schedules</a>';
-        }
-
-        var open = index.services.filter(function (s) { return s.cat === 'service' && s.open247; }).length;
-        var openEl = root.querySelector('[data-pdh-open247]');
-        if (openEl) {
-            openEl.innerHTML = '<span><strong>' + open + '</strong> medical services open 24/7</span> ' +
-                '<a href="/services/?cat=service&amp;open=24-7">View 24/7 services</a>';
+        var inClinic = index.doctors.filter(function (d) { return d.days.indexOf(today) !== -1; });
+        var countEl = document.querySelector('[data-pdh-today-count]');
+        if (countEl && WEEKDAYS[today]) {
+            var byDept = {};
+            inClinic.forEach(function (d) { if (d.d) byDept[d.d] = (byDept[d.d] || 0) + 1; });
+            var top = Object.keys(byDept).sort(function (a, b) { return byDept[b] - byDept[a]; }).slice(0, 3);
+            countEl.innerHTML = '<strong>' + inClinic.length + '</strong> ' + (inClinic.length === 1 ? 'doctor' : 'doctors') +
+                ' <span>&middot; ' + WEEKDAYS[today] + '</span>';
+            document.querySelector('[data-pdh-today-detail]').textContent = top.length
+                ? top.map(function (k) { return k + ' ' + byDept[k]; }).join(' · ')
+                : 'Clinics are by appointment today. Please call to book.';
+            var link = document.querySelector('[data-pdh-today-link]');
+            link.href = '/doctors/?day=' + today;
+            link.textContent = 'View today’s schedules';
         }
     }
 
+    // Tabs: "Find a doctor" / "Find a service" (WAI-ARIA tabs pattern, arrow keys move between tabs).
+    function setupTabs() {
+        var tabs = [].slice.call(root.querySelectorAll('[role="tab"]'));
+        function select(tab, focus) {
+            tabs.forEach(function (t) {
+                var on = t === tab;
+                t.setAttribute('aria-selected', on ? 'true' : 'false');
+                t.tabIndex = on ? 0 : -1;
+                document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+            });
+            if (focus) tab.focus();
+        }
+        tabs.forEach(function (tab, i) {
+            tab.addEventListener('click', function () {
+                select(tab, false);
+                document.getElementById(tab.getAttribute('aria-controls')).querySelector('input[name="q"]').focus();
+            });
+            tab.addEventListener('keydown', function (ev) {
+                var next = ev.key === 'ArrowRight' ? tabs[(i + 1) % tabs.length] : ev.key === 'ArrowLeft' ? tabs[(i - 1 + tabs.length) % tabs.length] : null;
+                if (next) { ev.preventDefault(); select(next, true); }
+            });
+        });
+        var start = tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0];
+        if (start) select(start, false);
+    }
+
+    // "Is my HMO accepted?" tile: checks the published partner list. Never says "not accepted";
+    // anything not on the list is referred to the HMO Hub.
+    function setupHmo() {
+        var form = document.querySelector('[data-pdh-hmo]');
+        if (!form || !index.hmo) return;
+        var input = form.querySelector('input');
+        var out = form.querySelector('[data-pdh-hmo-result]');
+        var initial = out.innerHTML;
+        var list = document.getElementById(input.getAttribute('list'));
+        list.innerHTML = index.hmo.partners.map(function (n) { return '<option value="' + esc(n) + '">'; }).join('');
+        var partners = index.hmo.partners.map(function (n) { return { name: n, words: norm(n).split(' ') }; });
+        var hub = index.hmo.hub ? ' Call our HMO Hub at <a href="' + esc(index.hmo.hub.tel) + '">' + esc(index.hmo.hub.mobile) + '</a>' : ' Call our HMO Hub';
+
+        function check() {
+            var q = norm(input.value);
+            if (q.length < 2) { out.innerHTML = initial; return; }
+            var tokens = q.split(' ');
+            var hits = partners.filter(function (p) {
+                return tokens.every(function (t) { return p.words.some(function (w) { return w.indexOf(t) === 0; }); });
+            });
+            if (hits.length === 1 || (hits.length && norm(hits[0].name) === q)) {
+                out.innerHTML = '<strong class="pdh-hmo__yes">Yes, ' + esc(hits[0].name) + ' is one of our HMO partners.</strong> ' +
+                    '<a href="' + esc(index.hmo.approval_url) + '" target="_blank" rel="noopener">Request HMO approval online</a>';
+            } else if (hits.length) {
+                out.textContent = 'Keep typing: ' + hits.map(function (h) { return h.name; }).join(', ');
+            } else if (q.length >= 3) {
+                out.innerHTML = '“' + esc(input.value.trim()) + '” isn’t on our published partner list.' + hub + ' to check your coverage.';
+            }
+        }
+        input.addEventListener('input', check);
+        input.addEventListener('change', check);
+        form.addEventListener('submit', function (ev) { ev.preventDefault(); check(); });
+    }
+
+    setupTabs();
     [].forEach.call(root.querySelectorAll('form[data-kind]'), setup);
 
     fetch('/data/search-index.json')
@@ -252,9 +318,28 @@
         .then(function (data) {
             index = prepare(data);
             fillStats();
+            setupHmo();
             [].forEach.call(root.querySelectorAll('form[data-kind] input[name="q"]'), function (input) {
                 if (input.value.trim()) input.dispatchEvent(new Event('input'));
             });
         })
         .catch(function () { /* keep the plain forms working */ });
+
+    // "Our Story": load the Vimeo player only when the visitor presses play (no autoplaying video,
+    // no Vimeo requests or data use until then). With sound, since the visitor chose to watch.
+    function setupVideo() {
+        [].forEach.call(document.querySelectorAll('[data-pdh-video]'), function (box) {
+            var link = box.querySelector('a');
+            link.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                var frame = document.createElement('iframe');
+                frame.src = 'https://player.vimeo.com/video/' + box.getAttribute('data-pdh-video') + '?autoplay=1&dnt=1&title=0&byline=0&portrait=0';
+                frame.title = 'Alagang PDH Ako video';
+                frame.allow = 'autoplay; fullscreen; picture-in-picture';
+                frame.allowFullscreen = true;
+                box.replaceChildren(frame);
+                frame.focus();
+            });
+        });
+    }
 })();
