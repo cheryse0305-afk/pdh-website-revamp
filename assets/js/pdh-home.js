@@ -231,23 +231,67 @@
             if (counts[href] != null) span.textContent = counts[href];
         });
 
-        // "In clinic today" tile: count and busiest departments, by the day in the Philippines.
+        // "In clinic today" card: today's count plus a clickable 7-day chart, by the day in the Philippines.
         var today = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: 'Asia/Manila' }).format(new Date());
-        var inClinic = index.doctors.filter(function (d) { return d.days.indexOf(today) !== -1; });
+        var perDay = {};
+        Object.keys(WEEKDAYS).forEach(function (day) {
+            perDay[day] = index.doctors.filter(function (d) { return d.days.indexOf(day) !== -1; }).length;
+        });
         var countEl = document.querySelector('[data-pdh-today-count]');
         if (countEl && WEEKDAYS[today]) {
-            var byDept = {};
-            inClinic.forEach(function (d) { if (d.d) byDept[d.d] = (byDept[d.d] || 0) + 1; });
-            var top = Object.keys(byDept).sort(function (a, b) { return byDept[b] - byDept[a]; }).slice(0, 3);
-            countEl.innerHTML = '<strong>' + inClinic.length + '</strong> ' + (inClinic.length === 1 ? 'doctor' : 'doctors') +
-                ' <span>&middot; ' + WEEKDAYS[today] + '</span>';
-            document.querySelector('[data-pdh-today-detail]').textContent = top.length
-                ? top.map(function (k) { return k + ' ' + byDept[k]; }).join(' · ')
-                : 'Clinics are by appointment today. Please call to book.';
+            countEl.innerHTML = '<strong data-pdh-countup="' + perDay[today] + '">' + perDay[today] + '</strong> ' +
+                (perDay[today] === 1 ? 'doctor' : 'doctors') + ' <span>&middot; ' + WEEKDAYS[today] + '</span>';
             var link = document.querySelector('[data-pdh-today-link]');
             link.href = '/doctors/?day=' + today;
             link.textContent = 'View today’s schedules';
         }
+        var week = document.querySelector('[data-pdh-week]');
+        if (week) {
+            var max = Math.max.apply(null, Object.keys(perDay).map(function (k) { return perDay[k]; })) || 1;
+            week.innerHTML = Object.keys(WEEKDAYS).map(function (day) {
+                var n = perDay[day];
+                return '<li' + (day === today ? ' class="is-today"' : '') + '><a href="/doctors/?day=' + day + '" aria-label="' +
+                    WEEKDAYS[day] + ': ' + n + (n === 1 ? ' doctor' : ' doctors') + ' in clinic' + (day === today ? ' (today)' : '') + '">' +
+                    '<span class="pdh-week__bar" style="--h:' + Math.max(6, Math.round(n / max * 100)) + '%"></span>' +
+                    '<span class="pdh-week__day">' + day.charAt(0) + '</span></a></li>';
+            }).join('');
+        }
+
+        // Trust row: real doctor photos plus totals.
+        var faces = document.querySelector('[data-pdh-faces]');
+        if (faces && index.faces) {
+            faces.innerHTML = index.faces.map(function (f) {
+                return '<img src="' + esc(f.photo) + '" alt="" width="44" height="44" loading="lazy" decoding="async">';
+            }).join('');
+        }
+        var trust = document.querySelector('[data-pdh-trust-text]');
+        if (trust) {
+            trust.innerHTML = '<strong>' + index.doctors.length + ' doctors</strong> across ' + index.specialty_count +
+                ' specialties <a href="/doctors/">Meet them</a>';
+        }
+        var open = document.querySelector('[data-pdh-open247]');
+        if (open) {
+            var n247 = index.services.filter(function (s) { return s.cat === 'service' && s.open247; }).length;
+            open.textContent = n247;
+            open.setAttribute('data-pdh-countup', n247);
+        }
+        countUp();
+    }
+
+    // Numbers roll up from zero once, unless the visitor prefers reduced motion.
+    function countUp() {
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        [].forEach.call(document.querySelectorAll('[data-pdh-countup]'), function (el) {
+            var target = parseInt(el.getAttribute('data-pdh-countup'), 10);
+            var start = null;
+            function step(ts) {
+                if (start === null) start = ts;
+                var p = Math.min(1, (ts - start) / 900);
+                el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+                if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        });
     }
 
     // Tabs: "Find a doctor" / "Find a service" (WAI-ARIA tabs pattern, arrow keys move between tabs).

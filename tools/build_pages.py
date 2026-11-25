@@ -350,6 +350,17 @@ HMO_APPROVAL_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfGbbyaFRjyniWhqtGD
 
 def search_index(doctors, services, raw_terms, specialties, service_terms, hotline, hmos, contacts):
     hub = next((h for h in contacts["hotlines"] if h["id"] == "hmo-hub"), None)
+    # Homepage avatar row: one doctor with a real photo from each of the largest departments.
+    faces, seen = [], set()
+    by_size = sorted({d["department"] for d in doctors if d["department"]},
+                     key=lambda dept: -sum(d["department"] == dept for d in doctors))
+    for dept in by_size:
+        d = next((d for d in doctors if d["department"] == dept and d["has_photo"]), None)
+        if d and d["id"] not in seen:
+            faces.append({"name": d["name"], "photo": d["photo_thumb"], "url": f"/doctors/{d['id']}/"})
+            seen.add(d["id"])
+        if len(faces) == 5:
+            break
     depts = {}
     for d in doctors:
         if d["department"]:
@@ -358,6 +369,8 @@ def search_index(doctors, services, raw_terms, specialties, service_terms, hotli
         "doctors": [{"id": d["id"], "n": d["name"], "s": d["specialty"], "d": d["department"], "days": d["days"] or [],
                      "oc": d["on_call"]} for d in doctors],
         "departments": [{"name": k, "count": v, "url": target_url({"dept": k})} for k, v in sorted(depts.items(), key=lambda x: -x[1])],
+        "faces": faces,
+        "specialty_count": len({d["specialty"] for d in doctors if d["specialty"]}),
         "specialties": specialties,
         "services": [{"id": s["id"], "name": s["name"], "cat": s["category"], "loc": s["location"], "hours": s["schedule"],
                       "open247": is_24_7(s), "terms": service_terms.get(s["id"], []), "offered": s["services_offered"] or []}
