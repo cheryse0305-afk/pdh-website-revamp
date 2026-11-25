@@ -7,6 +7,9 @@ Outputs:
     doctors/index.html            Doctor Finder
     doctors/<id>/index.html       one profile page per doctor
     services/index.html           Services directory ("Where is it?")
+    directory/index.html          "Find Your Way" interactive floor directory
+    sitemap.xml, robots.txt, llms.txt   search-engine and AI-assistant discoverability
+    index.html (marked block)     Hospital JSON-LD between <!-- pdh:hospital-jsonld --> markers
     data/search-index.json        compact index for the homepage search and tiles (assets/js/pdh-home.js)
 
 Reads data/doctors.json, services.json, contacts.json and search-terms.json; every search-terms target is
@@ -27,6 +30,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "doctors")
 SERVICES_OUT = os.path.join(ROOT, "services")
 SITE_URL = "https://pdh-website-revamp.vercel.app"  # switch to the production domain at launch
+# Pre-launch: keep this site out of search engines and AI assistants until PDH points pdh.com.ph at it, so patients
+# land on the official domain and the old site keeps its rankings. At launch: set SITE_URL, set False, re-run.
+PRE_LAUNCH = True
 HOSPITAL = "Parañaque Doctors Hospital"
 APPOINTMENT_LINE = ("8776-0644 to 46", "tel:+63287760644")
 WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -51,6 +57,7 @@ def shell():
 
 def page(head, body_top, footer, *, title, description, path, extra_head="", main="", scripts=""):
     url = SITE_URL + path
+    head = re.sub(re.escape(JSONLD_START) + r".*?" + re.escape(JSONLD_END) + r"\n?", "", head, flags=re.S)  # homepage-only schema
     head = re.sub(r"<title>.*?</title>", f"<title>{e(title)}</title>", head, flags=re.S)
     for attr, value in (("og:title", title), ("og:description", description), ("og:url", url)):
         head = re.sub(rf'(<meta property="{attr}" content=")[^"]*', lambda m: m.group(1) + e(value), head)
@@ -281,7 +288,10 @@ def service_card(s, terms):
     search = fold(" ".join([s["name"], s["description"] or "", " ".join(s["services_offered"] or []), " ".join(terms)]))
     rows = []
     if s["location"]:
-        rows.append(("Location", e(s["location"])))
+        loc = e(s["location"])
+        if s["floors"]:
+            loc = f'<a href="/directory/#floor-{floor_key(s["floors"][0])}">{loc}</a>'
+        rows.append(("Location", loc))
     if s["schedule"]:
         rows.append(("Hours", "<br>".join(e(l) for l in s["schedule"].split("\n"))))
     if s["contact"]:
@@ -384,6 +394,243 @@ def search_index(doctors, services, raw_terms, specialties, service_terms, hotli
     }
 
 
+# ---------------------------------------------------------------- "Find Your Way" floor directory
+
+def floor_key(n):
+    return {-1: "b", 0: "g"}.get(n, str(n))
+
+
+def floor_name(n):
+    if n == -1:
+        return "Basement"
+    if n == 0:
+        return "Ground Floor"
+    return f"{n}{'nd' if n == 2 else 'rd' if n == 3 else 'th'} Floor"
+
+
+def floor_short(n):
+    return {-1: "B", 0: "G"}.get(n, f"{n}F")
+
+
+def directory_card(s, terms):
+    search = fold(" ".join([s["name"], s["description"] or "", " ".join(s["services_offered"] or []), " ".join(terms)]))
+    hours = (s["schedule"] or "").split("\n")
+    hours = "Hours vary by test" if len(hours) > 1 and hours[0].rstrip().endswith(":") else hours[0]
+    multi = f' <span class="pdh-dir__span">({e(s["location"])})</span>' if s["floors"] and len(s["floors"]) > 1 else ""
+    er = " pdh-dir__card--er" if s["id"] == "emergency-room-er" else ""
+    badge = '<span class="pdh-svc__badge">Open 24/7</span>' if is_24_7(s) else ""
+    return f"""                        <li class="pdh-dir__card{er}" data-search="{e(search)}">
+                            <p class="pdh-svc__cat">{CATEGORY_LABELS[s['category']]}{badge}</p>
+                            <h3 class="pdh-dir__name">{e(s['name'])}{multi}</h3>
+                            <p class="pdh-dir__meta">{e(hours) if hours else 'Hours not listed'}</p>
+                            <p class="pdh-dir__links"><a href="{APPOINTMENT_LINE[1]}">Call {e(s['contact'] or APPOINTMENT_LINE[0])}</a> <a href="/services/#{s['id']}">Details</a></p>
+                        </li>"""
+
+
+def directory_page(services, service_terms, contacts):
+    floors = sorted({f for s in services for f in (s["floors"] or [])}, reverse=True)
+    on = {f: [s for s in services if f in (s["floors"] or [])] for f in floors}
+    for f in floors:  # medical services first, then facilities
+        on[f].sort(key=lambda s: (s["category"] != "service", s["name"]))
+    tbd = [s for s in services if not s["floors"] and (s["location"] or "").upper().startswith("TBD")]
+    start = 0 if 0 in floors else floors[-1]
+    tabs, panels = [], []
+    for f in floors:
+        k, names = floor_key(f), ", ".join(s["name"].split(" (")[0] for s in on[f][:3]) + ("…" if len(on[f]) > 3 else "")
+        sel = f == start
+        cls = " pdh-floor--ground" if f == 0 else " pdh-floor--basement" if f == -1 else ""
+        er = '<span class="pdh-floor__er">ER</span>' if any(s["id"] == "emergency-room-er" for s in on[f]) else ""
+        tabs.append(f"""                    <li><button class="pdh-floor{cls}" type="button" role="tab" id="floor-tab-{k}" aria-controls="floor-{k}" aria-selected="{'true' if sel else 'false'}"{'' if sel else ' tabindex="-1"'} data-floor="{k}">
+                        <span class="pdh-floor__num">{floor_short(f)}</span><span class="pdh-floor__names">{e(names)}</span>{er}<span class="pdh-floor__count" data-count>{len(on[f])}</span>
+                    </button></li>""")
+        cards = "\n".join(directory_card(s, service_terms.get(s["id"], [])) for s in on[f])
+        panels.append(f"""                <section class="pdh-dir__panel" id="floor-{k}" role="tabpanel" aria-labelledby="floor-tab-{k}" tabindex="-1">
+                    <h2 class="pdh-dir__floor">{floor_name(f)} <span>{len(on[f])} {'place' if len(on[f]) == 1 else 'places'}</span></h2>
+                    <ul class="pdh-dir__cards">
+{cards}
+                    </ul>
+                </section>""")
+    tbd_html = ""
+    if tbd:
+        items = "".join(f'<li><a href="/services/#{s["id"]}">{e(s["name"])}</a></li>' for s in tbd)
+        tbd_html = f'<p class="pdh-dir__tbd"><strong>Location to be announced:</strong></p><ul class="pdh-dir__tbd-list">{items}</ul>'
+    parking = next((s for s in services if s["id"] == "parking"), None)
+    er_line = next((h for h in contacts["hotlines"] if h["id"] == "emergency"), None)
+    return f"""<section class="pdh-finder pdh-dir" aria-labelledby="pdh-dir-title">
+        <div class="pdh-finder__inner">
+            <nav class="pdh-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/services/">Services</a> <span aria-hidden="true">/</span> <span aria-current="page">Find Your Way</span></nav>
+            <h1 class="pdh-finder__title" id="pdh-dir-title">Find Your Way</h1>
+            <p class="pdh-finder__lede">Explore PDH floor by floor. Select a floor to see what's there, or search for a service and we'll show you which floor to go to.</p>
+
+            <form class="pdh-dir__search" role="search" data-pdh-dir-search>
+                <label for="pdh-dir-q">Where do you need to go?</label>
+                <input id="pdh-dir-q" name="q" type="search" autocomplete="off" placeholder="e.g. X-ray, dialysis, pharmacy, chapel">
+                <p class="pdh-dir__status" aria-live="polite" data-pdh-dir-status></p>
+            </form>
+
+            <div class="pdh-dir__layout">
+                <div class="pdh-bldg">
+                    <div class="pdh-bldg__roof" aria-hidden="true"><span>PDH</span></div>
+                    <ol class="pdh-bldg__floors" role="tablist" aria-label="Floors" aria-orientation="vertical">
+{chr(10).join(tabs)}
+                    </ol>
+                    <p class="pdh-bldg__street" aria-hidden="true">Street level</p>
+                </div>
+                <div class="pdh-dir__panels">
+{chr(10).join(panels)}
+                    {tbd_html}
+                </div>
+            </div>
+
+            <section class="pdh-dir__getting" aria-labelledby="pdh-dir-getting">
+                <h2 id="pdh-dir-getting">Getting here</h2>
+                <div class="pdh-dir__getting-grid">
+                    <div><h3>Address</h3><p>{e(contacts['address'])}</p>
+                        <p><a href="https://www.google.com/maps/search/?api=1&amp;query=Para%C3%B1aque+Doctors+Hospital%2C+175+Do%C3%B1a+Soledad+Ave%2C+Para%C3%B1aque" target="_blank" rel="noopener">Get directions</a></p></div>
+                    <div><h3>Parking</h3><p>{e(parking['description']) if parking else 'Ask our staff for parking.'}</p></div>
+                    <div class="pdh-dir__getting-er"><h3>Emergency entrance</h3><p>The Emergency Room is on the Ground Floor and open 24/7.</p>
+                        {f'<p><a href="{tel(er_line["mobile"])}">Call {e(er_line["mobile"])}</a></p>' if er_line and er_line['mobile'] else ''}</div>
+                </div>
+            </section>
+
+            <p class="pdh-note">Locations and hours come from PDH's published service list and may change. Please call {APPOINTMENT_LINE[0]} to confirm before your visit.</p>
+        </div>
+    </section>"""
+
+
+# ---------------------------------------------------------------- AI-search discoverability
+
+SAME_AS = ["https://www.facebook.com/paranaquedoctorshospitaluhbi/", "https://www.instagram.com/paranaquedoctorshospital/",
+           "https://www.linkedin.com/company/paranaquedoctorshospital"]
+MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Para%C3%B1aque+Doctors+Hospital%2C+175+Do%C3%B1a+Soledad+Ave%2C+Para%C3%B1aque"
+JSONLD_START, JSONLD_END = "<!-- pdh:hospital-jsonld -->", "<!-- /pdh:hospital-jsonld -->"
+ROBOTS_START, ROBOTS_END = "<!-- pdh:robots -->", "<!-- /pdh:robots -->"
+AI_BOTS = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "PerplexityBot", "Google-Extended"]
+
+
+def postal_address(address):
+    m = re.match(r"(?P<street>.+?),\s*Parañaque,\s*(?P<zip>\d{4}),\s*Metro Manila", address or "")
+    if not m:
+        raise SystemExit(f"Unexpected address format in contacts.json: {address!r}")
+    return {"@type": "PostalAddress", "streetAddress": m.group("street"), "addressLocality": "Parañaque",
+            "postalCode": m.group("zip"), "addressRegion": "Metro Manila", "addressCountry": "PH"}
+
+
+def hospital_jsonld(hospital, contacts, services, doctors):
+    hotlines = {h["id"]: h for h in contacts["hotlines"]}
+    points = [{"@type": "ContactPoint", "contactType": label, "telephone": tel(hotlines[k]["mobile"])[4:]}
+              for k, label in (("emergency", "emergency"), ("information-services", "customer service"),
+                               ("admitting-department", "admissions"), ("hmo-hub", "billing support")) if k in hotlines and hotlines[k]["mobile"]]
+    data = {
+        "@context": "https://schema.org",
+        "@type": "Hospital",
+        "@id": SITE_URL + "/#hospital",
+        "name": HOSPITAL,
+        "alternateName": "PDH",
+        "url": SITE_URL + "/",
+        "logo": SITE_URL + "/assets/images/pdh-logo.png",
+        "image": SITE_URL + "/assets/images/pdh/pdh-facade-2026.jpg",
+        "description": hospital["intro"][0],
+        "foundingDate": "2007-05-08",
+        "telephone": "+63287760644",
+        "email": (contacts["emails"] or [None])[0],
+        "address": postal_address(contacts["address"]),
+        "hasMap": MAPS_URL,
+        "openingHours": "Mo-Su 00:00-23:59",
+        "isAcceptingNewPatients": True,
+        "parentOrganization": {"@type": "Organization", "name": "Metro Pacific Health"},
+        "sameAs": SAME_AS,
+        "contactPoint": points,
+        "medicalSpecialty": sorted({d["department"] for d in doctors if d["department"]}),
+        "department": [{"@type": "MedicalOrganization", "name": s["name"], "url": f"{SITE_URL}/services/#{s['id']}",
+                        **({"openingHours": "Mo-Su 00:00-23:59"} if is_24_7(s) else {})}
+                       for s in services if s["category"] == "service" and s["floors"]],
+    }
+    return json.dumps(data, ensure_ascii=False, indent=1)
+
+
+def inject_homepage_jsonld(block):
+    """Keep the Hospital JSON-LD in index.html in sync with the data (between marker comments)."""
+    path = os.path.join(ROOT, "index.html")
+    page_html = open(path, encoding="utf-8").read()
+    tag = f'{JSONLD_START}\n<script type="application/ld+json">\n{block}\n</script>\n{JSONLD_END}'
+    if JSONLD_START in page_html:
+        page_html = re.sub(re.escape(JSONLD_START) + r".*?" + re.escape(JSONLD_END), lambda m: tag, page_html, flags=re.S)
+    else:
+        anchor = page_html.index('<link rel="canonical"')
+        anchor = page_html.index("\n", anchor) + 1
+        page_html = page_html[:anchor] + tag + "\n" + page_html[anchor:]
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(page_html)
+
+
+def write_sitemap(doctors, lastmod):
+    paths = ["/", "/doctors/", "/services/", "/directory/"] + [f"/doctors/{d['id']}/" for d in doctors]
+    urls = "\n".join(f"  <url><loc>{SITE_URL}{p}</loc><lastmod>{lastmod}</lastmod></url>" for p in paths)
+    write(os.path.join(ROOT, "sitemap.xml"),
+          f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n')
+    return len(paths)
+
+
+def write_robots():
+    if PRE_LAUNCH:
+        lines = ["# PRE-LAUNCH: this site is not yet PDH's official address (pdh.com.ph).",
+                 "# Google may crawl so it can see the noindex tag on every page; AI crawlers are asked to stay out.",
+                 "User-agent: *", "Allow: /", ""]
+        for bot in AI_BOTS:
+            lines += [f"User-agent: {bot}", "Disallow: /", ""]
+    else:
+        lines = ["# Search engines and AI assistants are welcome: PDH wants patients to find accurate hospital information.",
+                 "User-agent: *", "Allow: /", ""]
+        for bot in AI_BOTS:
+            lines += [f"User-agent: {bot}", "Allow: /", ""]
+        lines.append(f"Sitemap: {SITE_URL}/sitemap.xml")
+    write(os.path.join(ROOT, "robots.txt"), "\n".join(lines).rstrip("\n") + "\n")
+
+
+def inject_robots_meta():
+    """Pre-launch noindex tag in index.html (generated pages copy the head, so every page gets it)."""
+    path = os.path.join(ROOT, "index.html")
+    page_html = open(path, encoding="utf-8").read()
+    tag = f'{ROBOTS_START}<meta name="robots" content="noindex, follow">{ROBOTS_END}' if PRE_LAUNCH else f"{ROBOTS_START}{ROBOTS_END}"
+    if ROBOTS_START in page_html:
+        page_html = re.sub(re.escape(ROBOTS_START) + r".*?" + re.escape(ROBOTS_END), lambda m: tag, page_html, flags=re.S)
+    else:
+        anchor = page_html.index('<meta name="viewport"')
+        anchor = page_html.index("\n", anchor) + 1
+        page_html = page_html[:anchor] + tag + "\n" + page_html[anchor:]
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(page_html)
+
+
+def write_llms(hospital, contacts, services, doctors, hmos):
+    hot = {h["id"]: h for h in contacts["hotlines"]}
+    lines = [f"# {HOSPITAL} (PDH)", "", f"> {hospital['intro'][0]}", "",
+             "Information below comes from PDH's published website. Schedules and locations can change; "
+             f"patients should call {APPOINTMENT_LINE[0]} to confirm.", "",
+             "## Emergency", "",
+             f"- The Emergency Room is open 24/7 on the Ground Floor.",
+             f"- Emergency hotline: {hot['emergency']['numbers']}" if "emergency" in hot else "", "",
+             "## Contact", "", f"- Address: {contacts['address']}"]
+    lines += [f"- {h['name']}: {h['numbers']}" for h in contacts["hotlines"]]
+    lines += [f"- Email: {', '.join(contacts['emails'])}", f"- Directions: {MAPS_URL}", "",
+              "## Key pages", "",
+              f"- [Find a Doctor]({SITE_URL}/doctors/): search {len(doctors)} doctors by name, specialty, department and clinic day; each doctor has a profile page with their clinic schedule.",
+              f"- [Services & Facilities]({SITE_URL}/services/): every service with its location, opening hours and phone number.",
+              f"- [Find Your Way]({SITE_URL}/directory/): floor-by-floor hospital directory.", "",
+              "## Services and where to find them", ""]
+    for s in services:
+        if s["category"] == "room":
+            continue
+        hours = (s["schedule"] or "not listed").split("\n")[0].rstrip(":")
+        lines.append(f"- {s['name']}: {s['location'] or 'location not listed'}; hours: {hours}")
+    lines += ["", "## About", ""]
+    lines += [p for p in hospital["intro"][1:3]]
+    lines += ["", f"- Mission: {hospital['mission']}", f"- Vision: {hospital['vision']}", "",
+              "## HMO partners", "", ", ".join(sorted(h["name"] for h in hmos)), ""]
+    write(os.path.join(ROOT, "llms.txt"), "\n".join(l for l in lines if l is not None) + "\n")
+
+
 def write(path, content):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
@@ -393,6 +640,7 @@ def write(path, content):
 def main():
     doctors = sorted(load("doctors"), key=lambda d: fold(d["name"]))
     contacts = load("contacts")[0]
+    inject_robots_meta()
     head, body_top, footer = shell()
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)  # generated output only; removes pages for doctors no longer listed
@@ -435,6 +683,27 @@ def main():
     with open(os.path.join(ROOT, "data", "search-index.json"), "w", encoding="utf-8", newline="\n") as f:
         json.dump(index, f, ensure_ascii=False, separators=(",", ":"))
     print(f"Wrote data/search-index.json ({os.path.getsize(os.path.join(ROOT, 'data', 'search-index.json')) // 1024} KB)")
+
+    directory_out = os.path.join(ROOT, "directory")
+    if os.path.isdir(directory_out):
+        shutil.rmtree(directory_out)
+    write(os.path.join(directory_out, "index.html"), page(
+        head, body_top, footer,
+        title=f"Find Your Way: Floor Directory | {HOSPITAL}",
+        description=f"Floor-by-floor directory of {HOSPITAL}: find the ER, laboratory, radiology, pharmacy, dialysis and every other service.",
+        path="/directory/",
+        main=directory_page(services, service_terms, contacts),
+        scripts='<script src="/assets/js/pdh-directory.js" defer></script>\n',
+    ))
+    print("Wrote directory/index.html")
+
+    hospital = load("hospital")[0]
+    inject_homepage_jsonld(hospital_jsonld(hospital, contacts, services, doctors))
+    lastmod = json.load(open(os.path.join(ROOT, "data", "doctors.json"), encoding="utf-8"))["meta"]["generated_at"][:10]
+    n = write_sitemap(doctors, lastmod)
+    write_robots()
+    write_llms(hospital, contacts, services, doctors, load("hmo-partners"))
+    print(f"Wrote Hospital JSON-LD into index.html, sitemap.xml ({n} URLs), robots.txt, llms.txt")
 
 
 if __name__ == "__main__":

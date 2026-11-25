@@ -1,0 +1,71 @@
+# Parañaque Doctors Hospital (PDH)
+
+> Parañaque Doctors Hospital (PDH) is a premier Level 2 healthcare institution located in the heart of Parañaque City. It is committed to ensuring the well-being of its community by continuously providing high-quality and affordable healthcare services.
+
+Information below comes from PDH's published website. Schedules and locations can change; patients should call 8776-0644 to 46 to confirm.
+
+## Emergency
+
+- The Emergency Room is open 24/7 on the Ground Floor.
+- Emergency hotline: 8776 0645 to local 8106 or 0921 572 0589
+
+## Contact
+
+- Address: 175 Doña Soledad Ave., Better Living Subdivision, Parañaque, 1711, Metro Manila
+- Information Services: 8776 0644/51 to local 7000 or 0998 520 7295
+- Emergency: 8776 0645 to local 8106 or 0921 572 0589
+- Admitting Department: 8776 0646 to local 8728 or 0947 236 9827
+- HMO Hub: 8776 0647 to local 8945 or 0921 567 2709
+- HR Department: 8776 0644 to local 8207 or 0947 341 5241
+- Email: marketing@pdh.com.ph
+- Directions: https://www.google.com/maps/search/?api=1&query=Para%C3%B1aque+Doctors+Hospital%2C+175+Do%C3%B1a+Soledad+Ave%2C+Para%C3%B1aque
+
+## Key pages
+
+- [Find a Doctor](https://pdh-website-revamp.vercel.app/doctors/): search 289 doctors by name, specialty, department and clinic day; each doctor has a profile page with their clinic schedule.
+- [Services & Facilities](https://pdh-website-revamp.vercel.app/services/): every service with its location, opening hours and phone number.
+- [Find Your Way](https://pdh-website-revamp.vercel.app/directory/): floor-by-floor hospital directory.
+
+## Services and where to find them
+
+- Emergency Room (ER): Ground Floor; hours: Open 24/7
+- Radiology: Ground Floor; hours: Open 24/7
+- Laboratory: Ground Floor; hours: Open 24/7
+- Nuclear Medicine: 7th Floor; hours: By Appointment
+- Multi-Diagnostic Center: 2nd Floor; hours: Echo
+- Pulmonary: 2nd Floor; hours: 6 AM – 10 PM (Monday to Friday), 6 AM – 6 PM (Saturdays & Sundays including Holidays)
+- Hemodialysis Center: 2nd Floor; hours: 6 AM – 10 PM (Monday, Wednesday, Friday), 6 AM – 6 PM (Tuesday, Thursday, Saturday)
+- Physical Medicine and Rehabilitation: 2nd Floor; hours: 7 AM – 7 PM (Monday to Saturday)
+- Operating Room (OR): 3rd Floor; hours: Open 24/7
+- ICU (Intensive Care Unit): 3rd Floor; hours: Open 24/7
+- NICU (Neonatal Intensive Care Unit): 3rd Floor; hours: Open 24/7
+- PICU (Pediatric Intensive Care Unit): 5th Floor; hours: Open 24/7
+- Outpatient Department (OPD) Clinics: 3rd to 6th Floor; hours: By appointment
+- Breastfeeding Station: 4th Floor; hours: Open 24/7
+- OB Ultrasound Services: 4th Floor; hours: 8 AM to 5 PM
+- Animal Bite Center: TBD; hours: TBD
+- Eye Center: 2nd Floor; hours: 10 AM – 7 PM (Monday to Saturday)
+- Dental Services: 3rd Floor; hours: 9 AM – 5 PM (Monday to Friday)
+- Pharmacy: Ground Floor; hours: Open 24/7
+- Admitting Department: Ground Floor; hours: Open 24/7
+- Chemo Infusion Center: TBD; hours: TBD
+- Medical Records: 2nd Floor; hours: 8 AM – 5 PM (Monday to Saturday)
+- Patient Experience Department: TBD; hours: TBD
+- HMO Hub: Ground Floor; hours: 6 AM – 7 PM (Monday to Saturday), 6 AM – 2 PM (Sunday and Holidays)
+- Prayer Room: 2nd Floor; hours: Open 24/7
+- Parking: Basement Parking and Allocated Parking Space for Patients and Visitors; hours: Open 24/7
+- Dietary/Canteen: Ground Floor; hours: 6 AM – 8 PM (Monday to Sunday)
+- Automated Teller Machine (ATM): Ground Floor; hours: Open 24/7
+
+## About
+
+Founded on May 8, 2007, by visionary doctors, PDH officially became a member of the Metro Pacific Health (MPH) Group in 2024 — the largest Philippine private hospital network in the country under the Metro Pacific Investments Corporation (MPIC), led by Mr. Manuel V. Pangilinan.
+As member of the MPH network, PDH shares the same goal in providing medical excellence and compassionate care to all our patients.
+
+- Mission: To deliver “Alagang PDH”, our unique way of delivering high quality and compassionate care that is affordable, accessible, and patient-centered.
+- Vision: To be the leading healthcare provider, renowned for medical excellence, compassionate care, innovative healthcare services, and dedicated commitment to the well-being of the community.
+
+## HMO partners
+
+Amaphil, AsianCare, Avega, BenLife, Cocolife, CoopHealth, EastWest Healthcare, Etiqa, Flexicare, Fortune Life, Generali, Getwell Health System, HMI, HPPI, Healthbridge, IMS Wellth Care, Intellicare, Kaiser, Lacson & Lacson, Maxicare, MedAsia, MediCard, Medilink, Medocare, Metrocare, Optimum, Pacific Cross, PhilCare, Royale Mariners Healthcare, ValuCare, Wellcare, iCare
+

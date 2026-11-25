@@ -92,3 +92,67 @@
 .pdh-svc__more summary { cursor: pointer; font-weight: 700; color: var(--pdh-teal); }
 .pdh-svc__more ul { margin: .5rem 0 .75rem 1.25rem; font-size: .9375rem; }
 .pdh-svc__amenities { font-size: .9375rem; }
+
+/* "Find Your Way" floor directory */
+.pdh-dir__search { background: var(--pdh-soft); border-top: 4px solid var(--pdh-teal-bright); margin-bottom: 1.5rem; padding: 1.25rem; }
+.pdh-dir__search label { display: block; font-weight: 700; margin-bottom: .375rem; }
+.pdh-dir__search input { background: #fff; border: 1px solid #8c97a2; border-radius: 0; font: inherit; height: 2.875rem; margin: 0; max-width: 34rem; padding: 0 .75rem; width: 100%; }
+.pdh-dir__search input:focus { outline: 3px solid var(--pdh-orange); outline-offset: 2px; }
+.pdh-dir__status { font-weight: 700; margin: .625rem 0 0; min-height: 1.5em; }
+.pdh-dir__layout { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+@media screen and (min-width: 64em) { .pdh-dir__layout { align-items: start; grid-template-columns: 22rem 1fr; } }
+
+/* The building: white floors with teal stripes, like PDH's facade */
+.pdh-bldg { position: relative; }
+@media screen and (min-width: 64em) { .pdh-bldg { position: sticky; top: 9rem; } }
+.pdh-bldg__roof { background: var(--pdh-navy); border-radius: .75rem .75rem 0 0; color: #fff; display: flex; font-weight: 700; justify-content: center;
+    letter-spacing: .2em; margin: 0 1.5rem; padding: .375rem 0; }
+.pdh-bldg__roof span::before { color: var(--pdh-orange); content: "+ "; }
+.pdh-bldg__floors { border: 2px solid var(--pdh-line); border-top: 0; list-style: none; margin: 0; padding: 0; }
+.pdh-floor { align-items: center; background: repeating-linear-gradient(90deg, #fff 0 2.25rem, #f1f6f7 2.25rem 2.5rem);
+    border: 0; border-top: 5px solid var(--pdh-teal-bright); color: var(--pdh-navy); cursor: pointer; display: grid; font: inherit;
+    gap: .75rem; grid-template-columns: 3rem 1fr auto auto; min-height: 3.75rem; padding: .5rem .75rem; text-align: left; transition: background .2s, color .2s; width: 100%; }
+.pdh-floor:hover { background: #e6f4f4; }
+.pdh-floor:focus-visible { outline: 3px solid var(--pdh-orange); outline-offset: -3px; }
+.pdh-floor__num { font-family: "Barlow Condensed", sans-serif; font-size: 1.5rem; font-weight: 700; }
+.pdh-floor__names { color: #4d5b68; font-size: .8125rem; line-height: 1.3; }
+.pdh-floor__count { background: var(--pdh-soft); border-radius: 999px; font-size: .8125rem; font-weight: 700; min-width: 1.75rem; padding: .125rem .5rem; text-align: center; }
+.pdh-floor__er { background: #b42318; border-radius: .25rem; color: #fff; font-size: .6875rem; font-weight: 700; letter-spacing: .06em; padding: .125rem .375rem; }
+.pdh-floor[aria-selected="true"] { background: var(--pdh-teal); color: #fff; }
+.pdh-floor[aria-selected="true"] .pdh-floor__names { color: #e3f4f4; }
+.pdh-floor[aria-selected="true"] .pdh-floor__count { background: #fff; color: var(--pdh-teal); }
+.pdh-floor.has-match:not([aria-selected="true"]) { box-shadow: inset 4px 0 0 var(--pdh-orange); }
+.pdh-floor.has-match .pdh-floor__count { background: var(--pdh-orange); color: #fff; }
+.pdh-floor.is-dim { opacity: .45; }
+.pdh-floor--ground { border-top-width: 8px; }
+.pdh-floor--basement { background: repeating-linear-gradient(90deg, #e9eef0 0 2.25rem, #dfe6e8 2.25rem 2.5rem); border-top: 3px dashed #8c97a2; }
+.pdh-bldg__street { border-top: 3px solid var(--pdh-navy); color: #4d5b68; font-size: .75rem; font-weight: 700; letter-spacing: .08em;
+    margin: -3.75rem 0 3.6rem; padding-top: .125rem; pointer-events: none; position: relative; text-align: center; text-transform: uppercase; }
+
+/* Floor panels */
+.pdh-dir__panel[hidden] { display: none; }
+.pdh-dir__panel:focus { outline: 0; }
+.pdh-dir__floor { color: var(--pdh-navy); font-size: 1.75rem; margin: 0 0 1rem; }
+.pdh-dir__floor span { color: #4d5b68; font-size: 1rem; font-weight: 400; margin-left: .5rem; }
+.pdh-dir__cards { display: grid; gap: 1rem; grid-template-columns: 1fr; list-style: none; margin: 0 0 1.5rem; padding: 0; }
+@media screen and (min-width: 48em) { .pdh-dir__cards { grid-template-columns: repeat(2, 1fr); } }
+.pdh-dir__card { border: 1px solid var(--pdh-line); border-left: 4px solid var(--pdh-teal-bright); padding: 1rem; transition: opacity .2s, box-shadow .2s; }
+.pdh-dir__card--er { border-left-color: #b42318; }
+.pdh-dir__card.is-match { box-shadow: 0 0 0 3px rgba(244, 122, 32, .45); }
+.pdh-dir__card.is-dim { opacity: .45; }
+.pdh-dir__name { color: var(--pdh-navy); font-size: 1.125rem; margin: 0 0 .25rem; }
+.pdh-dir__span { color: #4d5b68; font-size: .875rem; font-weight: 400; }
+.pdh-dir__meta { color: #4d5b68; font-size: .9375rem; margin: 0 0 .5rem; }
+.pdh-dir__links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin: 0; }
+.pdh-dir__links a { font-weight: 700; }
+.pdh-dir__tbd { margin: 0 0 .25rem; }
+.pdh-dir__tbd-list { margin: 0 0 0 1.25rem; }
+
+/* Getting here */
+.pdh-dir__getting { border-top: 4px solid var(--pdh-teal-bright); margin-top: 2.5rem; padding-top: 1.5rem; }
+.pdh-dir__getting h2 { color: var(--pdh-navy); margin: 0 0 1rem; }
+.pdh-dir__getting-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media screen and (min-width: 48em) { .pdh-dir__getting-grid { grid-template-columns: repeat(3, 1fr); } }
+.pdh-dir__getting-grid > div { background: var(--pdh-soft); padding: 1rem; }
+.pdh-dir__getting-grid h3 { color: var(--pdh-navy); font-size: 1.0625rem; margin: 0 0 .5rem; }
+.pdh-dir__getting-er { border-left: 4px solid #b42318; }

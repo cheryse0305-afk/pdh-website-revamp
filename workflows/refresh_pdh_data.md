@@ -25,7 +25,16 @@ Keep `data/*.json` (doctors, services, contacts, hospital profile, HMO partners)
    ```
    python tools/build_pages.py
    ```
-   Also run this after any change to the header, navigation or footer in `index.html` (the generated pages copy them from there) and after editing `data/search-terms.json`. `doctors/`, `services/` and `data/search-index.json` are generated output: never edit them by hand. The tool stops with an error if a search-terms target no longer matches the data (e.g. a specialty was renamed); fix the term file and re-run.
+   Also run this after any change to the header, navigation or footer in `index.html` (the generated pages copy them from there) and after editing `data/search-terms.json`. `doctors/`, `services/`, `directory/`, `data/search-index.json`, `sitemap.xml`, `robots.txt`, `llms.txt` and the Hospital JSON-LD block in `index.html` (between the `<!-- pdh:hospital-jsonld -->` markers) are generated output: never edit them by hand.
+   The site is in **pre-launch mode** (`PRE_LAUNCH = True` in `tools/build_pages.py`): every page carries `<meta name="robots" content="noindex, follow">` and `robots.txt` asks AI crawlers to stay out, so search engines keep sending patients to the official pdh.com.ph. See "Going live on pdh.com.ph" below.
+
+## Going live on pdh.com.ph
+1. Point the pdh.com.ph domain at this Vercel project (Vercel → Settings → Domains) and confirm the site loads on it.
+2. Redirect important old WordPress URLs to their new equivalents (e.g. `/all-doctors/` → `/doctors/`, `/our-services/` → `/services/`, `/doctor/<name>/` → `/doctors/<name>/`) so existing search results and bookmarks keep working.
+3. In `tools/build_pages.py`: set `SITE_URL = "https://pdh.com.ph"` and `PRE_LAUNCH = False`.
+4. Update the homepage `<link rel="canonical">`, `og:url` and `twitter:url` in `index.html` to `https://pdh.com.ph/`.
+5. Run `python tools/build_pages.py`: this removes the noindex tags, opens `robots.txt` to search engines and AI assistants, and rewrites the sitemap, structured data and `llms.txt` with the new domain.
+6. Commit and push, then submit `https://pdh.com.ph/sitemap.xml` in Google Search Console. The tool stops with an error if a search-terms target no longer matches the data (e.g. a specialty was renamed); fix the term file and re-run.
 4. Review with `git diff data/` before committing.
 5. Commit the data files, `doctors/` and `services/`. Pushing to `main` deploys to production, so confirm with the project owner first.
 

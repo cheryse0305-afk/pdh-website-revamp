@@ -16,60 +16,58 @@
         radial-gradient(36rem 24rem at 94% 96%, rgba(255, 207, 160, .5), transparent 70%),    /* warm glow, bottom right */
         radial-gradient(56rem 34rem at 68% 6%, rgba(255, 255, 255, .4), transparent 62%),
         linear-gradient(125deg, #cdeeed 0%, #98dbd9 34%, #66c4c4 62%, #a9e2e0 100%); }
-@media screen and (min-width: 64em) { .pdh-hero { padding-top: 3rem; } }
+@media screen and (min-width: 64em) { .pdh-hero { padding: 3rem 0 4rem; } }
 .pdh-hero__bg { inset: 0; overflow: hidden; pointer-events: none; position: absolute; z-index: 0; }
 /* global.css gives every svg `stroke: #000`; reset it so only elements with their own stroke draw one. */
 .pdh-hero__art { height: 100%; inset: 0; position: absolute; stroke: none; stroke-width: 0; width: 100%; }
 
-/* PDH's own building as a full-width architectural backdrop: strong at the base (entrance and signage),
-   fading up into the aqua sky. Sits above the waves so they don't wash it out. */
-.pdh-hero__facade { background: url(/assets/images/pdh/pdh-facade-2026.jpg) center bottom / 100% auto no-repeat; bottom: 0;
-    height: 42vw; max-height: 52rem;
-    left: 0; position: absolute; right: 0;
-    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 55%, rgba(0, 0, 0, .6) 78%, transparent 100%);
-    mask-image: linear-gradient(to top, #000 0%, #000 55%, rgba(0, 0, 0, .6) 78%, transparent 100%); }
-.pdh-hero__facade::after { background: linear-gradient(180deg, rgba(102, 196, 196, .4) 0%, rgba(102, 196, 196, .08) 45%, rgba(13, 59, 64, .1) 100%);
-    content: ""; inset: 0; position: absolute; }
-.pdh-hero { padding-bottom: 9rem; }
-@media screen and (min-width: 64em) {
-    .pdh-hero { padding-bottom: 14rem; }
+/* PDH's own building as the backdrop of the upper hero: starts under the navigation and fades down into
+   the aqua; a light veil on the left keeps the headline readable while the building shows on the right. */
+.pdh-hero__facade { background: url(/assets/images/pdh/pdh-facade-2026.jpg) center 35% / cover no-repeat; filter: saturate(.8); height: 62%;
+    left: 0; opacity: .38; position: absolute; right: 0; top: 0;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, rgba(0, 0, 0, .5) 78%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 55%, rgba(0, 0, 0, .5) 78%, transparent 100%); }
+.pdh-hero__facade::after { content: ""; inset: 0; position: absolute;
+    background: linear-gradient(90deg, rgba(236, 249, 248, .93) 0%, rgba(236, 249, 248, .86) 30%, rgba(236, 249, 248, .45) 52%,
+                rgba(236, 249, 248, .08) 72%, rgba(236, 249, 248, 0) 100%),
+                linear-gradient(180deg, rgba(102, 196, 196, .18) 0%, transparent 40%); }
+@media screen and (max-width: 63.99em) {
+    /* text spans the full width on phones, so use an even veil */
+    .pdh-hero__facade { height: 38rem; opacity: .25; }
+    .pdh-hero__facade::after { background: linear-gradient(180deg, rgba(236, 249, 248, .72) 0%, rgba(236, 249, 248, .82) 60%, rgba(236, 249, 248, .9) 100%); }
 }
 
-.pdh-ribbon { fill: none; opacity: .28; stroke: #fff; stroke-linecap: round; stroke-width: 140; }
+.pdh-ribbon { fill: none; opacity: .16; stroke: #fff; stroke-linecap: round; stroke-width: 140; }
 .pdh-wave { transform-box: fill-box; }
 .pdh-cross { fill: rgba(255, 255, 255, .16); stroke: rgba(255, 255, 255, .95); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
-.pdh-cross--1 { opacity: .75; }
-.pdh-cross--2, .pdh-cross--3 { opacity: .8; }
-.pdh-cross--4 { opacity: .6; }
-.pdh-trail { fill: none; filter: drop-shadow(0 0 6px rgba(255, 255, 255, .95)) drop-shadow(0 0 14px rgba(255, 255, 255, .6)); stroke-linecap: round; stroke-width: 3; }
-.pdh-wave-edge { fill: none; filter: drop-shadow(0 0 5px rgba(255, 255, 255, .9)); opacity: .75; stroke: #fff; stroke-linecap: round; stroke-width: 2; transform-box: fill-box; }
-.pdh-wave-edge--2 { opacity: .5; stroke-width: 1.5; }
-.pdh-trail--warm { filter: drop-shadow(0 0 8px rgba(255, 190, 120, .95)) drop-shadow(0 0 18px rgba(244, 122, 32, .45)); stroke-width: 4; }
-.pdh-trail--top, .pdh-trail--right { opacity: .85; stroke-width: 2; }
+.pdh-cross--1 { opacity: .6; }
+.pdh-cross--2 { opacity: .65; }
+.pdh-trail { fill: none; filter: drop-shadow(0 0 5px rgba(255, 255, 255, .8)); stroke-linecap: round; stroke-width: 2.5; }
+.pdh-wave-edge { fill: none; filter: drop-shadow(0 0 4px rgba(255, 255, 255, .7)); opacity: .45; stroke: #fff; stroke-linecap: round; stroke-width: 2; transform-box: fill-box; }
+.pdh-wave-edge--2 { opacity: .3; stroke-width: 1.25; }
+.pdh-trail--warm { filter: drop-shadow(0 0 6px rgba(255, 190, 120, .8)); stroke-width: 3; }
+.pdh-trail--top { opacity: .7; stroke-width: 1.75; }
 
 /* Phones: keep the atmosphere, drop the busiest details. */
 @media screen and (max-width: 39.99em) {
     /* the art scales up ~2.8x on tall phone heroes, so the big cross would sit behind the headline and search */
-    .pdh-cross--1, .pdh-cross--2, .pdh-cross--4, .pdh-trail--top, .pdh-trail--right, .pdh-dots--b { display: none; }
+    .pdh-cross--1, .pdh-cross--2, .pdh-trail--top { display: none; }
     .pdh-ribbon { opacity: .16; }
 }
 
-@keyframes pdh-wave-drift { from { transform: translateX(-30px); } to { transform: translateX(30px); } }
-@keyframes pdh-cross-float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
-@keyframes pdh-trail-glow { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+@keyframes pdh-wave-drift { from { transform: translateX(-16px); } to { transform: translateX(16px); } }
+@keyframes pdh-cross-float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-6px) rotate(2deg); } }
+@keyframes pdh-trail-glow { 0%, 100% { opacity: .35; } 50% { opacity: .75; } }
 @media (prefers-reduced-motion: no-preference) {
-    .pdh-wave--1, .pdh-wave-edge { animation: pdh-wave-drift 18s ease-in-out infinite alternate; }
-    .pdh-wave-edge--2 { animation: pdh-wave-drift 24s ease-in-out infinite alternate-reverse; }
-    .pdh-wave--2 { animation: pdh-wave-drift 24s ease-in-out infinite alternate-reverse; }
-    .pdh-wave--3 { animation: pdh-wave-drift 30s ease-in-out infinite alternate; }
-    .pdh-cross--1 { animation: pdh-cross-float 12s ease-in-out infinite; }
-    .pdh-cross--2 { animation: pdh-cross-float 9s ease-in-out infinite 1s; }
-    .pdh-cross--3 { animation: pdh-cross-float 11s ease-in-out infinite 2s; }
-    .pdh-cross--4 { animation: pdh-cross-float 14s ease-in-out infinite .5s; }
-    .pdh-trail { animation: pdh-trail-glow 6s ease-in-out infinite; }
-    .pdh-trail--white { animation-delay: 1.5s; }
-    .pdh-trail--top { animation-delay: 3s; }
-    .pdh-trail--right { animation-delay: 4.5s; }
+    .pdh-wave--1, .pdh-wave-edge { animation: pdh-wave-drift 32s ease-in-out infinite alternate; }
+    .pdh-wave-edge--2 { animation: pdh-wave-drift 40s ease-in-out infinite alternate-reverse; }
+    .pdh-wave--2 { animation: pdh-wave-drift 40s ease-in-out infinite alternate-reverse; }
+    .pdh-wave--3 { animation: pdh-wave-drift 48s ease-in-out infinite alternate; }
+    .pdh-cross--1 { animation: pdh-cross-float 16s ease-in-out infinite; }
+    .pdh-cross--2 { animation: pdh-cross-float 20s ease-in-out infinite 2s; }
+    .pdh-trail { animation: pdh-trail-glow 10s ease-in-out infinite; }
+    .pdh-trail--white { animation-delay: 3s; }
+    .pdh-trail--top { animation-delay: 6s; }
 }
 
 .pdh-hero__inner { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); margin: 0 auto; max-width: 82rem;
@@ -179,12 +177,13 @@ html:not(.no-js) .pdh-qf__title { clip: rect(0 0 0 0); height: 1px; margin: -1px
 .pdh-hero__visual { position: relative; }
 .pdh-hero__visual::before { border: 2px solid rgba(10, 161, 165, .4); border-radius: 12rem 12rem 1.5rem 1.5rem; content: "";
     inset: 1rem -.75rem -1rem 1rem; position: absolute; z-index: 0; }
-.pdh-arch { aspect-ratio: 4 / 3.4; border-radius: 12rem 12rem 1.5rem 1.5rem; box-shadow: 0 30px 60px -20px rgba(13, 59, 64, .35);
+.pdh-arch { aspect-ratio: 4 / 3.4; border-radius: 12rem 12rem 1.5rem 1.5rem;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, .6), 0 34px 70px -22px rgba(13, 59, 64, .5);
     margin: 0; overflow: hidden; position: relative; z-index: 1; }
 /* Core-values slideshow: stacked photos cross-fade; a soft gradient keeps the caption readable. */
 .pdh-arch img { display: block; height: 100%; inset: 0; object-fit: cover; opacity: 0; position: absolute; transition: opacity 1.2s ease; width: 100%; }
 .pdh-arch img.is-active { opacity: 1; }
-.pdh-arch::after { background: linear-gradient(180deg, transparent 50%, rgba(13, 59, 64, .45)); content: ""; inset: 0; pointer-events: none; position: absolute; }
+.pdh-arch::after { background: linear-gradient(180deg, transparent 62%, rgba(13, 59, 64, .28)); content: ""; inset: 0; pointer-events: none; position: absolute; }
 .pdh-arch__caption { -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); background: rgba(255, 255, 255, .9); border-radius: 1rem;
     bottom: 1rem; box-shadow: 0 12px 28px -12px rgba(13, 59, 64, .4); color: var(--qf-ink); display: flex; flex-direction: column; gap: .125rem;
     max-width: 15rem; padding: .75rem .875rem; position: absolute; right: 1rem; z-index: 2; }
@@ -334,4 +333,16 @@ html:not(.no-js) .pdh-qf__title { clip: rect(0 0 0 0); height: 1px; margin: -1px
     .pdh-float--since { left: -.5rem; top: 2.5rem; }
     .pdh-float--today { bottom: 2rem; left: -2rem; margin: 0; position: absolute; width: 17.5rem; }
     .pdh-tiles { grid-area: tiles; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Depth: a soft vignette at the hero's edges keeps the eye on the content. */
+.pdh-hero::after { background: radial-gradient(120% 90% at 50% 40%, transparent 60%, rgba(13, 59, 64, .1) 100%); content: ""; inset: 0;
+    pointer-events: none; position: absolute; z-index: 0; }
+
+/* Phones/tablets: static background and no backdrop blur (both are costly on budget devices). */
+@media screen and (max-width: 63.99em) {
+    .pdh-wave, .pdh-wave-edge, .pdh-cross, .pdh-trail { animation: none !important; }
+    .pdh-tile, .pdh-float, .pdh-arch__caption, .pdh-pill { -webkit-backdrop-filter: none; backdrop-filter: none; }
+    .pdh-tile:not(.pdh-tile--emergency) { background: rgba(255, 255, 255, .93); }
+    .pdh-float, .pdh-arch__caption { background: rgba(255, 255, 255, .96); }
 }
