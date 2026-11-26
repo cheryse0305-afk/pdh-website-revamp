@@ -18,6 +18,7 @@ pages always match the homepage. Re-run after changing index.html's header/foote
 or after editing data/search-terms.json (see workflows/refresh_pdh_data.md).
 """
 
+import hashlib
 import html
 import json
 import os
@@ -66,8 +67,8 @@ def page(head, body_top, footer, *, title, description, path, extra_head="", mai
     head = re.sub(r'(<meta name="description" content=")[^"]*', lambda m: m.group(1) + e(description), head)
     head = re.sub(r'(<link rel="canonical" href=")[^"]*', lambda m: m.group(1) + url, head)
     # homepage-only assets (hero, sections, quick search) aren't needed on generated pages
-    head = re.sub(r'<link rel="stylesheet" href="/assets/css/pdh-(?:home|tgh-colors|sections)\.css">\n?', "", head)
-    footer = re.sub(r'<script src="/assets/js/pdh-home\.js" defer></script>\n?', "", footer)
+    head = re.sub(r'<link rel="stylesheet" href="/assets/css/pdh-(?:home|tgh-colors|sections)\.css(?:\?v=[0-9a-f]+)?">\n?', "", head)
+    footer = re.sub(r'<script src="/assets/js/pdh-home\.js(?:\?v=[0-9a-f]+)?" defer></script>\n?', "", footer)
     head += '<link rel="stylesheet" href="/assets/css/pdh-pages.css">\n' + extra_head
     body_top = body_top.replace('<body id="body" data-theme="tgh">', '<body id="body" data-theme="tgh" class="u-no-hero">', 1)
     footer = footer.replace("</body>", scripts + "</body>", 1)
@@ -372,7 +373,10 @@ def search_index(doctors, services, raw_terms, specialties, service_terms, hotli
     for dept in by_size:
         d = next((d for d in doctors if d["department"] == dept and d["has_photo"]), None)
         if d and d["id"] not in seen:
-            faces.append({"name": d["name"], "photo": d["photo_thumb"], "url": f"/doctors/{d['id']}/"})
+            # Prefer our own small copy (assets/images/pdh/faces/<id>-96.webp) over the slow pdh.com.ph original.
+            local = f"/assets/images/pdh/faces/{d['id']}-96.webp"
+            photo = local if os.path.exists(os.path.join(ROOT, local.lstrip("/"))) else d["photo_thumb"]
+            faces.append({"name": d["name"], "photo": photo, "url": f"/doctors/{d['id']}/"})
             seen.add(d["id"])
         if len(faces) == 5:
             break
@@ -636,7 +640,24 @@ def write_llms(hospital, contacts, services, doctors, hmos):
     write(os.path.join(ROOT, "llms.txt"), "\n".join(l for l in lines if l is not None) + "\n")
 
 
+ASSET_REF = re.compile(r'(href|src)="(/assets/(?:css|js)/[^"?]+\.(?:css|js))(?:\?v=[0-9a-f]+)?"')
+
+
+def stamp_assets(page_html):
+    """Add ?v=<content hash> to our CSS/JS links so browsers can cache them for a long time (see vercel.json)
+    and still fetch the new file the moment it changes."""
+    def stamp(m):
+        path = os.path.join(ROOT, m.group(2).lstrip("/"))
+        if not os.path.exists(path):
+            return m.group(0)
+        digest = hashlib.sha1(open(path, "rb").read()).hexdigest()[:10]
+        return f'{m.group(1)}="{m.group(2)}?v={digest}"'
+    return ASSET_REF.sub(stamp, page_html)
+
+
 def write(path, content):
+    if path.endswith(".html"):
+        content = stamp_assets(content)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(content)
@@ -708,7 +729,9 @@ def main():
     n = write_sitemap(doctors, lastmod)
     write_robots()
     write_llms(hospital, contacts, services, doctors, load("hmo-partners"))
-    print(f"Wrote Hospital JSON-LD into index.html, sitemap.xml ({n} URLs), robots.txt, llms.txt")
+    index_path = os.path.join(ROOT, "index.html")
+    write(index_path, open(index_path, encoding="utf-8").read())  # stamps the homepage's CSS/JS versions too
+    print(f"Wrote Hospital JSON-LD into index.html, sitemap.xml ({n} URLs), robots.txt, llms.txt; versioned CSS/JS links")
 
 
 if __name__ == "__main__":

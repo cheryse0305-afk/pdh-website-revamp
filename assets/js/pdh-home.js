@@ -552,7 +552,7 @@
         els.forEach(function (el) { io.observe(el); });
     }
 
-    // Hero core-values slideshow: cross-fades every 6 s; pauses on hover/focus, when the tab is hidden,
+    // Hero core-values slideshow: cross-fades every 4 s; pauses on hover/focus, when the tab is hidden,
     // or via the pause button (WCAG 2.2.2). With reduced motion it never advances on its own.
     function setupSlides() {
         var box = document.querySelector('[data-pdh-slides]');
@@ -568,7 +568,12 @@
             current = (i + slides.length) % slides.length;
             slides.forEach(function (img, n) {
                 img.classList.toggle('is-active', n === current);
-                if (n === (current + 1) % slides.length) img.loading = 'eager';  // preload the next slide
+                // Slides 3+ ship without src (data-src); load the current one and the next before they're shown.
+                if (n === current || n === (current + 1) % slides.length) {
+                    if (img.dataset.srcset) { img.srcset = img.dataset.srcset; img.removeAttribute('data-srcset'); }
+                    if (img.dataset.src) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
+                    img.loading = 'eager';
+                }
             });
             dots.forEach(function (d, n) {
                 d.classList.toggle('is-active', n === current);
@@ -579,7 +584,7 @@
         }
         function schedule() {
             clearTimeout(timer);
-            if (!paused && !hovering && !document.hidden) timer = setTimeout(function () { show(current + 1); schedule(); }, 6000);
+            if (!paused && !hovering && !document.hidden) timer = setTimeout(function () { show(current + 1); schedule(); }, 4000);
         }
         function setPaused(value) {
             paused = value;
