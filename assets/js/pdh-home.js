@@ -6,6 +6,7 @@
 (function () {
     var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     document.documentElement.classList.add('pdh-js');  // scroll-reveal CSS only applies while this script runs
+    setupBoxes();
     setupReveal();
     setupVideo();
     setupSlides();
@@ -278,7 +279,9 @@
         var stats = { doctors: index.doctors.length, specialties: index.specialty_count };
         [].forEach.call(document.querySelectorAll('[data-pdh-stat]'), function (el) {
             var v = stats[el.getAttribute('data-pdh-stat')];
-            if (v) el.textContent = v;
+            if (!v) return;
+            if (el.hasAttribute('data-count-to')) el.setAttribute('data-count-to', v);  // a running count-up ends on this
+            el.textContent = v;
         });
         var open = document.querySelector('[data-pdh-open247]');
         if (open) {
@@ -380,16 +383,170 @@
         })
         .catch(function () { /* keep the plain forms working */ });
 
+    // Homepage boxes. Everyone gets the staggered entrance (quick links, service blurbs); with a desktop mouse
+    // the photo/card boxes also get a cursor spotlight and gentle 3D tilt, the 24/7 cards a border light sweep,
+    // and round buttons pull toward the cursor. Nothing here runs with reduced motion except the plain hovers in CSS.
+    function setupBoxes() {
+        [['.cta-list-teasers .list__item', 45], ['.cta-list-teasers .three-col > .col:not(:first-child)', 180],
+         ['.featured-content-awards .grid-item--tile', 110], ['.blurb__card-wrapper', 120]].forEach(function (group) {
+            [].forEach.call(document.querySelectorAll(group[0]), function (el, i) {
+                el.classList.add('pdh-reveal');
+                el.style.setProperty('--d', i * group[1] + 'ms');
+            });
+        });
+        // Idle shimmer layer on the photo and 24/7 cards, staggered so they don't flash together.
+        [].forEach.call(document.querySelectorAll('.featured-content-awards .grid-item--tile, .cta-list-teasers .image-cta, ' +
+            '.image-with-ctas .cta__link, .related-content__tile a'), function (box, i) {
+            var shine = document.createElement('span');
+            shine.className = 'pdh-shine';
+            shine.setAttribute('aria-hidden', 'true');
+            shine.style.setProperty('--sd', (i * 0.7).toFixed(1) + 's');
+            box.appendChild(shine);
+        });
+        setupSectionBackgrounds();
+        countStats();
+        if (reducedMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+        var TILT = '.featured-content-awards .grid-item--tile, .cta-list-teasers .image-cta, .related-content__tile a, .blurb_section .blurb__card';
+        var GLOW_ONLY = '.image-with-ctas .cta__link';
+        [].forEach.call(document.querySelectorAll(TILT + ', ' + GLOW_ONLY), function (box) {
+            var tilt = box.matches(TILT), max = box.matches('.blurb__card') ? 3 : 5, frame = null;
+            var glow = document.createElement('span');
+            glow.className = 'pdh-glow';
+            glow.setAttribute('aria-hidden', 'true');
+            box.appendChild(glow);
+            if (box.matches(GLOW_ONLY)) {
+                var sweep = document.createElement('span');
+                sweep.className = 'pdh-sweep';
+                sweep.setAttribute('aria-hidden', 'true');
+                box.appendChild(sweep);
+            }
+            box.classList.add('pdh-fx');
+            if (tilt) box.classList.add('pdh-tilt');
+            box.addEventListener('pointermove', function (ev) {
+                var r = box.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width, y = (ev.clientY - r.top) / r.height;
+                cancelAnimationFrame(frame);
+                frame = requestAnimationFrame(function () {
+                    box.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+                    box.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+                    if (tilt) {
+                        box.classList.add('is-moving');
+                        box.style.setProperty('--rx', ((0.5 - y) * max).toFixed(2) + 'deg');
+                        box.style.setProperty('--ry', ((x - 0.5) * max).toFixed(2) + 'deg');
+                    }
+                });
+            });
+            box.addEventListener('pointerleave', function () {
+                cancelAnimationFrame(frame);
+                box.classList.remove('is-moving');
+                box.style.setProperty('--rx', '0deg');
+                box.style.setProperty('--ry', '0deg');
+            });
+        });
+
+        // Magnetic buttons: drift up to 10px toward the cursor while it is over the surrounding area.
+        [['.image-with-ctas .cta__link', '.cta__button'], ['.featured-content-awards .grid-item--text', '.item__cta'],
+         ['.related-content__cta-container', '.related-content__cta']].forEach(function (pair) {
+            [].forEach.call(document.querySelectorAll(pair[0]), function (area) {
+                var btn = area.querySelector(pair[1]);
+                if (!btn) return;
+                btn.classList.add('pdh-magnet');
+                area.addEventListener('pointermove', function (ev) {
+                    var r = btn.getBoundingClientRect();
+                    var dx = ev.clientX - (r.left + r.width / 2), dy = ev.clientY - (r.top + r.height / 2);
+                    var near = Math.sqrt(dx * dx + dy * dy) < 160;
+                    btn.style.setProperty('--tx', near ? Math.max(-10, Math.min(10, dx * 0.2)).toFixed(1) + 'px' : '0px');
+                    btn.style.setProperty('--ty', near ? Math.max(-10, Math.min(10, dy * 0.2)).toFixed(1) + 'px' : '0px');
+                });
+                area.addEventListener('pointerleave', function () {
+                    btn.style.setProperty('--tx', '0px');
+                    btn.style.setProperty('--ty', '0px');
+                });
+            });
+        });
+    }
+
+    // Section backgrounds (tiny pre-blurred photos, inline in index.html): mark sections on screen (is-live:
+    // runs the shimmer) and entered once (has-entered: title reveal), and drift the background photos and
+    // card photos at a slower speed than the page (parallax).
+    function setupSectionBackgrounds() {
+        var layers = [].slice.call(document.querySelectorAll('.pdh-bg__img'));
+        var sections = [].slice.call(document.querySelectorAll('.pdh-has-bg, .image-with-ctas'));
+        if (!('IntersectionObserver' in window)) {
+            sections.forEach(function (s) { s.classList.add('is-live', 'has-entered'); });
+            return;
+        }
+        var live = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                e.target.classList.toggle('is-live', e.isIntersecting);
+                if (e.isIntersecting) e.target.classList.add('has-entered');
+            });
+        }, { threshold: 0.12 });
+        sections.forEach(function (s) { live.observe(s); });
+
+        if (reducedMotion) return;
+        var photos = [].slice.call(document.querySelectorAll('.cta-list-teasers .image-cta .cta__image, .blurb_section .blurb-image img, .related-content__tile a img'));
+        var ticking = false;
+        function update() {
+            ticking = false;
+            var vh = window.innerHeight;
+            layers.forEach(function (el) {
+                var r = el.parentNode.getBoundingClientRect();
+                if (r.bottom < -200 || r.top > vh + 200) return;
+                var offset = r.top + r.height / 2 - vh / 2, limit = r.height * 0.12;
+                el.style.setProperty('--py', Math.max(-limit, Math.min(limit, -offset * 0.14)).toFixed(1) + 'px');
+            });
+            photos.forEach(function (img) {
+                var r = img.parentNode.getBoundingClientRect();
+                if (r.bottom < 0 || r.top > vh) return;
+                var offset = r.top + r.height / 2 - vh / 2, limit = r.height * 0.05;
+                img.style.setProperty('--pp', Math.max(-limit, Math.min(limit, -offset * 0.06)).toFixed(1) + 'px');
+            });
+        }
+        function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        update();
+    }
+
+    // "PDH at a glance" figures ([data-count]) count up the first time they come into view, from
+    // data-count-from (default 0). The cards also get .is-counted to start their accent animations.
+    function countStats() {
+        var nums = [].filter.call(document.querySelectorAll('[data-count]'), function (el) { return /^\d+$/.test(el.textContent.trim()); });
+        if (reducedMotion || !nums.length || !('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                io.unobserve(e.target);
+                var el = e.target, start = null, from = parseInt(el.getAttribute('data-count-from') || '0', 10);
+                var card = el.closest('.pdh-statcard');
+                if (card) card.classList.add('is-counted');
+                function step(ts) {
+                    var target = parseInt(el.getAttribute('data-count-to'), 10);
+                    if (start === null) start = ts;
+                    var p = Math.min(1, (ts - start) / 1600);
+                    el.textContent = Math.round(from + (target - from) * (1 - Math.pow(1 - p, 3)));
+                    if (p < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            });
+        }, { threshold: 0.5 });
+        nums.forEach(function (el) {
+            el.setAttribute('data-count-to', el.textContent.trim());
+            io.observe(el);
+        });
+    }
+
     // Sections fade/rise in as they scroll into view. Without IntersectionObserver everything is shown at once.
     function setupReveal() {
         var els = [].slice.call(document.querySelectorAll('.pdh-reveal'));
         if (!('IntersectionObserver' in window) || reducedMotion) {
-            els.forEach(function (el) { el.classList.add('is-visible'); });
+            els.forEach(function (el) { el.classList.add('pdh-in'); });
             return;
         }
         var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
-                if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+                if (e.isIntersecting) { e.target.classList.add('pdh-in'); io.unobserve(e.target); }
             });
         }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
         els.forEach(function (el) { io.observe(el); });

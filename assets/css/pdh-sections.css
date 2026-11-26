@@ -1,162 +1,226 @@
-/* Homepage sections below the hero (markup in index.html). Continues the hero's PDH look:
-   teal/aqua palette, Barlow Condensed headings, rounded cards with hover lift. */
-.pdh-ess, .pdh-why, .pdh-247, .pdh-featured, .pdh-news, .pdh-story, .pdh-partners {
-    --s-ink: #0d3b40;
-    --s-teal: #007f86;
-    --s-bright: #0aa1a5;
-    --s-orange: #f47a20;
-    --s-line: #d5e6e7;
-    --s-muted: #48606a;
-    --s-soft: #f2f9f9;
-}
-.pdh-ess, .pdh-why, .pdh-247, .pdh-featured, .pdh-news { color: var(--s-ink); padding: 4rem 0; }
-@media screen and (min-width: 64em) { .pdh-ess, .pdh-why, .pdh-247, .pdh-featured, .pdh-news { padding: 5.5rem 0; } }
-.pdh-sec__inner { margin: 0 auto; max-width: 82rem; padding: 0 1.25rem; }
+/* Homepage sections below the hero. The sections use TGH's own markup and styles (global.css), recoloured to
+   PDH by the generated pdh-tgh-colors.css. This file only styles the PDH-specific pieces so they match TGH:
+   flat, square-cornered, Barlow Condensed headings with the vertical accent bar. */
 
-/* global.css strokes every svg black; these icons draw with the text colour instead */
-.pdh-ess svg, .pdh-why svg, .pdh-247 svg, .pdh-featured svg, .pdh-news svg {
-    fill: none; flex: 0 0 auto; height: 1.25rem; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; width: 1.25rem; }
-
-/* Shared type and controls */
-.pdh-eyebrow { align-items: center; color: var(--s-teal); display: flex; font-size: .875rem; font-weight: 700; gap: .5rem; letter-spacing: .08em;
-    margin: 0 0 .625rem; text-transform: uppercase; }
-.pdh-eyebrow::before { color: var(--s-orange); content: "+"; font-size: 1.125rem; line-height: 1; }
-.pdh-eyebrow--light { color: #8fe3e0; }
-.pdh-sec__title { color: var(--s-ink); font-family: "Barlow Condensed", sans-serif; font-size: clamp(2.25rem, 2vw + 1.5rem, 3.25rem); font-weight: 700;
-    letter-spacing: -.005em; line-height: 1; margin: 0 0 1.5rem; text-transform: none; }
-.pdh-sec__title--light { color: #fff; }
-.pdh-textlink { align-items: center; color: var(--s-teal); display: inline-flex; font-weight: 700; gap: .375rem; text-decoration: none; }
-.pdh-textlink:hover { text-decoration: underline; }
-.pdh-btn { align-items: center; background: linear-gradient(135deg, #007f86, #0a959a); border-radius: 999px; box-shadow: 0 10px 24px -10px rgba(0, 127, 134, .8);
-    color: #fff; display: inline-flex; font-weight: 700; gap: .5rem; padding: .875rem 1.5rem; text-decoration: none; transition: transform .2s, box-shadow .2s; }
-.pdh-btn:hover { box-shadow: 0 14px 28px -10px rgba(0, 127, 134, .9); color: #fff; transform: translateY(-2px); }
-.pdh-sec__cta { margin: 2.5rem 0 0; text-align: center; }
-.pdh-ess a:focus-visible, .pdh-why a:focus-visible, .pdh-247 a:focus-visible, .pdh-featured a:focus-visible, .pdh-news a:focus-visible {
-    outline: 3px solid var(--s-orange); outline-offset: 3px; }
-
-/* ---------- Patient essentials ---------- */
-.pdh-ess { background: #fff; }
-.pdh-ess__intro { align-items: end; display: flex; flex-wrap: wrap; gap: .5rem 2rem; justify-content: space-between; margin-bottom: 1.5rem; }
-.pdh-ess__intro .pdh-eyebrow { flex-basis: 100%; }
-.pdh-ess__intro .pdh-sec__title { margin: 0; }
-.pdh-ess__grid { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
-@media screen and (min-width: 64em) { .pdh-ess__grid { gap: 1.25rem; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); grid-template-rows: 1fr 1fr; }
-    .pdh-ess__list { grid-row: span 2; } }
-.pdh-ess__list { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); list-style: none; margin: 0; padding: 0; }
-/* 8 cards: always an even column count so no row is left with a hole */
-@media screen and (min-width: 40em) { .pdh-ess__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.pdh-ess__link { align-items: center; background: #fff; border: 1px solid var(--s-line); border-radius: 1rem; color: var(--s-ink); display: flex; gap: .875rem;
-    height: 100%; padding: 1rem; text-decoration: none; transition: border-color .2s, box-shadow .2s, transform .2s; }
-.pdh-ess__link:hover { border-color: var(--s-bright); box-shadow: 0 14px 28px -16px rgba(13, 59, 64, .35); transform: translateY(-2px); }
-.pdh-ess__icon { align-items: center; background: rgba(10, 161, 165, .12); border-radius: .875rem; color: var(--s-teal); display: inline-flex;
-    flex: 0 0 2.75rem; height: 2.75rem; justify-content: center; width: 2.75rem; }
-.pdh-ess__text { display: flex; flex-direction: column; gap: .125rem; }
-.pdh-ess__text strong { font-size: 1rem; }
-.pdh-ess__text span { color: var(--s-muted); font-size: .875rem; line-height: 1.35; }
-.pdh-ess__feature { border-radius: 1.25rem; box-shadow: 0 18px 36px -20px rgba(13, 59, 64, .45); display: block; min-height: 13rem; overflow: hidden; position: relative; }
-.pdh-ess__feature img { height: 100%; inset: 0; object-fit: cover; position: absolute; transition: transform .6s ease; width: 100%; }
-.pdh-ess__feature--map { background: #fff; }
-.pdh-ess__feature--map img { object-fit: contain; object-position: center 20%; }
-.pdh-ess__feature::after { background: linear-gradient(180deg, transparent 35%, rgba(13, 59, 64, .88)); content: ""; inset: 0; position: absolute; }
-.pdh-ess__feature:hover img { transform: scale(1.04); }
-.pdh-ess__feature-body { bottom: 0; color: #fff; display: flex; flex-direction: column; gap: .375rem; left: 0; padding: 1.125rem; position: absolute; right: 0; z-index: 1; }
-.pdh-ess__feature-body strong { font-size: 1.125rem; line-height: 1.3; }
-
-/* ---------- Why PDH ---------- */
-.pdh-why { background: radial-gradient(50rem 30rem at 100% 0%, rgba(10, 161, 165, .14), transparent 60%), var(--s-soft); }
-.pdh-why__head { display: grid; gap: 1rem 3rem; grid-template-columns: minmax(0, 1fr); margin-bottom: 2rem; }
-@media screen and (min-width: 64em) { .pdh-why__head { align-items: end; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
-.pdh-why__head .pdh-sec__title { margin: 0; }
-.pdh-why__lede { color: var(--s-muted); font-size: 1.0625rem; line-height: 1.6; margin: 0; }
-.pdh-stats { background: #fff; border: 1px solid var(--s-line); border-radius: 1.25rem; box-shadow: 0 18px 40px -28px rgba(13, 59, 64, .4);
-    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); list-style: none; margin: 0 0 2.5rem; padding: .5rem; }
-@media screen and (min-width: 48em) { .pdh-stats { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
-.pdh-stats li { display: flex; flex-direction: column; gap: .25rem; padding: 1.125rem 1.25rem; }
-@media screen and (max-width: 47.99em) { .pdh-stats li:last-child { border-top: 1px solid var(--s-line); grid-column: 1 / -1; } }
-@media screen and (min-width: 48em) { .pdh-stats li + li { border-left: 1px solid var(--s-line); } }
-.pdh-stats strong { color: var(--s-teal); font-family: "Barlow Condensed", sans-serif; font-size: 2.5rem; line-height: 1; }
-.pdh-stats span { color: var(--s-muted); font-size: .875rem; }
-.pdh-pillars { display: grid; gap: 1rem; grid-auto-flow: column; grid-auto-columns: minmax(16rem, 80%); list-style: none; margin: 0; overflow-x: auto;
-    padding: 0 0 .75rem; scroll-snap-type: x mandatory; scrollbar-width: thin; }
-@media screen and (min-width: 64em) { .pdh-pillars { grid-auto-flow: row; grid-template-columns: repeat(5, minmax(0, 1fr)); overflow: visible; } }
-.pdh-pillar { scroll-snap-align: start; }
-.pdh-pillar__link { border-radius: 1.25rem; box-shadow: 0 18px 36px -22px rgba(13, 59, 64, .55); color: #fff; display: block; height: 100%;
-    min-height: 24rem; overflow: hidden; position: relative; text-decoration: none; }
-.pdh-pillar__link img { height: 100%; inset: 0; object-fit: cover; position: absolute; transition: transform .7s ease; width: 100%; }
-.pdh-pillar__link::after { background: linear-gradient(180deg, rgba(13, 59, 64, .05) 25%, rgba(13, 59, 64, .92) 75%); content: ""; inset: 0; position: absolute; }
-.pdh-pillar__link:hover img, .pdh-pillar__link:focus-visible img { transform: scale(1.06); }
-.pdh-pillar__body { bottom: 0; display: flex; flex-direction: column; gap: .5rem; left: 0; padding: 1.25rem; position: absolute; right: 0; z-index: 1; }
-.pdh-pillar__body strong { font-family: "Barlow Condensed", sans-serif; font-size: 1.625rem; line-height: 1.05; }
-.pdh-pillar__text { color: rgba(255, 255, 255, .88); font-size: .9375rem; line-height: 1.45; }
-.pdh-pillar__more { align-items: center; color: #8fe3e0; display: inline-flex; font-size: .875rem; font-weight: 700; gap: .375rem; }
-/* With a mouse, the description slides up on hover; on touch screens it is always shown. */
-@media (hover: hover) and (min-width: 64em) {
-    .pdh-pillar__text, .pdh-pillar__more { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .45s ease, opacity .35s ease; }
-    .pdh-pillar__link:hover .pdh-pillar__text, .pdh-pillar__link:focus-visible .pdh-pillar__text { max-height: 9rem; opacity: 1; }
-    .pdh-pillar__link:hover .pdh-pillar__more, .pdh-pillar__link:focus-visible .pdh-pillar__more { max-height: 2rem; opacity: 1; }
-}
-
-/* ---------- Our Story (spacing to sit with the new sections) ---------- */
+/* Our Story and HMO Partners: TGH section heading (condensed, accent bar) and flat media */
 .pdh-story { background: #fff; padding: 4rem 0; }
 @media screen and (min-width: 64em) { .pdh-story { padding: 5.5rem 0; } }
-.pdh-story__inner { max-width: 82rem; } /* same content edge as the other sections */
+.pdh-story__inner { max-width: 82rem; }
+.pdh-story__title, .pdh-partners__title { color: #0d3b40; font-family: "Barlow Condensed", sans-serif; font-size: clamp(2.25rem, 2vw + 1.5rem, 3.25rem);
+    font-weight: 700; line-height: 1; position: relative; text-transform: none; }
+.pdh-story__title { padding-left: 1.125rem; }
+.pdh-story__title::before { background: #4cc9c6; bottom: .1em; content: ""; left: 0; position: absolute; top: .1em; width: 4px; }
+.pdh-story .pdh-hero__eyebrow { color: #007f86; font-size: .8125rem; font-weight: 700; letter-spacing: .1em; margin: 0 0 .75rem; text-transform: uppercase; }
+.pdh-story__media, .pdh-story__btn { border-radius: 0; }
+.pdh-story__link { color: #007f86; }
+.pdh-partners { background: #f3f8f8; padding: 4rem 0; }
+.pdh-partners__link { color: #007f86; }
 
-/* ---------- Here for You, 24/7 ---------- */
-.pdh-247 { background: linear-gradient(135deg, rgba(13, 59, 64, .94) 0%, rgba(0, 101, 107, .86) 60%, rgba(10, 161, 165, .8) 100%),
-    url(/assets/images/pdh/PDH-CLEAN-FACADE-scaled-1600w.webp) center / cover no-repeat; color: #fff; }
-.pdh-247__cards { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); list-style: none; margin: 0; padding: 0; }
-@media screen and (min-width: 48em) { .pdh-247__cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.pdh-247__card { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .22);
-    border-radius: 1.25rem; color: #fff; display: flex; flex-direction: column; gap: .625rem; height: 100%; padding: 1.5rem; text-decoration: none;
-    transition: background .2s, transform .2s; }
-.pdh-247__card:hover { background: rgba(255, 255, 255, .16); color: #fff; transform: translateY(-3px); }
-.pdh-247__card strong { font-size: 1.25rem; }
-.pdh-247__card > span:not(.pdh-247__icon):not(.pdh-247__more) { color: rgba(255, 255, 255, .85); line-height: 1.5; }
-.pdh-247__card--er { background: linear-gradient(140deg, rgba(200, 41, 29, .95), rgba(125, 22, 14, .95)); border-color: transparent; }
-.pdh-247__card--er:hover { background: linear-gradient(140deg, #c8291d, #7d160e); }
-.pdh-247__icon { align-items: center; background: rgba(255, 255, 255, .16); border-radius: .875rem; display: inline-flex; height: 2.75rem; justify-content: center; width: 2.75rem; }
-.pdh-247__more { align-items: center; display: inline-flex; font-weight: 700; gap: .375rem; margin-top: auto; }
+/* ---------- Interactive boxes ----------
+   Base (every device): richer hover colours, quick-link accent bar, service photo zoom.
+   Motion (only with no reduced-motion preference): staggered entrance, photo wipe, icon line-draw, border sweep.
+   Pointer effects (desktop mouse; pdh-home.js adds .pdh-fx and a .pdh-glow span): cursor spotlight, 3D tilt,
+   magnetic round buttons. */
 
-/* ---------- Featured services ---------- */
-.pdh-featured { background: #fff; }
-.pdh-feat__list { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); list-style: none; margin: 0; padding: 0; }
-.pdh-feat__link, .pdh-news__link { background: #fff; border: 1px solid var(--s-line); border-radius: 1.25rem; color: var(--s-ink); display: flex; flex-direction: column;
-    height: 100%; overflow: hidden; text-decoration: none; transition: box-shadow .25s, transform .25s, border-color .25s; }
-.pdh-feat__link:hover, .pdh-news__link:hover { border-color: var(--s-bright); box-shadow: 0 20px 40px -22px rgba(13, 59, 64, .45); transform: translateY(-4px); }
-.pdh-feat__media, .pdh-news__media { aspect-ratio: 16 / 10; display: block; overflow: hidden; position: relative; }
-.pdh-feat__media img, .pdh-news__media img { height: 100%; object-fit: cover; transition: transform .6s ease; width: 100%; }
-.pdh-feat__link:hover img, .pdh-news__link:hover img { transform: scale(1.05); }
-.pdh-feat__tag { background: rgba(255, 255, 255, .92); border-radius: 999px; color: var(--s-teal); font-size: .75rem; font-weight: 700; left: .75rem;
-    padding: .25rem .625rem; position: absolute; top: .75rem; }
-.pdh-feat__body, .pdh-news__body { display: flex; flex: 1; flex-direction: column; gap: .5rem; padding: 1.25rem; }
-.pdh-feat__body strong { font-size: 1.1875rem; }
-.pdh-feat__body > span:not(.pdh-feat__more) { color: var(--s-muted); font-size: .9375rem; line-height: 1.5; }
-.pdh-feat__more, .pdh-news__more { align-items: center; color: var(--s-teal); display: inline-flex; font-weight: 700; gap: .375rem; margin-top: auto; }
+/* Quick links: teal bar grows in from the left, text nudges right */
+.cta-list-teasers .cta-list .cta__link { box-shadow: inset 0 0 0 #4cc9c6; transition: box-shadow .3s ease, padding .3s ease, color .3s ease; }
+.cta-list-teasers .cta-list .cta__link:hover, .cta-list-teasers .cta-list .cta__link:focus-visible {
+    box-shadow: inset 4px 0 0 #4cc9c6; color: #007f86; padding-left: 1.75rem; }
 
-/* ---------- HMO partners (existing marquee, framed to match) ---------- */
-.pdh-partners { background: var(--s-soft); }
+/* Keep tile text above TGH's photo overlay and the injected light/shimmer layers (its z-index needs a position) */
+.featured-content-awards .grid-item--tile .item__text-container { position: relative; z-index: 2; }
 
-/* ---------- News ---------- */
-.pdh-news { background: #fff; }
-.pdh-news__head { align-items: end; display: flex; flex-wrap: wrap; gap: .5rem 2rem; justify-content: space-between; margin-bottom: 1.5rem; }
-.pdh-news__head .pdh-sec__title { margin: 0; }
-.pdh-news__list { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); list-style: none; margin: 0; padding: 0; }
-.pdh-news__tag { align-self: flex-start; background: rgba(244, 122, 32, .12); border-radius: 999px; color: #b3520f; font-size: .75rem; font-weight: 700;
-    padding: .25rem .625rem; }
-.pdh-ess__feature-body .pdh-news__tag { background: rgba(255, 255, 255, .9); color: var(--s-teal); }
-.pdh-news__body strong { font-size: 1.0625rem; line-height: 1.4; }
+/* Photo tiles and 24/7 cards: gradient fill on hover instead of flat aqua */
+.featured-content-awards .grid-item--tile:hover .item__text-container,
+.featured-content-awards .grid-item--tile:focus-visible .item__text-container { background-image: linear-gradient(160deg, rgba(143, 227, 224, .96), rgba(76, 201, 198, .94)); }
+.image-with-ctas .cta__link:hover .cta__text, .image-with-ctas .cta__link:focus-visible .cta__text { background-image: linear-gradient(165deg, #8fe3e0, #4cc9c6); }
 
-/* ---------- Scroll reveal (only when pdh-home.js is running; never hides content without it) ---------- */
-@media screen and (prefers-reduced-motion: no-preference) {
-    .pdh-js .pdh-reveal { opacity: 0; transition: opacity .8s ease, translate .8s cubic-bezier(.2, .7, .2, 1); translate: 0 28px; }
-    .pdh-js .pdh-reveal.is-visible { opacity: 1; translate: 0 0; }
+/* Service blurbs: photo zooms, bottom bar turns orange */
+.blurb_section .blurb__card { position: relative; transition: border-color .4s; }
+.blurb_section .blurb-image { overflow: hidden; }
+.blurb_section .blurb-image img { transition: transform .9s cubic-bezier(.2, .7, .2, 1); }
+.blurb_section .blurb__card:hover { border-bottom-color: #f47a20; }
+.blurb_section .blurb__card:hover .blurb-image img { transform: scale(1.07); }
+
+.related-content__tile a { position: relative; }
+
+/* Spotlight that follows the cursor (span injected by pdh-home.js) */
+.pdh-glow { background: radial-gradient(22rem circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .26), rgba(143, 227, 224, .1) 40%, transparent 65%);
+    inset: 0; opacity: 0; pointer-events: none; position: absolute; transition: opacity .35s ease; z-index: 1; }
+.pdh-fx:hover > .pdh-glow, .pdh-fx:focus-visible > .pdh-glow { opacity: 1; }
+.blurb_section .pdh-glow { background: radial-gradient(18rem circle at var(--mx, 50%) var(--my, 50%), rgba(76, 201, 198, .16), transparent 65%); }
+
+/* 3D tilt toward the cursor */
+.pdh-tilt { transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.pdh-tilt.is-moving { transition: transform .12s linear; }
+
+/* Magnetic buttons: translate composes with TGH's own transform */
+.pdh-magnet { transition: translate .35s cubic-bezier(.2, .7, .2, 1); translate: var(--tx, 0) var(--ty, 0); }
+
+/* ---------- Dark brand backdrop (every section below the hero) ----------
+   Deep PDH teal with aqua and orange light: a pre-blurred PDH photo (a tiny inline image scaled up, so no
+   live blur; it drifts with scroll via --py) under one static deep-teal wash with soft glows. Text and TGH components are re-coloured for the dark ground below. */
+.pdh-has-bg { background: #082c30; color: rgba(226, 244, 243, .84); isolation: isolate; margin-bottom: 0; margin-top: 0; overflow: hidden; position: relative; }
+.pdh-has-bg::before { display: none; }
+.pdh-has-bg.featured-content-awards, .pdh-has-bg.related-content, .pdh-has-bg.blurb_section { padding-bottom: 5rem; padding-top: 5rem; }
+.pdh-has-bg.cta-list-teasers { padding-bottom: 4rem; }
+.pdh-bg { inset: 0; overflow: hidden; pointer-events: none; position: absolute; z-index: -1; }
+.pdh-bg__img { background: #0b3a3f center / cover no-repeat; inset: -14% -3%; opacity: .55; position: absolute;
+    transform: translate3d(0, var(--py, 0px), 0) scale(1.06); will-change: transform; }
+/* wash + glows in one static layer (the photo is pre-blurred: a 96px image scaled up) */
+.pdh-bg::after { background: radial-gradient(38rem 26rem at 12% 18%, rgba(76, 201, 198, .28), transparent 65%),
+        radial-gradient(30rem 22rem at 88% 82%, rgba(244, 122, 32, .16), transparent 65%),
+        radial-gradient(26rem 18rem at 70% 10%, rgba(10, 161, 165, .2), transparent 70%),
+        linear-gradient(160deg, rgba(5, 34, 38, .88) 0%, rgba(9, 60, 66, .8) 50%, rgba(4, 28, 32, .9) 100%);
+    content: ""; inset: 0; position: absolute; }
+.pdh-has-bg--dark .pdh-bg::after { background: radial-gradient(40rem 26rem at 85% 20%, rgba(76, 201, 198, .3), transparent 65%),
+        radial-gradient(28rem 20rem at 10% 90%, rgba(244, 122, 32, .15), transparent 65%),
+        linear-gradient(160deg, rgba(5, 34, 38, .88) 0%, rgba(9, 60, 66, .8) 50%, rgba(4, 28, 32, .9) 100%); }
+
+/* Text on dark */
+.pdh-has-bg :is(.title, .blurb-title, .related-content__title, .pdh-story__title, .pdh-partners__title, .pdh-stats-tile__title) { color: #fff; }
+.pdh-has-bg :is(.teaser, .blurb-description, .blurb-description p, .pdh-story__text p, .related-content__sub-title) { color: rgba(226, 244, 243, .8); }
+.pdh-has-bg :is(.pdh-hero__eyebrow, .pdh-story__link, .pdh-partners__link) { color: #8fe3e0; }
+.pdh-has-bg.blurb_section .blurb-cta { color: #fff; }
+.pdh-has-bg.blurb_section .blurb-cta svg { stroke: #4cc9c6; }
+.pdh-has-bg.blurb_section .blurb-cta:hover, .pdh-has-bg.blurb_section .blurb-cta:focus-visible { color: #8fe3e0; }
+.pdh-has-bg .pdh-story__media { box-shadow: 0 30px 60px -25px rgba(0, 0, 0, .7), 0 0 0 1px rgba(143, 227, 224, .15); }
+
+/* Quick links: glass panel that fills its column; rows light up with a gradient sweep */
+@media screen and (min-width: 64em) {
+    .pdh-has-bg.cta-list-teasers .col:first-child { max-width: 22rem; width: 30%; }
+    .pdh-has-bg.cta-list-teasers .col:not(:first-child) { flex: 1 1 0; margin-left: 1.25rem; max-width: none; }
 }
+.pdh-has-bg .cta-list { background: linear-gradient(160deg, rgba(22, 86, 92, .62), rgba(10, 52, 57, .55));
+    border: 1px solid rgba(143, 227, 224, .16); box-shadow: 0 24px 48px -24px rgba(0, 0, 0, .55); padding: .375rem; }
+.pdh-has-bg.cta-list-teasers .cta-list .cta__link { background: linear-gradient(90deg, rgba(76, 201, 198, .28), rgba(76, 201, 198, 0)) left / 0 100% no-repeat;
+    border-top-color: rgba(143, 227, 224, .12); color: #fff; letter-spacing: .04em; transition: background-size .45s ease, box-shadow .3s, padding .3s, color .3s; }
+.pdh-has-bg.cta-list-teasers .cta-list .list__item:first-child .cta__link { border-top: 0; }
+.pdh-has-bg.cta-list-teasers .cta-list .cta__link svg { stroke: #4cc9c6; }
+.pdh-has-bg.cta-list-teasers .cta-list .cta__link:hover, .pdh-has-bg.cta-list-teasers .cta-list .cta__link:focus-visible {
+    background-size: 100% 100%; box-shadow: inset 4px 0 0 #f47a20; color: #fff; padding-left: 1.75rem; }
 
-/* Align "Our Story" and "HMO partners" headings with the other sections */
-.pdh-story__title, .pdh-partners__title { color: var(--s-ink); font-family: "Barlow Condensed", sans-serif; font-size: clamp(2.25rem, 2vw + 1.5rem, 3.25rem);
-    font-weight: 700; line-height: 1; text-transform: none; }
-.pdh-story .pdh-hero__eyebrow { align-items: center; color: var(--s-teal); display: flex; font-size: .875rem; font-weight: 700; gap: .5rem;
-    letter-spacing: .08em; margin: 0 0 .625rem; text-transform: uppercase; }
-.pdh-story .pdh-hero__eyebrow::before { color: var(--s-orange); content: "+"; font-size: 1.125rem; line-height: 1; }
-.pdh-partners { padding: 4rem 0; }
-.pdh-partners__link { color: var(--s-teal); }
+/* Desktop: image cards fill their column's height (the column is as tall as the quick-link panel) */
+@media screen and (min-width: 64em) {
+    .pdh-has-bg.cta-list-teasers .three-col > .col:not(:first-child) { display: flex; flex-direction: column; }
+    .pdh-has-bg.cta-list-teasers .image-cta { flex: 1 1 auto; min-height: 22rem; padding-top: 0; width: 100%; }
+    .pdh-has-bg.cta-list-teasers .image-cta .cta__image { height: 100%; object-fit: cover; }
+    /* keep the people in the patient-stories poster in frame (they sit on its left) */
+    .pdh-has-bg.cta-list-teasers .col:nth-child(2) .image-cta .cta__image { object-position: 12% center; }
+}
+.pdh-has-bg.blurb_section .blurb-cta { max-height: none; }
+
+/* Image cards: animated light ring around each card */
+.pdh-has-bg.cta-list-teasers .three-col > .col:not(:first-child) { background: rgba(76, 201, 198, .35); box-shadow: 0 30px 60px -28px rgba(0, 0, 0, .7);
+    isolation: isolate; overflow: hidden; padding: 2px; position: relative; }
+.pdh-has-bg.cta-list-teasers .three-col > .col:not(:first-child)::before { background: conic-gradient(rgba(76, 201, 198, .95), rgba(76, 201, 198, 0) 25%,
+    rgba(244, 122, 32, .9) 50%, rgba(244, 122, 32, 0) 75%, rgba(76, 201, 198, .95)); content: ""; height: 200%; left: -50%; position: absolute;
+    top: -50%; width: 200%; z-index: -1; }
+
+/* Service blurbs as glass cards */
+.pdh-has-bg.blurb_section .blurb__card { background: linear-gradient(170deg, rgba(22, 86, 92, .58), rgba(10, 52, 57, .5));
+    border: 1px solid rgba(143, 227, 224, .14); border-bottom: 5px solid #4cc9c6; box-shadow: 0 24px 48px -26px rgba(0, 0, 0, .6); height: 100%; }
+.pdh-has-bg.blurb_section .blurb-text-wrapper { padding: 0 1.25rem 1.25rem; }
+.pdh-has-bg.blurb_section .blurb__card:hover { border-color: rgba(143, 227, 224, .3); border-bottom-color: #f47a20; }
+
+/* Pillar tiles: thin aqua edge on the dark ground */
+.pdh-has-bg .grid-item--tile { box-shadow: 0 0 0 1px rgba(143, 227, 224, .14), 0 30px 60px -30px rgba(0, 0, 0, .7); }
+
+/* "Here for You, 24/7" photo band: no white margin under the cards; the facade fades into the dark backdrop.
+   background-attachment: scroll replaces TGH's fixed background, which repaints the whole band on every scroll frame. */
+.image-with-ctas { background-attachment: scroll; background-color: #082c30; margin: 0; padding-bottom: 5rem; }
+/* TGH's cards hang ~13.75rem below the band's box on desktop; reserve that as dark padding instead of white margin */
+@media screen and (min-width: 64em) { .image-with-ctas { margin: 0; padding-bottom: 16rem; } }
+.image-with-ctas::before { background-image: linear-gradient(180deg, rgba(8, 44, 48, 0) 35%, rgba(8, 44, 48, .85) 62%, #082c30 80%),
+    linear-gradient(to right, rgba(6, 36, 40, .78), rgba(8, 44, 48, .55) 45%, rgba(8, 44, 48, 0) 75%); }
+
+/* HMO partner logos on white chips so they stay legible on dark */
+.pdh-has-bg.pdh-partners { background: transparent; }
+.pdh-has-bg .pdh-partners__list li { background: #fff; border-radius: .5rem; box-shadow: 0 10px 24px -14px rgba(0, 0, 0, .6); }
+
+/* ---------- "PDH at a glance": animated stat cards (fills the space under the first photo tiles) ---------- */
+@media screen and (min-width: 64em) {
+    .featured-content-awards .content__grid { grid-template-areas: "tile-1 tile-1 tile-2 tile-2 text-tile text-tile text-tile"
+        "stats stats stats stats text-tile text-tile text-tile" ". tile-3 tile-3 tile-4 tile-4 tile-5 tile-5"; grid-template-rows: auto 1fr auto; }
+    .featured-content-awards .pdh-stats-tile { grid-area: stats; }
+}
+.pdh-stats-tile { align-self: stretch; display: flex; flex-direction: column; justify-content: center; padding: 1.5rem 0; }
+.pdh-stats-tile__title { color: #fff; font-family: "Barlow Condensed", sans-serif; font-size: 1.125rem; font-weight: 600; letter-spacing: .14em;
+    margin: 0 0 1rem; text-transform: uppercase; }
+.pdh-statcards { display: grid; gap: .75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
+@media screen and (min-width: 40em) { .pdh-statcards { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .pdh-statcard { grid-column: span 2; } .pdh-statcard:nth-child(n+4) { grid-column: span 3; } }
+@media screen and (max-width: 39.99em) { .pdh-statcard:last-child { grid-column: 1 / -1; } }
+.pdh-statcard { background: linear-gradient(155deg, rgba(26, 94, 100, .62), rgba(10, 50, 55, .52));
+    border: 1px solid rgba(143, 227, 224, .18); box-shadow: 0 24px 48px -26px rgba(0, 0, 0, .65); display: flex; flex-direction: column; gap: .25rem;
+    margin: 0; overflow: hidden; padding: 1.25rem 1.25rem 1.375rem; position: relative; transition: border-color .3s, transform .3s, box-shadow .3s; }
+.pdh-statcard:hover { border-color: rgba(143, 227, 224, .45); box-shadow: 0 30px 60px -26px rgba(0, 0, 0, .7), 0 0 30px -8px rgba(76, 201, 198, .45); transform: translateY(-4px); }
+.pdh-statcard::before { background: radial-gradient(14rem 8rem at 100% 0%, rgba(76, 201, 198, .22), transparent 70%); content: ""; inset: 0; pointer-events: none; position: absolute; }
+.pdh-statcard__icon { align-items: center; background: rgba(76, 201, 198, .14); border: 1px solid rgba(143, 227, 224, .25); color: #8fe3e0; display: inline-flex;
+    height: 2.5rem; justify-content: center; margin-bottom: .5rem; width: 2.5rem; }
+.pdh-statcard__icon svg { fill: none; height: 1.375rem; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; width: 1.375rem; }
+.pdh-statcard__num { background: linear-gradient(180deg, #fff 30%, #8fe3e0); -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-family: "Barlow Condensed", sans-serif; font-size: clamp(2.75rem, 3vw + 1rem, 4rem); font-variant-numeric: tabular-nums; font-weight: 700; line-height: .95; }
+.pdh-statcard__label { color: rgba(226, 244, 243, .78); font-size: .875rem; letter-spacing: .02em; }
+.pdh-statcard__line { background: linear-gradient(90deg, #4cc9c6, #f47a20); bottom: 0; height: 3px; left: 0; position: absolute; transform-origin: left; width: 100%; }
+.pdh-statcard__live { align-items: center; color: #ffb784; display: inline-flex; font-size: .75rem; font-weight: 700; gap: .375rem; letter-spacing: .08em;
+    margin-top: .25rem; text-transform: uppercase; }
+.pdh-statcard__live i { background: #f47a20; border-radius: 50%; display: block; height: .5rem; width: .5rem; }
+.pdh-statcard--live .pdh-statcard__num { background: linear-gradient(180deg, #fff 30%, #ffc79d); -webkit-background-clip: text; background-clip: text; }
+
+/* Photo parallax inside image cards: the picture is slightly larger and drifts with scroll (--pp) */
+.cta-list-teasers .image-cta .cta__image, .blurb_section .blurb-image img, .related-content__tile a img { scale: 1.12; translate: 0 var(--pp, 0px); }
+
+/* Idle shimmer (span injected by pdh-home.js; runs only while its section is on screen) */
+.pdh-shine { inset: 0; overflow: hidden; pointer-events: none; position: absolute; z-index: 1; }
+.pdh-shine::before { background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .26) 50%, transparent 65%); content: ""; inset: 0 -50%;
+    position: absolute; translate: -100% 0; }
+
+@property --pdh-ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@media (prefers-reduced-motion: no-preference) {
+    /* Staggered entrance (classes added by pdh-home.js, so nothing is hidden without JS) */
+    .pdh-js .pdh-reveal { opacity: 0; transition: opacity .7s ease var(--d, 0ms), translate .7s cubic-bezier(.2, .7, .2, 1) var(--d, 0ms); translate: 0 24px; }
+    .pdh-js .pdh-reveal.pdh-in { opacity: 1; translate: 0 0; }
+    /* Service photos wipe open from the top as they enter */
+    .pdh-js .blurb__card-wrapper.pdh-reveal .blurb-image { clip-path: inset(0 0 100% 0); transition: clip-path 1.1s cubic-bezier(.65, 0, .35, 1) calc(var(--d, 0ms) + 150ms); }
+    .pdh-js .blurb__card-wrapper.pdh-reveal.pdh-in .blurb-image { clip-path: inset(0 0 0 0); }
+
+    /* 24/7 cards: light sweeps around the border, icon draws itself */
+    .pdh-sweep { -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+        background: conic-gradient(from var(--pdh-ang), transparent 0 62%, #4cc9c6 78%, #f47a20 90%, transparent 100%);
+        inset: 0; opacity: 0; padding: 2px; pointer-events: none; position: absolute; transition: opacity .4s; z-index: 2; }
+    .image-with-ctas .cta__link:hover .pdh-sweep, .image-with-ctas .cta__link:focus-visible .pdh-sweep { animation: pdh-sweep 2.6s linear infinite; opacity: 1; }
+    .image-with-ctas .cta__link:hover .cta__text > svg:first-child, .image-with-ctas .cta__link:focus-visible .cta__text > svg:first-child {
+        animation: pdh-draw 1.2s ease-out both; stroke-dasharray: 320; }
+
+    /* Section titles rise out of a mask when their section enters */
+    .pdh-js .pdh-has-bg:not(.has-entered) .pdh-story__title, .pdh-js .pdh-has-bg:not(.has-entered) .pdh-partners__title { clip-path: inset(0 0 100% 0); translate: 0 .4em; }
+    .pdh-js .pdh-story__title, .pdh-js .pdh-partners__title { transition: clip-path .9s cubic-bezier(.65, 0, .35, 1) .15s, translate .9s cubic-bezier(.2, .7, .2, 1) .15s; }
+
+    /* Idle shimmer: a light sweep every ~9 s, staggered per card, paused off screen */
+    .pdh-shine::before { animation: pdh-shine 9s ease-in-out var(--sd, 0s) infinite; animation-play-state: paused; }
+    .is-live .pdh-shine::before { animation-play-state: running; }
+    .pdh-fx:hover .pdh-shine::before { animation-play-state: paused; }
+
+    /* Emergency card "breathes" so it stands out among the 24/7 cards */
+    .image-with-ctas .cta:first-child .cta__link { animation: pdh-breathe 2.8s ease-in-out infinite; }
+
+    /* Image cards: the light ring travels around the edge */
+    .pdh-has-bg.cta-list-teasers .three-col > .col:not(:first-child)::before { animation: pdh-spin 8s linear infinite; will-change: transform; }
+    .pdh-has-bg.cta-list-teasers .three-col > .col:last-child::before { animation-delay: -4s; }
+    /* Stat cards: accent line sweeps in as the number counts, ECG traces, live dot pulses */
+    .pdh-js .pdh-statcard__line { scale: 0 1; transition: scale 1.6s cubic-bezier(.2, .7, .2, 1); }
+    .pdh-js .pdh-statcard.is-counted .pdh-statcard__line, .pdh-js .pdh-statcard--live .pdh-statcard__line { scale: 1 1; }
+    .pdh-statcard__ecg { animation: pdh-ecg 2.4s linear infinite; stroke-dasharray: 60 60; }
+    .pdh-statcard__live i { animation: pdh-live 1.8s ease-out infinite; }
+    .pdh-statcard:hover .pdh-statcard__icon { animation: pdh-pop .6s cubic-bezier(.2, .7, .2, 1); }
+}
+@keyframes pdh-spin { to { transform: rotate(1turn); } }
+@keyframes pdh-ecg { from { stroke-dashoffset: 120; } to { stroke-dashoffset: 0; } }
+@keyframes pdh-live { 0% { box-shadow: 0 0 0 0 rgba(244, 122, 32, .7); } 100% { box-shadow: 0 0 0 10px rgba(244, 122, 32, 0); } }
+@keyframes pdh-pop { 0% { transform: scale(1); } 40% { transform: scale(1.18) rotate(-6deg); } 100% { transform: scale(1); } }
+@keyframes pdh-shine { 0%, 78% { translate: -100% 0; } 100% { translate: 100% 0; } }
+@keyframes pdh-breathe { 0%, 100% { box-shadow: 0 0 0 0 rgba(244, 122, 32, .55), 0 0 0 0 rgba(244, 122, 32, 0); }
+    50% { box-shadow: 0 0 0 4px rgba(244, 122, 32, .55), 0 0 28px 6px rgba(244, 122, 32, .35); } }
+@keyframes pdh-sweep { to { --pdh-ang: 360deg; } }
+@keyframes pdh-draw { from { stroke-dashoffset: 320; } to { stroke-dashoffset: 0; } }
