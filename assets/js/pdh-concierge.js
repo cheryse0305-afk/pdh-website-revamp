@@ -399,6 +399,10 @@
         if (!state.msgs.length) append('assistant', WELCOME, false);
         chips.hidden = state.msgs.length > 0;
         if (state.open && window.matchMedia('(min-width: 64em)').matches) setOpen(true, true);
+        // Any [data-kriss-open] control (e.g. the header's "Ask Kriss" button) opens the chat.
+        document.addEventListener('click', function (e) {
+            if (e.target.closest && e.target.closest('[data-kriss-open]')) { e.preventDefault(); setOpen(true); }
+        });
     }
 
     function grow() {
