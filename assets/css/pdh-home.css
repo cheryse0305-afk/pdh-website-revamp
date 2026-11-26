@@ -15,7 +15,10 @@
         radial-gradient(46rem 30rem at 24% 32%, rgba(255, 255, 255, .78), transparent 70%),   /* light behind the headline */
         radial-gradient(36rem 24rem at 94% 96%, rgba(255, 207, 160, .5), transparent 70%),    /* warm glow, bottom right */
         radial-gradient(56rem 34rem at 68% 6%, rgba(255, 255, 255, .4), transparent 62%),
-        linear-gradient(125deg, #cdeeed 0%, #98dbd9 34%, #66c4c4 62%, #a9e2e0 100%); }
+        linear-gradient(125deg, #c4e9e7 0%, #86d1cf 34%, #4fb5b6 62%, #7fcfcd 100%); }
+/* The lower hero fades into the deep teal of the sections below, so the page reads as one piece. */
+.pdh-hero__bg::after { background: linear-gradient(180deg, rgba(8, 44, 48, 0) 52%, rgba(8, 44, 48, .35) 70%, rgba(8, 44, 48, .82) 88%, #082c30 100%);
+    content: ""; inset: 0; pointer-events: none; position: absolute; }
 @media screen and (min-width: 64em) { .pdh-hero { padding: 3rem 0 4rem; } }
 .pdh-hero__bg { inset: 0; overflow: hidden; pointer-events: none; position: absolute; z-index: 0; }
 /* global.css gives every svg `stroke: #000`; reset it so only elements with their own stroke draw one. */
@@ -86,6 +89,12 @@
     font-weight: 700; letter-spacing: -.01em; line-height: .95; margin: 0 0 1rem; text-transform: none; }
 .pdh-hero__accent { background: linear-gradient(90deg, #007f86 0%, #0aa1a5 50%, #f47a20 100%); -webkit-background-clip: text;
     background-clip: text; color: transparent; padding-bottom: .06em; }
+/* Tagalog tagline in brush script with a teal brush stroke underneath (stroke draws in; see motion block) */
+.pdh-hero__tagline { display: inline-block; margin: -.25rem 0 1.125rem; padding-bottom: .5rem; position: relative; }
+.pdh-hero__tagline-text { color: #f47a20; font-family: "Yellowtail", "Brush Script MT", cursive; font-size: clamp(2rem, 1.6vw + 1.5rem, 3.25rem);
+    line-height: 1.1; text-shadow: 0 2px 14px rgba(255, 255, 255, .6); }
+.pdh-hero__swoosh { bottom: 0; fill: none; height: .9rem; left: .25em; overflow: visible; position: absolute; width: calc(100% - .25em); }
+.pdh-hero__swoosh path { fill: none; stroke: #0aa1a5; stroke-linecap: round; stroke-width: 7; }
 .pdh-hero__lede { color: var(--qf-muted); font-size: 1.1875rem; line-height: 1.55; margin: 0 0 1.75rem; max-width: 34rem; }
 
 /* ---------- Search card with segmented tabs ---------- */
@@ -233,8 +242,45 @@ html:not(.no-js) .pdh-qf__title { clip: rect(0 0 0 0); height: 1px; margin: -1px
 .pdh-tiles { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
 @media screen and (min-width: 40em) { .pdh-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .pdh-tile { -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); background: rgba(255, 255, 255, .76); border: 1px solid var(--qf-line);
-    border-radius: 1.25rem; margin: 0; padding: 1.25rem; transition: transform .25s ease, box-shadow .25s ease; }
-.pdh-tile:hover { box-shadow: 0 18px 36px -18px rgba(13, 59, 64, .35); transform: translateY(-4px); }
+    border-radius: 1.25rem; margin: 0; overflow: hidden; padding: 1.25rem; position: relative; transition: transform .25s ease, box-shadow .25s ease; }
+.pdh-tile:hover { box-shadow: 0 22px 44px -18px rgba(0, 30, 34, .55), 0 0 0 1px rgba(10, 161, 165, .35); transform: translateY(-4px); }
+/* With the desktop tilt (pdh-home.js adds .pdh-tilt) the hover lift rides along in the tilt transform */
+.pdh-tile.pdh-tilt:hover { --lift: -4px; transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift)); }
+/* HMO / 24/7 / Find-us tiles as dark glass (they sit where the hero fades into the deep-teal page below) */
+.pdh-tiles .pdh-tile:not(.pdh-tile--emergency) { -webkit-backdrop-filter: none; backdrop-filter: none;
+    background: linear-gradient(155deg, rgba(26, 98, 104, .92), rgba(9, 52, 57, .94)); border: 1px solid rgba(143, 227, 224, .22);
+    box-shadow: 0 24px 48px -24px rgba(0, 24, 28, .7); color: rgba(226, 244, 243, .86); }
+.pdh-tiles .pdh-tile:not(.pdh-tile--emergency) .pdh-tile__title { color: #fff; }
+.pdh-tiles .pdh-tile:not(.pdh-tile--emergency) .pdh-tile__meta, .pdh-tiles .pdh-hmo__result { color: rgba(226, 244, 243, .82); }
+.pdh-tiles .pdh-tile:not(.pdh-tile--emergency) .pdh-tile__badge { background: rgba(76, 201, 198, .16); border: 1px solid rgba(143, 227, 224, .28); }
+.pdh-tiles .pdh-tile:not(.pdh-tile--emergency) .pdh-tile__icon { stroke: #8fe3e0; }
+.pdh-tiles .pdh-tile__num { color: #8fe3e0; }
+.pdh-tiles .pdh-tile__link, .pdh-tiles .pdh-hmo__result a { color: #8fe3e0; }
+.pdh-tiles .pdh-hmo__yes { color: #8ff0b8; }
+.pdh-tiles .pdh-tile:not(.pdh-tile--emergency):hover { box-shadow: 0 26px 50px -22px rgba(0, 24, 28, .8), 0 0 0 1px rgba(143, 227, 224, .45), 0 0 28px -6px rgba(76, 201, 198, .45); }
+
+/* Desktop: true frosted glass. The tiles sit in the dark lower hero, so the waves show through softly. */
+@media screen and (min-width: 64em) {
+    .pdh-tiles .pdh-tile:not(.pdh-tile--emergency) { -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4);
+        background: linear-gradient(150deg, rgba(255, 255, 255, .2) 0%, rgba(255, 255, 255, .06) 38%, rgba(255, 255, 255, 0) 60%), rgba(12, 70, 76, .5);
+        border-color: rgba(255, 255, 255, .16); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .28), inset 0 0 30px rgba(143, 227, 224, .06), 0 24px 48px -24px rgba(0, 24, 28, .75);
+        transition: transform .25s ease, box-shadow .3s ease, background-color .3s ease; }
+    .pdh-tiles .pdh-tile:not(.pdh-tile--emergency):hover { background-color: rgba(16, 86, 92, .58); }
+}
+/* A light that travels around every tile's border (ring = masked conic gradient) */
+.pdh-tiles .pdh-tile::before, .pdh-tiles .pdh-tile::after { border-radius: inherit; content: ""; inset: 0; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; padding: 1.5px; pointer-events: none; position: absolute; z-index: 2; }
+.pdh-tiles .pdh-tile::before { background: conic-gradient(from var(--pdh-ang, 0deg), rgba(143, 227, 224, 0) 0deg, rgba(143, 227, 224, .95) 50deg,
+    rgba(244, 122, 32, .85) 100deg, rgba(143, 227, 224, 0) 150deg, rgba(143, 227, 224, 0) 360deg); }
+.pdh-tiles .pdh-tile--emergency::before { background: conic-gradient(from var(--pdh-ang, 0deg), rgba(255, 255, 255, 0) 0deg, rgba(255, 255, 255, .95) 50deg,
+    rgba(255, 179, 120, .9) 100deg, rgba(255, 255, 255, 0) 150deg, rgba(255, 255, 255, 0) 360deg); }
+/* On hover the border lights up brightest where the cursor is (--mx/--my come from pdh-home.js) */
+.pdh-tiles .pdh-tile::after { background: radial-gradient(12rem circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .95), rgba(143, 227, 224, .5) 35%, transparent 60%);
+    opacity: 0; padding: 2px; transition: opacity .35s ease; }
+.pdh-tiles .pdh-tile:hover::after { opacity: 1; }
+.pdh-tiles .pdh-tile:hover .pdh-tile__badge { box-shadow: 0 0 0 4px rgba(143, 227, 224, .14), 0 0 22px rgba(143, 227, 224, .45); }
+.pdh-tiles .pdh-tile--emergency:hover .pdh-tile__badge { box-shadow: 0 0 0 4px rgba(255, 255, 255, .14), 0 0 22px rgba(255, 200, 170, .55); }
+.pdh-tile__icon { transform-box: view-box; transform-origin: center; }
 .pdh-tile__badge { align-items: center; background: rgba(10, 161, 165, .12); border-radius: .875rem; display: inline-flex; height: 2.75rem;
     justify-content: center; margin-bottom: .875rem; position: relative; width: 2.75rem; }
 .pdh-tile__icon { fill: none; height: 1.375rem; stroke: var(--qf-teal); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; width: 1.375rem; }
@@ -303,17 +349,49 @@ html:not(.no-js) .pdh-qf__title { clip: rect(0 0 0 0); height: 1px; margin: -1px
 @keyframes pdh-rise { from { opacity: 0; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }
 @keyframes pdh-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
 @keyframes pdh-zoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+@keyframes pdh-swoosh { from { stroke-dashoffset: 420; } to { stroke-dashoffset: 0; } }
+@keyframes pdh-ring { 0%, 70%, 100% { rotate: 0deg; } 73% { rotate: -16deg; } 76% { rotate: 14deg; } 79% { rotate: -12deg; } 82% { rotate: 10deg; } 85% { rotate: -6deg; } 88% { rotate: 0deg; } }
+@keyframes pdh-flip { 0%, 82%, 100% { transform: rotateY(0deg); } 91% { transform: rotateY(180deg); } }
+@keyframes pdh-clock { to { rotate: 1turn; } }
+@keyframes pdh-pin { 0%, 60%, 100% { translate: 0 0; } 70% { translate: 0 -5px; } 80% { translate: 0 0; } 86% { translate: 0 -2px; } }
+@keyframes pdh-tile-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+@keyframes pdh-tile-pop { 0% { scale: 1; } 40% { scale: 1.15; rotate: -6deg; } 100% { scale: 1; rotate: 0deg; } }
+@keyframes pdh-er-glow { 0%, 100% { box-shadow: 0 14px 30px -14px rgba(180, 35, 24, .55), 0 0 0 0 rgba(255, 120, 90, 0); }
+    50% { box-shadow: 0 14px 30px -14px rgba(180, 35, 24, .55), 0 0 0 4px rgba(255, 120, 90, .35), 0 0 34px 4px rgba(244, 90, 50, .35); } }
 @media (prefers-reduced-motion: no-preference) {
     .pdh-rise { animation: pdh-rise .75s cubic-bezier(.2, .7, .2, 1) both; }
     .pdh-hero__main > .pdh-rise:nth-child(2) { animation-delay: .06s; }
     .pdh-hero__main > .pdh-rise:nth-child(3) { animation-delay: .12s; }
     .pdh-hero__main > .pdh-rise:nth-child(4) { animation-delay: .18s; }
     .pdh-hero__main > .pdh-rise:nth-child(5) { animation-delay: .24s; }
+    .pdh-hero__main > .pdh-rise:nth-child(6) { animation-delay: .3s; }
+    .pdh-hero__swoosh path { animation: pdh-swoosh 1s cubic-bezier(.65, 0, .35, 1) .7s both; stroke-dasharray: 420; }
     .pdh-hero__visual { animation-delay: .15s; }
     .pdh-tiles > .pdh-rise:nth-child(1) { animation-delay: .3s; }
     .pdh-tiles > .pdh-rise:nth-child(2) { animation-delay: .38s; }
     .pdh-tiles > .pdh-rise:nth-child(3) { animation-delay: .46s; }
     .pdh-tiles > .pdh-rise:nth-child(4) { animation-delay: .54s; }
+    /* Tile icons come alive: the phone rings, the HMO card flips, the clock's hands turn, the map pin bounces */
+    .pdh-tile--emergency .pdh-tile__icon { animation: pdh-ring 4.5s ease-in-out 1.2s infinite; }
+    .pdh-tile--hmo .pdh-tile__icon { animation: pdh-flip 7s ease-in-out 2s infinite; }
+    .pdh-tile--open .pdh-tile__icon path { animation: pdh-clock 10s linear infinite; transform-box: view-box; transform-origin: 12px 12px; }
+    .pdh-tile--where .pdh-tile__icon { animation: pdh-pin 3.2s ease-in-out 1s infinite; }
+    .pdh-tile:hover .pdh-tile__badge { animation: pdh-tile-pop .6s cubic-bezier(.2, .7, .2, 1); }
+    /* Tiles float gently, out of step; the Emergency tile also breathes a warm glow */
+    .pdh-tiles .pdh-tile { animation: pdh-rise .75s cubic-bezier(.2, .7, .2, 1) .3s both, pdh-tile-float 6.5s ease-in-out 1.3s infinite; }
+    .pdh-tiles .pdh-tile:nth-child(2) { animation-delay: .38s, 2.1s; animation-duration: .75s, 7.2s; }
+    .pdh-tiles .pdh-tile:nth-child(3) { animation-delay: .46s, 1.7s; animation-duration: .75s, 6.8s; }
+    .pdh-tiles .pdh-tile:nth-child(4) { animation-delay: .54s, 2.6s; animation-duration: .75s, 7.6s; }
+    .pdh-tiles .pdh-tile--emergency { animation: pdh-rise .75s cubic-bezier(.2, .7, .2, 1) .3s both, pdh-er-glow 2.8s ease-in-out 1.2s infinite,
+        pdh-tile-float 6.5s ease-in-out 1.3s infinite; }
+    /* (beats the older single-value .pdh-tiles > .pdh-rise:nth-child(1) delay, so the float waits for the entrance) */
+    .pdh-tiles .pdh-tile--emergency:nth-child(1) { animation-delay: .3s, 1.2s, 1.3s; }
+    /* Border light runs round each tile at its own pace and position */
+    .pdh-tiles .pdh-tile::before { animation: pdh-sweep 6s linear infinite; }
+    .pdh-tiles .pdh-tile:nth-child(2)::before { animation-delay: -1.5s; animation-duration: 6.6s; }
+    .pdh-tiles .pdh-tile:nth-child(3)::before { animation-delay: -3s; animation-duration: 6.3s; }
+    .pdh-tiles .pdh-tile:nth-child(4)::before { animation-delay: -4.5s; animation-duration: 6.9s; }
+    .pdh-tiles .pdh-tile:hover::before { animation-duration: 2.4s; }
     .pdh-float--since { animation: pdh-bob 6s ease-in-out infinite; }
     .pdh-arch img.is-active { animation: pdh-zoom 7s ease-out both; }
 }

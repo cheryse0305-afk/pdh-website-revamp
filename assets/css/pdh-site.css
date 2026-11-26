@@ -41,3 +41,5 @@ body .footer .footer-social__title { color: #8fe3e0; }
 body .footer .footer-social__link { border-color: #0aa1a5; }
 body .footer .footer__footer, body .footer .footer__nav-util a { color: rgba(255, 255, 255, .7); }
 body .footer a:focus-visible { outline: 3px solid #f47a20; outline-offset: 3px; }
+/* Tagalog sign-off under the footer logo, in the hero's brush script */
+.pdh-footer-sign { color: #ff9a4d; font-family: "Yellowtail", "Brush Script MT", cursive; font-size: 1.875rem; line-height: 1.1; margin: .75rem 0 1rem; }

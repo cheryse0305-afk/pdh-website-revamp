@@ -25,7 +25,7 @@
         ['Services & floors', 'Where can I find your services?'],
         ['Contact numbers', 'What are your contact numbers?']
     ];
-    var WELCOME = "Hi! I'm **Kriss**, PDH's virtual concierge. I can help you find a doctor, check clinic schedules, " +
+    var WELCOME = "Kumusta! Ako si **Kriss**, ang virtual concierge ng PDH. I can help you find a doctor, check clinic schedules, " +
         'find services and floors, check HMO coverage, and guide you through booking an appointment. What can I help you with?';
 
     var state = load() || { mode: 'unknown', msgs: [], open: false };
@@ -254,7 +254,7 @@
         var words = q.split(' ');
         if (!q) return null;
         if (words.length <= 4 && hasAny(q, ['hi', 'hello', 'hey', 'helo', 'kumusta', 'kamusta', 'good morning', 'good afternoon', 'good evening', 'magandang umaga', 'magandang hapon', 'magandang gabi'])) {
-            return 'Hello! How can I help you today? You can ask about doctors, clinic schedules, services, HMOs or appointments.';
+            return 'Kumusta! Ano ang maitutulong ko? You can ask about doctors, clinic schedules, services, HMOs or appointments, in English or Filipino.';
         }
         if (words.length <= 5 && hasAny(q, ['thanks', 'thank you', 'salamat', 'ty', 'thank u'])) {
             return 'You\'re welcome! Is there anything else I can help you with?';

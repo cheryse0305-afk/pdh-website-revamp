@@ -395,7 +395,7 @@
             });
         });
         // Idle shimmer layer on the photo and 24/7 cards, staggered so they don't flash together.
-        [].forEach.call(document.querySelectorAll('.featured-content-awards .grid-item--tile, .cta-list-teasers .image-cta, ' +
+        [].forEach.call(document.querySelectorAll('.pdh-tiles .pdh-tile, .featured-content-awards .grid-item--tile, .cta-list-teasers .image-cta, ' +
             '.image-with-ctas .cta__link, .related-content__tile a'), function (box, i) {
             var shine = document.createElement('span');
             shine.className = 'pdh-shine';
@@ -407,7 +407,7 @@
         countStats();
         if (reducedMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-        var TILT = '.featured-content-awards .grid-item--tile, .cta-list-teasers .image-cta, .related-content__tile a, .blurb_section .blurb__card';
+        var TILT = '.pdh-tiles .pdh-tile, .featured-content-awards .grid-item--tile, .cta-list-teasers .image-cta, .related-content__tile a, .blurb_section .blurb__card';
         var GLOW_ONLY = '.image-with-ctas .cta__link';
         [].forEach.call(document.querySelectorAll(TILT + ', ' + GLOW_ONLY), function (box) {
             var tilt = box.matches(TILT), max = box.matches('.blurb__card') ? 3 : 5, frame = null;
@@ -471,7 +471,7 @@
     // card photos at a slower speed than the page (parallax).
     function setupSectionBackgrounds() {
         var layers = [].slice.call(document.querySelectorAll('.pdh-bg__img'));
-        var sections = [].slice.call(document.querySelectorAll('.pdh-has-bg, .image-with-ctas'));
+        var sections = [].slice.call(document.querySelectorAll('.pdh-hero, .pdh-has-bg, .image-with-ctas'));
         if (!('IntersectionObserver' in window)) {
             sections.forEach(function (s) { s.classList.add('is-live', 'has-entered'); });
             return;
