@@ -9,7 +9,6 @@
     var STORE = 'pdh-kriss-v1';
     var MAX_HISTORY = 12;
     var MAX_CHARS = 600;
-    var MESSENGER = 'https://m.me/paranaquedoctorshospitaluhbi';
     var MAPS = 'https://www.google.com/maps/search/?api=1&query=Para%C3%B1aque+Doctors+Hospital%2C+175+Do%C3%B1a+Soledad+Ave%2C+Para%C3%B1aque';
     var DAY_CODES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     var DAY_NAMES = { Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday', Sun: 'Sunday' };
@@ -156,8 +155,8 @@
 
     function infoLine() {
         var info = hotline('information-services');
-        return (info ? 'call Information Services at [' + info.mobile + '](' + tel(info.mobile) + ') or ' : '') +
-            '[message PDH on Messenger](' + MESSENGER + ')';
+        return info ? 'call Information Services at [' + info.mobile + '](' + tel(info.mobile) + ')'
+            : 'call PDH at [' + data.appointments.label + '](' + data.appointments.tel + ')';
     }
 
     function doctorLine(d) {
@@ -245,7 +244,7 @@
     function appointmentAnswer() {
         return 'PDH doesn\'t have online booking yet, but here\'s how to set an appointment:\n' +
             '1. Find your doctor and their clinic days in the [Doctor Finder](/doctors/).\n' +
-            '2. Call the appointment line at [' + data.appointments.label + '](' + data.appointments.tel + ') or [message PDH on Messenger](' + MESSENGER + ') to book.\n' +
+            '2. Call the appointment line at [' + data.appointments.label + '](' + data.appointments.tel + ') to book.\n' +
             '3. Using an HMO? Request approval first with the [HMO online approval form](' + data.hmo.approval_url + ').\n' +
             'Clinic schedules can change, so it\'s best to confirm when you call.';
     }
@@ -366,7 +365,7 @@
             '<form class="pdh-kriss__form" novalidate><label class="pdh-kriss__sr" for="pdh-kriss-input">Message Kriss</label>' +
             '<textarea id="pdh-kriss-input" rows="1" maxlength="' + MAX_CHARS + '" placeholder="Ask about doctors, services, HMOs…" autocomplete="off"></textarea>' +
             '<button type="submit" class="pdh-kriss__send" aria-label="Send">' + ICON_SEND + '</button></form>' +
-            '<p class="pdh-kriss__foot">Please don\'t share personal medical details. <a href="' + MESSENGER + '" target="_blank" rel="noopener">Talk to PDH staff on Messenger</a></p>' +
+            '<p class="pdh-kriss__foot">Please don\'t share personal medical details. To talk to PDH staff, call <a href="tel:+63287760644">8776-0644</a>.</p>' +
             '</section>';
         document.body.appendChild(root);
         launcher = root.querySelector('.pdh-kriss__launcher');

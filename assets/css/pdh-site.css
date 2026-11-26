@@ -1,9 +1,9 @@
 /* Site-wide PDH components (loaded on every page via index.html's <head>, which tools/build_pages.py copies). */
 
-/* Quick-contact bar: sticky on phones/tablets; a floating "Message us" button on desktop. */
+/* Quick-contact bar: sticky on phones/tablets; hidden on desktop (Kriss is the floating button there). */
 .pdh-quickbar { --qb-ink: #0d3b40; --qb-teal: #007f86; bottom: 0; left: 0; position: fixed; right: 0; z-index: 5; }
 .pdh-quickbar__list { background: rgba(255, 255, 255, .97); border-top: 1px solid #d5e6e7; box-shadow: 0 -8px 24px rgba(13, 59, 64, .12);
-    display: grid; grid-template-columns: repeat(4, 1fr); list-style: none; margin: 0; padding: .375rem .375rem calc(.375rem + env(safe-area-inset-bottom)); }
+    display: grid; grid-template-columns: repeat(3, 1fr); list-style: none; margin: 0; padding: .375rem .375rem calc(.375rem + env(safe-area-inset-bottom)); }
 .pdh-quickbar__list li { margin: 0; }
 .pdh-quickbar a { align-items: center; border-radius: .75rem; color: var(--qb-ink); display: flex; flex-direction: column; font-size: .75rem;
     font-weight: 700; gap: .2rem; line-height: 1.2; min-height: 3.25rem; justify-content: center; padding: .375rem .25rem; text-decoration: none; }
@@ -13,7 +13,6 @@
 .pdh-quickbar__er { background: #b42318; color: #fff !important; }
 .pdh-quickbar__er:hover, .pdh-quickbar__er:focus-visible { background: #8f1a12 !important; }
 .pdh-quickbar__er svg { stroke: #fff; }
-.pdh-quickbar__msg svg { fill: #0084ff; stroke: none; }
 
 /* Keep page content (footer) clear of the bar on small screens. */
 @media screen and (max-width: 63.99em) {
@@ -22,15 +21,8 @@
     body:has(.nav-mobile.is-open) .pdh-quickbar { display: none; }
 }
 
-/* Desktop: only the Messenger button, floating bottom-right. */
-@media screen and (min-width: 64em) {
-    .pdh-quickbar { bottom: 1.5rem; left: auto; right: 1.5rem; }
-    .pdh-quickbar__list { background: transparent; border: 0; box-shadow: none; display: block; padding: 0; }
-    .pdh-quickbar__list li:not(.pdh-quickbar__desk) { display: none; }
-    .pdh-quickbar__desk a { background: #fff; border: 1px solid #d5e6e7; border-radius: 999px; box-shadow: 0 12px 28px -8px rgba(13, 59, 64, .35);
-        flex-direction: row; font-size: .9375rem; gap: .5rem; min-height: 0; padding: .75rem 1.125rem .75rem .875rem; transition: transform .2s, box-shadow .2s; }
-    .pdh-quickbar__desk a:hover { box-shadow: 0 16px 32px -8px rgba(13, 59, 64, .45); transform: translateY(-2px); }
-}
+/* Desktop: the header already carries these links. */
+@media screen and (min-width: 64em) { .pdh-quickbar { display: none; } }
 
 @media print { .pdh-quickbar { display: none; } }
 

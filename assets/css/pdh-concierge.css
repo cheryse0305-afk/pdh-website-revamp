@@ -79,7 +79,7 @@
 .pdh-kriss__foot { color: #48606a; font-size: .75rem; margin: 0; padding: 0 1rem calc(.75rem + env(safe-area-inset-bottom)); }
 .pdh-kriss__foot a { color: var(--k-teal); font-weight: 700; }
 
-/* Desktop: pill launcher, floating panel; the Messenger button sits above the launcher. */
+/* Desktop: pill launcher, floating panel. */
 @media screen and (min-width: 64em) {
     .pdh-kriss__launcher { bottom: 1.5rem; height: auto; padding: .5rem 1.25rem .5rem .5rem; right: 1.5rem; width: auto; }
     .pdh-kriss__launcher > svg { background: rgba(255, 255, 255, .16); border-radius: 50%; box-sizing: content-box; padding: .5rem; }
@@ -89,8 +89,6 @@
     .pdh-kriss__panel { border-radius: 1.25rem; box-shadow: 0 30px 60px -20px rgba(13, 59, 64, .5), 0 0 0 1px rgba(13, 59, 64, .08);
         height: min(40rem, calc(100vh - 3rem)); inset: auto 1.5rem 1.5rem auto; overflow: hidden; width: 25rem; }
     .pdh-kriss__head { padding-top: .875rem; }
-    body .pdh-quickbar { bottom: 5.75rem; }
-    html.pdh-kriss-open .pdh-quickbar { display: none; }
 }
 
 @media (prefers-reduced-motion: no-preference) {

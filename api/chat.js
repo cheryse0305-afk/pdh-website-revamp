@@ -31,8 +31,7 @@ function knowledge() {
 
     lines.push('', '# Contact', 'Address: ' + contacts.address,
         'Google Maps: https://www.google.com/maps/search/?api=1&query=Para%C3%B1aque+Doctors+Hospital',
-        'Appointments and clinic schedules: ' + index.appointments.label + ' (' + index.appointments.tel + ')',
-        'Messenger (chat with PDH staff): https://m.me/paranaquedoctorshospitaluhbi');
+        'Appointments and clinic schedules: ' + index.appointments.label + ' (' + index.appointments.tel + ')');
     contacts.hotlines.forEach(h => lines.push(h.name + ': ' + h.numbers));
     lines.push('Email: ' + contacts.emails.join(', '));
 
@@ -68,11 +67,11 @@ function knowledge() {
 const INSTRUCTIONS = `You are Kriss, the virtual concierge on the website of Parañaque Doctors Hospital (PDH). You help visitors find doctors, understand services and facilities, get around the hospital, check HMO coverage, and make appointment inquiries.
 
 How to answer:
-- Use only the hospital information below. If the answer isn't there (for example prices, room rates, visiting hours, doctor fees, test results, or availability today), say you don't have that information and give the Information Services number or Messenger link. Never guess or invent names, numbers, schedules or services.
+- Use only the hospital information below. If the answer isn't there (for example prices, room rates, visiting hours, doctor fees, test results, or availability today), say you don't have that information and give the Information Services number. Never guess or invent names, numbers, schedules or services.
 - Clinic schedules can change, so suggest calling to confirm before visiting.
 - Keep replies short and friendly: usually 2 to 5 sentences or a short list of at most 5 items. Reply in the visitor's language (English, Filipino or Taglish).
 - Link with Markdown, for example [Cardiology doctors](/doctors/?spec=Cardiology) or [call the ER](tel:+639215720589). Use only links and phone numbers that appear in the information below.
-- Appointments: PDH has no online booking. Help the visitor pick a doctor and clinic day, then tell them to call the appointment line or message PDH on Messenger to book. For HMO patients, mention the HMO approval form.
+- Appointments: PDH has no online booking. Help the visitor pick a doctor and clinic day, then tell them to call the appointment line to book. For HMO patients, mention the HMO approval form.
 - You are not a doctor. Don't diagnose, interpret symptoms, or recommend treatments or medicines; suggest which specialty they could see and encourage them to consult a doctor.
 - If someone describes an emergency (for example chest pain, difficulty breathing, stroke signs, severe bleeding, unconsciousness), tell them first to go to the PDH Emergency Room (Ground Floor, open 24/7), call the ER hotline, or dial 911.
 - If someone mentions self-harm or suicide, respond with care and give the NCMH Crisis Hotline 1553 (or 0917 899 8727 / 0919 057 1553), available 24/7, and the PDH ER.
@@ -168,7 +167,7 @@ module.exports = async function handler(req, res) {
         if (data.stop_reason === 'refusal' || !reply) {
             const info = contacts.hotlines.find(h => h.id === 'information-services');
             return res.status(200).json({ mode: 'ai', reply: "Sorry, I can't help with that here. For anything about PDH, you can call " +
-                (info ? 'Information Services at ' + info.mobile + ' or ' : '') + '[message us on Messenger](https://m.me/paranaquedoctorshospitaluhbi).' });
+                (info ? 'Information Services at ' + info.mobile : 'PDH at ' + index.appointments.label) + '.' });
         }
         return res.status(200).json({ mode: 'ai', reply });
     } catch (e) {
