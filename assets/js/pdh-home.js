@@ -9,8 +9,6 @@
     setupBoxes();
     setupReveal();
     setupVideo();
-    setupSlides();
-    setupTilt();
     var root = document.querySelector('[data-pdh-quickfind]');
     if (!root) return;
 
@@ -111,7 +109,7 @@
 
     function serviceRow(r) {
         var s = r.item;
-        return '<li><a href="/services/#' + esc(s.id) + '"><strong>' + esc(s.name) + '</strong><span>' +
+        return '<li><a href="/services/' + esc(s.id) + '/"><strong>' + esc(s.name) + '</strong><span>' +
             esc(serviceSummary(s)) + '</span></a></li>';
     }
 
@@ -119,6 +117,19 @@
         var d = r.item;
         var spec = d.s || d.d || 'Specialty not listed';
         return '<li><a href="/doctors/' + esc(d.id) + '/"><strong>' + esc(d.n) + '</strong><span>' + esc(spec) + '</span></a></li>';
+    }
+
+    // Words that mean different services (data/search-terms.json "clarify"), e.g. diagnostic vs therapeutic ultrasound.
+    function clarifyFor(q) {
+        return (index.clarify || []).filter(function (c) {
+            return c.terms.some(function (t) { return hasPhrase(q, norm(t)); });
+        })[0] || null;
+    }
+
+    function clarifyHtml(c) {
+        return '<div class="pdh-qf__group pdh-qf__clarify"><p>' + esc(c.note) + '</p><ul>' + c.options.map(function (o) {
+            return '<li><a href="/services/' + esc(o.service) + '/"><strong>' + esc(o.label) + '</strong><span>' + esc(o.detail) + '</span></a></li>';
+        }).join('') + '</ul></div>';
     }
 
     function alertHtml(q) {
@@ -171,6 +182,8 @@
             }
             var specs = group('Specialties', last.specialties.map(specialtyRow));
             var services = group(kind === 'service' ? 'Where to go' : 'Services', last.services.slice(0, kind === 'service' ? 4 : 2).map(serviceRow));
+            var cl = clarifyFor(q);
+            if (cl) services = clarifyHtml(cl);  // e.g. "ultrasound": explain the different kinds instead of guessing
             var html = kind === 'service' ? services + group('Specialists', last.specialties.slice(0, 2).map(specialtyRow))
                 : specs + group('Doctors', docs) + services;
             if (!html && alert) { close(); return; }  // the safety banner is the answer; no "no matches" noise
@@ -192,14 +205,16 @@
             var r = last || search(norm(raw));
             var top = function (list) { return list.length && list[0].score >= 75 ? list[0].item : null; };
             var url;
-            if (kind === 'service') {
-                url = top(r.services) ? '/services/#' + top(r.services).id : '/services/?q=' + encodeURIComponent(raw);
+            if (clarifyFor(norm(raw))) {
+                url = '/services/?q=' + encodeURIComponent(raw);  // the services page explains the different matches
+            } else if (kind === 'service') {
+                url = top(r.services) ? '/services/' + top(r.services).id + '/' : '/services/?q=' + encodeURIComponent(raw);
             } else if (r.doctors.length === 1) {
                 url = '/doctors/' + r.doctors[0].item.id + '/';
             } else if (top(r.specialties) && !r.doctors.length) {
                 url = top(r.specialties).url;
             } else if (!r.doctors.length && top(r.services)) {
-                url = '/services/#' + top(r.services).id;
+                url = '/services/' + top(r.services).id + '/';
             } else {
                 url = '/doctors/?q=' + encodeURIComponent(raw);
             }
@@ -237,30 +252,14 @@
             if (counts[href] != null) span.textContent = counts[href];
         });
 
-        // "In clinic today" card: today's count plus a clickable 7-day chart, by the day in the Philippines.
+        // "Doctors scheduled today" (doctor search card): the number of doctors whose *published* schedule includes
+        // today in the Philippines. It links to the Doctor Finder filtered to the same day, which shows the same count.
         var today = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: 'Asia/Manila' }).format(new Date());
-        var perDay = {};
-        Object.keys(WEEKDAYS).forEach(function (day) {
-            perDay[day] = index.doctors.filter(function (d) { return d.days.indexOf(day) !== -1; }).length;
-        });
-        var countEl = document.querySelector('[data-pdh-today-count]');
-        if (countEl && WEEKDAYS[today]) {
-            countEl.innerHTML = '<strong data-pdh-countup="' + perDay[today] + '">' + perDay[today] + '</strong> ' +
-                (perDay[today] === 1 ? 'doctor' : 'doctors') + ' <span>&middot; ' + WEEKDAYS[today] + '</span>';
-            var link = document.querySelector('[data-pdh-today-link]');
-            link.href = '/doctors/?day=' + today;
-            link.textContent = 'View today’s schedules';
-        }
-        var week = document.querySelector('[data-pdh-week]');
-        if (week) {
-            var max = Math.max.apply(null, Object.keys(perDay).map(function (k) { return perDay[k]; })) || 1;
-            week.innerHTML = Object.keys(WEEKDAYS).map(function (day) {
-                var n = perDay[day];
-                return '<li' + (day === today ? ' class="is-today"' : '') + '><a href="/doctors/?day=' + day + '" aria-label="' +
-                    WEEKDAYS[day] + ': ' + n + (n === 1 ? ' doctor' : ' doctors') + ' in clinic' + (day === today ? ' (today)' : '') + '">' +
-                    '<span class="pdh-week__bar" style="--h:' + Math.max(6, Math.round(n / max * 100)) + '%"></span>' +
-                    '<span class="pdh-week__day">' + day.charAt(0) + '</span></a></li>';
-            }).join('');
+        var todayEl = document.querySelector('[data-pdh-today]');
+        if (todayEl && WEEKDAYS[today]) {
+            var nToday = index.doctors.filter(function (d) { return d.days.indexOf(today) !== -1; }).length;
+            todayEl.innerHTML = '<strong>' + nToday + (nToday === 1 ? ' doctor' : ' doctors') + ' scheduled today</strong> (' + WEEKDAYS[today] +
+                ') <a href="/doctors/?day=' + today + '">See who</a>';
         }
 
         // Trust row: real doctor photos plus totals.
@@ -285,7 +284,7 @@
         });
         var open = document.querySelector('[data-pdh-open247]');
         if (open) {
-            var n247 = index.services.filter(function (s) { return s.cat === 'service' && s.open247; }).length;
+            var n247 = index.services.filter(function (s) { return s.open247; }).length;  // same set as /services/?open=24-7
             open.textContent = n247;
             open.setAttribute('data-pdh-countup', n247);
         }
@@ -306,32 +305,6 @@
             }
             requestAnimationFrame(step);
         });
-    }
-
-    // Tabs: "Find a doctor" / "Find a service" (WAI-ARIA tabs pattern, arrow keys move between tabs).
-    function setupTabs() {
-        var tabs = [].slice.call(root.querySelectorAll('[role="tab"]'));
-        function select(tab, focus) {
-            tabs.forEach(function (t) {
-                var on = t === tab;
-                t.setAttribute('aria-selected', on ? 'true' : 'false');
-                t.tabIndex = on ? 0 : -1;
-                document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-            });
-            if (focus) tab.focus();
-        }
-        tabs.forEach(function (tab, i) {
-            tab.addEventListener('click', function () {
-                select(tab, false);
-                document.getElementById(tab.getAttribute('aria-controls')).querySelector('input[name="q"]').focus();
-            });
-            tab.addEventListener('keydown', function (ev) {
-                var next = ev.key === 'ArrowRight' ? tabs[(i + 1) % tabs.length] : ev.key === 'ArrowLeft' ? tabs[(i - 1 + tabs.length) % tabs.length] : null;
-                if (next) { ev.preventDefault(); select(next, true); }
-            });
-        });
-        var start = tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0];
-        if (start) select(start, false);
     }
 
     // "Is my HMO accepted?" tile: checks the published partner list. Never says "not accepted";
@@ -368,7 +341,6 @@
         form.addEventListener('submit', function (ev) { ev.preventDefault(); check(); });
     }
 
-    setupTabs();
     [].forEach.call(root.querySelectorAll('form[data-kind]'), setup);
 
     fetch('/data/search-index.json')
@@ -395,7 +367,7 @@
             });
         });
         // Idle shimmer layer on the photo and 24/7 cards, staggered so they don't flash together.
-        [].forEach.call(document.querySelectorAll('.pdh-tiles .pdh-tile, .featured-content-awards .grid-item--tile, .cta-list-teasers .image-cta, ' +
+        [].forEach.call(document.querySelectorAll('.featured-content-awards .grid-item--tile, .cta-list-teasers .image-cta, ' +
             '.image-with-ctas .cta__link, .related-content__tile a'), function (box, i) {
             var shine = document.createElement('span');
             shine.className = 'pdh-shine';
@@ -407,7 +379,7 @@
         countStats();
         if (reducedMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-        var TILT = '.pdh-tiles .pdh-tile, .featured-content-awards .grid-item--tile, .cta-list-teasers .image-cta, .related-content__tile a, .blurb_section .blurb__card';
+        var TILT = '.featured-content-awards .grid-item--tile, .cta-list-teasers .image-cta, .related-content__tile a, .blurb_section .blurb__card';
         var GLOW_ONLY = '.image-with-ctas .cta__link';
         [].forEach.call(document.querySelectorAll(TILT + ', ' + GLOW_ONLY), function (box) {
             var tilt = box.matches(TILT), max = box.matches('.blurb__card') ? 3 : 5, frame = null;
@@ -471,7 +443,7 @@
     // card photos at a slower speed than the page (parallax).
     function setupSectionBackgrounds() {
         var layers = [].slice.call(document.querySelectorAll('.pdh-bg__img'));
-        var sections = [].slice.call(document.querySelectorAll('.pdh-hero, .pdh-has-bg, .image-with-ctas'));
+        var sections = [].slice.call(document.querySelectorAll('.pdh-has-bg, .image-with-ctas'));
         if (!('IntersectionObserver' in window)) {
             sections.forEach(function (s) { s.classList.add('is-live', 'has-entered'); });
             return;
@@ -550,82 +522,6 @@
             });
         }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
         els.forEach(function (el) { io.observe(el); });
-    }
-
-    // Hero core-values slideshow: cross-fades every 4 s; pauses on hover/focus, when the tab is hidden,
-    // or via the pause button (WCAG 2.2.2). With reduced motion it never advances on its own.
-    function setupSlides() {
-        var box = document.querySelector('[data-pdh-slides]');
-        if (!box) return;
-        var slides = [].slice.call(box.querySelectorAll('img[data-value]'));
-        var dots = [].slice.call(box.querySelectorAll('.pdh-arch__dot'));
-        var title = box.querySelector('[data-pdh-slide-title]');
-        var desc = box.querySelector('[data-pdh-slide-desc]');
-        var pause = box.querySelector('[data-pdh-pause]');
-        var current = 0, timer = null, paused = reducedMotion, hovering = false;
-
-        function show(i) {
-            current = (i + slides.length) % slides.length;
-            slides.forEach(function (img, n) {
-                img.classList.toggle('is-active', n === current);
-                // Slides 3+ ship without src (data-src); load the current one and the next before they're shown.
-                if (n === current || n === (current + 1) % slides.length) {
-                    if (img.dataset.srcset) { img.srcset = img.dataset.srcset; img.removeAttribute('data-srcset'); }
-                    if (img.dataset.src) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
-                    img.loading = 'eager';
-                }
-            });
-            dots.forEach(function (d, n) {
-                d.classList.toggle('is-active', n === current);
-                if (n === current) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
-            });
-            title.textContent = slides[current].getAttribute('data-value');
-            desc.textContent = slides[current].getAttribute('data-desc');
-        }
-        function schedule() {
-            clearTimeout(timer);
-            if (!paused && !hovering && !document.hidden) timer = setTimeout(function () { show(current + 1); schedule(); }, 4000);
-        }
-        function setPaused(value) {
-            paused = value;
-            box.classList.toggle('is-paused', paused);
-            pause.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
-            pause.innerHTML = paused
-                ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
-                : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>';
-            schedule();
-        }
-        dots.forEach(function (d, n) { d.addEventListener('click', function () { show(n); schedule(); }); });
-        pause.addEventListener('click', function () { setPaused(!paused); });
-        box.addEventListener('mouseenter', function () { hovering = true; schedule(); });
-        box.addEventListener('mouseleave', function () { hovering = false; schedule(); });
-        box.addEventListener('focusin', function () { hovering = true; schedule(); });
-        box.addEventListener('focusout', function () { hovering = false; schedule(); });
-        document.addEventListener('visibilitychange', schedule);
-        setPaused(paused);
-    }
-
-    // Subtle 3D tilt of the hero photo and its floating cards toward the cursor (desktop mouse only).
-    function setupTilt() {
-        var el = document.querySelector('[data-pdh-tilt]');
-        if (!el || reducedMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-        var frame = null;
-        el.classList.add('is-tiltable');
-        el.addEventListener('pointermove', function (ev) {
-            var r = el.getBoundingClientRect();
-            var x = (ev.clientX - r.left) / r.width - 0.5;
-            var y = (ev.clientY - r.top) / r.height - 0.5;
-            cancelAnimationFrame(frame);
-            frame = requestAnimationFrame(function () {
-                el.style.setProperty('--tilt-x', (-y * 6).toFixed(2) + 'deg');
-                el.style.setProperty('--tilt-y', (x * 6).toFixed(2) + 'deg');
-            });
-        });
-        el.addEventListener('pointerleave', function () {
-            cancelAnimationFrame(frame);
-            el.style.setProperty('--tilt-x', '0deg');
-            el.style.setProperty('--tilt-y', '0deg');
-        });
     }
 
     // "Our Story": load the Vimeo player only when the visitor presses play (no autoplaying video,

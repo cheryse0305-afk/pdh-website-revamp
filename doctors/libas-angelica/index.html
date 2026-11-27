@@ -39,11 +39,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Yellowtail&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Lora:ital,wght@0,700;1,600;1,700&family=Allura&family=Yellowtail&display=swap">
 <link rel="stylesheet" href="/assets/css/global.css?v=afd8c13f8e">
 <link rel="stylesheet" href="/assets/css/pdh-tgh-header.css?v=c3c2a5f2fa">
-<link rel="stylesheet" href="/assets/css/pdh-site.css?v=be9fad6ff1">
-<link rel="stylesheet" href="/assets/css/pdh-concierge.css?v=ebba1ffcd4">
+<link rel="stylesheet" href="/assets/css/pdh-site.css?v=e8d54bc864">
+<link rel="stylesheet" href="/assets/css/pdh-concierge.css?v=a579686049">
 <style>
 /* PDH logo: the PDH lockup is wider (~4.7:1) than TGH's (~3:1), so widen the
    logo slot per breakpoint to keep a comparable visual height in the header. */
@@ -78,7 +78,7 @@
 
 
     
-<link rel="stylesheet" href="/assets/css/pdh-pages.css?v=8a6ce3e3db">
+<link rel="stylesheet" href="/assets/css/pdh-pages.css?v=854f50af07">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Physician", "name": "Libas, Angelica", "url": "https://pdh-website-revamp.vercel.app/doctors/libas-angelica/", "telephone": "+63287760644", "address": {"@type": "PostalAddress", "streetAddress": "175 Doña Soledad Ave., Better Living Subdivision, Parañaque, 1711, Metro Manila", "addressLocality": "Parañaque", "addressRegion": "Metro Manila", "addressCountry": "PH"}, "hospitalAffiliation": {"@type": "Hospital", "name": "Parañaque Doctors Hospital", "url": "https://pdh-website-revamp.vercel.app/"}, "medicalSpecialty": "Anesthesiology"}</script>
 </head>
 
@@ -97,7 +97,7 @@
 
         <div class="global-navigation js-global-navigation">
             <div class="inner">
-                <a href="/" class="nav__logo"><img src="/assets/images/pdh-logo.png" alt="Parañaque Doctors Hospital logo"></a>
+                <a href="/" class="nav__logo"><img src="/assets/images/pdh-logo.png" width="2048" height="432" alt="Parañaque Doctors Hospital logo"></a>
                 <nav class="nav-main show-for-tablet-l" aria-label="Desktop Main Navigation Menu">
                     <div class="nav-main__inner">
                         <ul class="nav-main-items dropdown menu js-nav-main" data-dropdown-menu id="nav" data-close-on-click-inside="false">
@@ -169,7 +169,7 @@ Critical &amp; Inpatient Care                                                   
                                                                 </div>
                                                                 <ul class="flyout__links" role="none">
                                                                         <li class="flyout__item">
-                                                                            <a href="/services/#emergency-room-er"  class="flyout__link">
+                                                                            <a href="/services/emergency-room-er/"  class="flyout__link">
                                                                                 <span>Emergency Room</span> <svg width="8" height="16" viewBox="0 0 8 16" class="icon icon--chevron-right" aria-hidden="true"><use xlink:href="#icon-chevron-right"></use></svg>
                                                                             </a>
                                                                         </li>
@@ -349,7 +349,7 @@ Critical &amp; Inpatient Care                                                   
             <a href="/services/" class="nav-mobile__l2-link">Our Services</a>
         </li>
         <li class="nav-mobile__l2-item">
-            <a href="/services/?cat=facility" class="nav-mobile__l2-link">Our Facilities</a>
+            <a href="/services/?need=visit" class="nav-mobile__l2-link">Our Facilities</a>
         </li>
         <li class="nav-mobile__l2-item">
             <a href="https://pdh.com.ph/our-services/room-gallery/" class="nav-mobile__l2-link">Room Gallery</a>
@@ -407,16 +407,30 @@ Critical &amp; Inpatient Care                                                   
                     <h1 class="pdh-profile__name" id="pdh-profile-name">Libas, Angelica</h1>
                     <p class="pdh-profile__spec">Anesthesiology</p>
 
-                    <h2 class="pdh-profile__heading">Clinic schedule</h2>
-                    <p class="pdh-profile__sched">On call</p>
-                    
-                    <p class="pdh-profile__oncall">Available on call. Please contact the hospital to arrange a consultation.</p>
-
-                    <h2 class="pdh-profile__heading">Book a consultation</h2>
-                    <p>Call our appointments line at <a href="tel:+63287760644">8776-0644 to 46</a> or <a href="tel:+639985207295">0998 520 7295</a>.</p>
-                    <a class="pdh-button" href="tel:+63287760644">Call 8776-0644</a>
-
-                    <p class="pdh-note">Schedules come from PDH's doctor directory and may change. Please call to confirm before your visit.</p>
+                    <div class="pdh-profile__grid">
+                        <section class="pdh-pbox" aria-labelledby="pdh-when">
+                            <h2 class="pdh-profile__heading" id="pdh-when">When</h2>
+                            <p>Available <strong>on call</strong>: there are no regular clinic hours. Call the appointment line and the hospital will arrange the consultation.</p>
+                            <p class="pdh-pbox__note">Published schedule. Doctors' clinic days can change, so call to confirm before you go.</p>
+                        </section>
+                        <section class="pdh-pbox" aria-labelledby="pdh-where">
+                            <h2 class="pdh-profile__heading" id="pdh-where">Where</h2>
+                            <p>PDH's outpatient (OPD) clinics are on the <strong>3rd to 6th Floor</strong>. This doctor's clinic room isn't published yet, so please confirm where to go when you call. <a href="/directory/">Floor directory</a></p>
+                        </section>
+                        <section class="pdh-pbox" aria-labelledby="pdh-who">
+                            <h2 class="pdh-profile__heading" id="pdh-who">Who to contact</h2>
+                            <ul class="pdh-contacts"><li><span>Book or confirm a schedule</span><a href="tel:+63287760644">8776-0644 to 46</a></li><li><span>Information Services</span><a href="tel:+639985207295">0998 520 7295</a></li><li><span>HMO Hub (Ground Floor)</span><a href="tel:+639215672709">0921 567 2709</a></li></ul>
+                            <a class="pdh-button" href="tel:+63287760644">Call to book</a>
+                        </section>
+                        <section class="pdh-pbox pdh-pbox--hmo" aria-labelledby="pdh-hmo">
+                            <h2 class="pdh-profile__heading" id="pdh-hmo">Using an HMO?</h2>
+                            <ol class="pdh-steps">
+                                <li>Ask the HMO Hub at <a href="tel:+639215672709">0921 567 2709</a> whether your HMO covers a consultation with this doctor.</li>
+                                <li>Request approval before your visit with the <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGbbyaFRjyniWhqtGDN7iIRPqERjcXCGzobQlQkLESc1JbFg/viewform" target="_blank" rel="noopener">HMO online approval form</a>.</li>
+                                <li>Bring your HMO card and a valid ID.</li>
+                            </ol>
+                        </section>
+                    </div>
                     <p><a class="pdh-back" href="/doctors/">&larr; Back to Find a Doctor</a></p>
                 </div>
             </div>
@@ -436,7 +450,7 @@ Critical &amp; Inpatient Care                                                   
     <footer id="footer" class="footer">
     <div class="footer__inner" data-in-view="once">
         <div class="footer__col">
-            <a href="/" class="footer__logo"><img loading="lazy" decoding="async" src="/assets/images/pdh-logo.png" alt="Parañaque Doctors Hospital logo"></a>
+            <a href="/" class="footer__logo"><img loading="lazy" decoding="async" src="/assets/images/pdh-logo.png" width="2048" height="432" alt="Parañaque Doctors Hospital logo"></a>
             <p class="pdh-footer-sign" lang="tl">Alagang PDH, Pusong PDH</p>
             <div class="footer__meta">
                     <div class="footer__contact-info"><a href="tel:+63287760644">(02) 8776 0644</a></div>
@@ -538,8 +552,8 @@ Critical &amp; Inpatient Care                                                   
     }
 </script>
 <script src="/assets/js/main.js?v=ac4d8d7b79"></script>
-<script src="/assets/js/pdh-concierge.js?v=5b941e1b79" defer></script>
-<script src="/assets/js/pdh-site.js?v=06524738aa" defer></script>
+<script src="/assets/js/pdh-concierge.js?v=4238747c08" defer></script>
+<script src="/assets/js/pdh-site.js?v=a699c1fab6" defer></script>
 
 
 

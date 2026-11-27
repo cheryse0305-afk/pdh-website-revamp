@@ -30,6 +30,22 @@
             (function follow(now) { fitTeal(); if (now - start < 450) requestAnimationFrame(follow); })(start);
         });
     }
+    // Phones: while a text field outside the chat has focus (keyboard open), hide the bottom bar and the round
+    // Kriss button so they can't sit on top of the field or its search results.
+    var small = window.matchMedia('(max-width: 63.99em)');
+    document.addEventListener('focusin', function (e) {
+        var t = e.target;
+        var typing = small.matches && t.matches && t.matches('input:not([type=checkbox]):not([type=radio]):not([type=submit]), textarea, select') &&
+            !t.closest('.pdh-kriss');
+        root.classList.toggle('pdh-typing', !!typing);
+    });
+    document.addEventListener('focusout', function () {
+        setTimeout(function () {
+            var a = document.activeElement;
+            if (!a || !a.matches || !a.matches('input, textarea, select')) root.classList.remove('pdh-typing');
+        }, 0);
+    });
+
     update();
     fitTeal();
 })();

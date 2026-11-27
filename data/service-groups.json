@@ -1,0 +1,21 @@
+{
+  "_comment": "Hand-written. Groups the services page by what a patient needs; floors are shown as location details on each service. Every service id in data/services.json must appear exactly once (tools/build_pages.py checks this).",
+  "groups": [
+    {"id": "urgent", "label": "Emergency & critical care", "intro": "Open 24/7 for emergencies, intensive care and surgery.",
+     "services": ["emergency-room-er", "icu-intensive-care-unit", "nicu-neonatal-intensive-care-unit", "picu-pediatric-intensive-care-unit", "operating-room-or"]},
+    {"id": "consult", "label": "See a doctor", "intro": "Outpatient clinics and specialty centers for consultations.",
+     "services": ["outpatient-department-opd-clinics", "eye-center", "dental-services", "animal-bite-center"]},
+    {"id": "tests", "label": "Tests & imaging", "intro": "Laboratory tests, X-ray, CT, ultrasound, heart and lung tests.",
+     "services": ["laboratory", "radiology", "ob-ultrasound-services", "multi-diagnostic-center", "pulmonary", "nuclear-medicine"]},
+    {"id": "treatment", "label": "Treatment & therapy", "intro": "Ongoing treatments and rehabilitation.",
+     "services": ["hemodialysis-center", "chemo-infusion-center", "physical-medicine-and-rehabilitation"]},
+    {"id": "mother", "label": "Mother & baby", "intro": "Support for new mothers before and after delivery.",
+     "services": ["premium-labor-room", "breastfeeding-station"]},
+    {"id": "admission", "label": "Admission, records & billing", "intro": "Getting admitted, your HMO, records and medicines.",
+     "services": ["admitting-department", "hmo-hub", "medical-records", "pharmacy", "patient-experience-department"]},
+    {"id": "rooms", "label": "Patient rooms", "intro": "Room types for admitted patients.",
+     "services": ["ward", "semi-private-room", "private-room", "suite", "isolation-room"]},
+    {"id": "visit", "label": "For visitors", "intro": "Parking, food and other amenities.",
+     "services": ["parking", "dietary-canteen", "automated-teller-machine-atm", "prayer-room"]}
+  ]
+}

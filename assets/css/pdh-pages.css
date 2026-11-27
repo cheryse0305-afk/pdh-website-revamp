@@ -156,3 +156,59 @@
 .pdh-dir__getting-grid > div { background: var(--pdh-soft); padding: 1rem; }
 .pdh-dir__getting-grid h3 { color: var(--pdh-navy); font-size: 1.0625rem; margin: 0 0 .5rem; }
 .pdh-dir__getting-er { border-left: 4px solid #b42318; }
+
+/* ---------- Doctor profile: When / Where / Who to contact / HMO ---------- */
+.pdh-profile__grid { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); margin-bottom: 1rem; }
+@media screen and (min-width: 48em) { .pdh-profile__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pdh-pbox { background: var(--pdh-soft); border: 1px solid var(--pdh-line); border-radius: .75rem; padding: 1rem 1.125rem; }
+.pdh-pbox .pdh-profile__heading { margin-top: 0; }
+.pdh-pbox p { margin-bottom: .5rem; }
+.pdh-pbox__note { color: #4d5b68; font-size: .875rem; }
+.pdh-sched { list-style: none; margin: 0 0 .5rem; padding: 0; }
+.pdh-sched li { display: flex; flex-direction: column; padding: .375rem 0; }
+.pdh-sched li + li { border-top: 1px solid var(--pdh-line); }
+.pdh-sched strong { color: var(--pdh-navy); }
+.pdh-contacts { list-style: none; margin: 0 0 .875rem; padding: 0; }
+.pdh-contacts li { display: flex; flex-wrap: wrap; gap: .25rem .75rem; justify-content: space-between; padding: .3rem 0; }
+.pdh-contacts span { color: #4d5b68; }
+.pdh-contacts a, .pdh-pbox a { color: var(--pdh-teal); font-weight: 700; }
+.pdh-steps { margin: 0 0 0 1.25rem; }
+.pdh-steps li { margin-bottom: .375rem; }
+
+/* ---------- Services grouped by patient need ---------- */
+.pdh-svc-jump { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: 0 0 1.25rem; padding: 0; }
+.pdh-svc-jump a { border: 1px solid var(--pdh-line); border-radius: 999px; color: var(--pdh-navy); display: inline-block; font-size: .875rem;
+    font-weight: 700; padding: .375rem .875rem; text-decoration: none; }
+.pdh-svc-jump a:hover { border-color: var(--pdh-teal); color: var(--pdh-teal); }
+.pdh-svc-group { margin: 0 0 2.25rem; scroll-margin-top: 7rem; }
+.pdh-svc-group[hidden] { display: none; }
+.pdh-svc-group__title { color: var(--pdh-navy); font-size: 1.5rem; margin: 0 0 .25rem; }
+.pdh-svc-group__intro { color: #4d5b68; margin: 0 0 1rem; }
+.pdh-svc__name a { color: inherit; text-decoration: none; }
+.pdh-svc__name a:hover { color: var(--pdh-teal); text-decoration: underline; }
+.pdh-svc__more-link { margin: 0; }
+.pdh-svc__more-link a { color: var(--pdh-teal); font-weight: 700; }
+.pdh-svc__ask { color: #4d5b68; font-size: .875rem; }
+.pdh-svc__facts a { color: var(--pdh-teal); font-weight: 700; }
+
+/* "Ultrasound" and other ambiguous searches */
+.pdh-clarify { background: #fff7ef; border: 1px solid #f7c99f; border-left: 4px solid var(--pdh-orange); border-radius: .5rem; margin: 0 0 1.25rem; padding: 1rem 1.125rem; }
+.pdh-clarify[hidden] { display: none; }
+.pdh-clarify p { font-weight: 700; margin: 0 0 .5rem; }
+.pdh-clarify ul { display: grid; gap: .5rem; grid-template-columns: minmax(0, 1fr); list-style: none; margin: 0; padding: 0; }
+@media screen and (min-width: 48em) { .pdh-clarify ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pdh-clarify a { background: #fff; border: 1px solid var(--pdh-line); border-radius: .5rem; color: var(--pdh-navy); display: flex; flex-direction: column;
+    gap: .125rem; height: 100%; padding: .625rem .75rem; text-decoration: none; }
+.pdh-clarify a:hover { border-color: var(--pdh-teal); }
+.pdh-clarify span { color: #4d5b68; font-size: .875rem; }
+
+/* ---------- One service page ---------- */
+.pdh-service__card { border-top: 4px solid var(--pdh-teal-bright); max-width: 52rem; padding-top: 1.25rem; }
+.pdh-svc__facts--big { font-size: 1.0625rem; gap: .5rem 1.25rem; margin: 1rem 0 1.25rem; }
+.pdh-offered { columns: 2 16rem; margin: 0 0 1rem 1.25rem; }
+.pdh-offered li { break-inside: avoid; margin-bottom: .25rem; }
+/* global.css strips list markers; these lists need theirs */
+.pdh-steps { list-style: decimal; }
+.pdh-offered { list-style: disc; }
+.pdh-svc__name .pdh-svc__badge { display: inline-block; font-size: .6875rem; font-weight: 700; letter-spacing: .04em; line-height: 1.5;
+    padding: .125rem .5rem; position: relative; text-transform: uppercase; top: -.2em; }

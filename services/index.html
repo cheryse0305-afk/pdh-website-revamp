@@ -39,11 +39,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Yellowtail&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Lora:ital,wght@0,700;1,600;1,700&family=Allura&family=Yellowtail&display=swap">
 <link rel="stylesheet" href="/assets/css/global.css?v=afd8c13f8e">
 <link rel="stylesheet" href="/assets/css/pdh-tgh-header.css?v=c3c2a5f2fa">
-<link rel="stylesheet" href="/assets/css/pdh-site.css?v=be9fad6ff1">
-<link rel="stylesheet" href="/assets/css/pdh-concierge.css?v=ebba1ffcd4">
+<link rel="stylesheet" href="/assets/css/pdh-site.css?v=e8d54bc864">
+<link rel="stylesheet" href="/assets/css/pdh-concierge.css?v=a579686049">
 <style>
 /* PDH logo: the PDH lockup is wider (~4.7:1) than TGH's (~3:1), so widen the
    logo slot per breakpoint to keep a comparable visual height in the header. */
@@ -78,7 +78,7 @@
 
 
     
-<link rel="stylesheet" href="/assets/css/pdh-pages.css?v=8a6ce3e3db">
+<link rel="stylesheet" href="/assets/css/pdh-pages.css?v=854f50af07">
 </head>
 
 <body id="body" data-theme="tgh" class="u-no-hero">
@@ -96,7 +96,7 @@
 
         <div class="global-navigation js-global-navigation">
             <div class="inner">
-                <a href="/" class="nav__logo"><img src="/assets/images/pdh-logo.png" alt="Parañaque Doctors Hospital logo"></a>
+                <a href="/" class="nav__logo"><img src="/assets/images/pdh-logo.png" width="2048" height="432" alt="Parañaque Doctors Hospital logo"></a>
                 <nav class="nav-main show-for-tablet-l" aria-label="Desktop Main Navigation Menu">
                     <div class="nav-main__inner">
                         <ul class="nav-main-items dropdown menu js-nav-main" data-dropdown-menu id="nav" data-close-on-click-inside="false">
@@ -168,7 +168,7 @@ Critical &amp; Inpatient Care                                                   
                                                                 </div>
                                                                 <ul class="flyout__links" role="none">
                                                                         <li class="flyout__item">
-                                                                            <a href="/services/#emergency-room-er"  class="flyout__link">
+                                                                            <a href="/services/emergency-room-er/"  class="flyout__link">
                                                                                 <span>Emergency Room</span> <svg width="8" height="16" viewBox="0 0 8 16" class="icon icon--chevron-right" aria-hidden="true"><use xlink:href="#icon-chevron-right"></use></svg>
                                                                             </a>
                                                                         </li>
@@ -348,7 +348,7 @@ Critical &amp; Inpatient Care                                                   
             <a href="/services/" class="nav-mobile__l2-link">Our Services</a>
         </li>
         <li class="nav-mobile__l2-item">
-            <a href="/services/?cat=facility" class="nav-mobile__l2-link">Our Facilities</a>
+            <a href="/services/?need=visit" class="nav-mobile__l2-link">Our Facilities</a>
         </li>
         <li class="nav-mobile__l2-item">
             <a href="https://pdh.com.ph/our-services/room-gallery/" class="nav-mobile__l2-link">Room Gallery</a>
@@ -401,7 +401,7 @@ Critical &amp; Inpatient Care                                                   
         <div class="pdh-finder__inner">
             <nav class="pdh-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Services</span></nav>
             <h1 class="pdh-finder__title" id="pdh-services-title">Services &amp; Facilities</h1>
-            <p class="pdh-finder__lede">Where to find each service, when it's open and who to call. 10 medical services are open 24/7.</p>
+            <p class="pdh-finder__lede">Find what you need, where it is and who to call. 13 services and facilities are open 24/7.</p>
 
             <form class="pdh-finder__filters pdh-finder__filters--services" role="search" data-pdh-services>
                 <div class="pdh-field pdh-field--search">
@@ -409,8 +409,8 @@ Critical &amp; Inpatient Care                                                   
                     <input id="pdh-sq" name="q" type="search" autocomplete="off" placeholder="e.g. X-ray, dialysis, pharmacy">
                 </div>
                 <div class="pdh-field">
-                    <label for="pdh-cat">Type</label>
-                    <select id="pdh-cat" name="cat"><option value="">All types</option><option value="service">Medical services</option><option value="facility">Facilitys</option><option value="room">Rooms</option></select>
+                    <label for="pdh-grp">What do you need?</label>
+                    <select id="pdh-grp" name="need"><option value="">Everything</option><option value="urgent">Emergency &amp; critical care</option><option value="consult">See a doctor</option><option value="tests">Tests &amp; imaging</option><option value="treatment">Treatment &amp; therapy</option><option value="mother">Mother &amp; baby</option><option value="admission">Admission, records &amp; billing</option><option value="rooms">Patient rooms</option><option value="visit">For visitors</option></select>
                 </div>
                 <div class="pdh-field pdh-field--check">
                     <input id="pdh-open" name="open" type="checkbox" value="24-7">
@@ -418,248 +418,264 @@ Critical &amp; Inpatient Care                                                   
                 </div>
                 <button class="pdh-finder__reset" type="reset">Clear filters</button>
             </form>
+            <ul class="pdh-svc-jump" aria-label="Jump to"><li><a href="#grp-urgent">Emergency &amp; critical care</a></li><li><a href="#grp-consult">See a doctor</a></li><li><a href="#grp-tests">Tests &amp; imaging</a></li><li><a href="#grp-treatment">Treatment &amp; therapy</a></li><li><a href="#grp-mother">Mother &amp; baby</a></li><li><a href="#grp-admission">Admission, records &amp; billing</a></li><li><a href="#grp-rooms">Patient rooms</a></li><li><a href="#grp-visit">For visitors</a></li></ul>
 
+            <div class="pdh-clarify" data-clarify="ultrasound|ultra sound|ultrasonic|utz|sonogram" hidden role="note"><p>“Ultrasound” can mean different things at PDH. Pick the one you need:</p><ul><li><a href="/services/radiology/"><strong>Diagnostic ultrasound</strong><span>Imaging of organs such as the abdomen &middot; Radiology</span></a></li><li><a href="/services/ob-ultrasound-services/"><strong>Pregnancy &amp; pelvic ultrasound</strong><span>3D/4D, transvaginal and other OB scans &middot; OB Ultrasound Services</span></a></li><li><a href="/services/multi-diagnostic-center/"><strong>Heart &amp; blood-vessel ultrasound</strong><span>2D Echo, Doppler and duplex scans &middot; Multi-Diagnostic Center</span></a></li><li><a href="/services/physical-medicine-and-rehabilitation/"><strong>Therapeutic ultrasound</strong><span>A physical therapy treatment, not an imaging test &middot; Physical Medicine and Rehabilitation</span></a></li></ul></div>
             <p class="pdh-finder__count" aria-live="polite" data-pdh-count>34 services and facilities</p>
-            <ul class="pdh-services" data-pdh-results>
-            <li class="pdh-svc" id="emergency-room-er" data-search="emergency room (er) open 24/7, staffed by experienced professionals for all emergency needs.  er emergency room emergency" data-cat="service" data-open="24-7">
-                <p class="pdh-svc__cat">Medical service<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">Emergency Room (ER)</h2>
-                <p class="pdh-svc__desc">Open 24/7, staffed by experienced professionals for all emergency needs.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-g">Ground Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="radiology" data-search="radiology provides essential imaging services such as x-rays, ct scans, and ultrasound, for accurate diagnoses. x-ray services mobile c-arm services mammography ultrasound services ct scan services specialized imaging procedures x-ray xray x ray ct scan ct imaging ultrasound" data-cat="service" data-open="24-7">
-                <p class="pdh-svc__cat">Medical service<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">Radiology</h2>
-                <p class="pdh-svc__desc">Provides essential imaging services such as X-rays, CT scans, and ultrasound, for accurate diagnoses.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-g">Ground Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <details class="pdh-svc__more"><summary>Services offered (6)</summary><ul><li>X-Ray Services</li><li>Mobile C-Arm Services</li><li>Mammography</li><li>Ultrasound Services</li><li>CT Scan Services</li><li>Specialized Imaging Procedures</li></ul></details><p><a href="https://pdh.com.ph/our-services/radiology/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="laboratory" data-search="laboratory offers diagnostic tests, including blood works and specialized tests, to provide accurate diagnosis and support treatment. hematology (blood &amp; cell analysis) cbc w/ platelet esr (erythrocyte sedimentation rate) ct, bt (clotting time, bleeding time) prothrombin time (pt), ptt reticulocyte count malarial smear peripheral blood smear microbiology (infection detection) afb stain gram stain &amp; koh smear culture &amp; sensitivity (blood, urine, stool, csf, sputum, swab/discharge) lab labs lab test blood test urinalysis cbc laboratoryo" data-cat="service" data-open="24-7">
-                <p class="pdh-svc__cat">Medical service<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">Laboratory</h2>
-                <p class="pdh-svc__desc">Offers diagnostic tests, including blood works and specialized tests, to provide accurate diagnosis and support treatment.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-g">Ground Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <details class="pdh-svc__more"><summary>Services offered (12)</summary><ul><li>Hematology (Blood &amp; Cell Analysis)</li><li>CBC w/ Platelet</li><li>ESR (Erythrocyte Sedimentation Rate)</li><li>CT, BT (Clotting Time, Bleeding Time)</li><li>Prothrombin Time (PT), PTT</li><li>Reticulocyte Count</li><li>Malarial Smear</li><li>Peripheral Blood Smear</li><li>Microbiology (Infection Detection)</li><li>AFB Stain</li><li>Gram Stain &amp; KOH Smear</li><li>Culture &amp; Sensitivity (Blood, Urine, Stool, CSF, Sputum, Swab/Discharge)</li></ul></details><p><a href="https://pdh.com.ph/our-services/laboratory-services/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="nuclear-medicine" data-search="nuclear medicine our nuclear medicine services specializes in using small amounts of radioactive materials for diagnostic and therapeutic purposes. it is the only nuclear medicine department in paranaque. thyroid uptake (radioactive iodine uptake) radioactive iodine therapy thyroid scan radioactive iodine nuclear" data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Nuclear Medicine</h2>
-                <p class="pdh-svc__desc">Our Nuclear Medicine services specializes in using small amounts of radioactive materials for diagnostic and therapeutic purposes. It is the only Nuclear Medicine Department in Parañaque.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-7">7th Floor</a></dd><dt>Hours</dt><dd>By Appointment</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <details class="pdh-svc__more"><summary>Services offered (2)</summary><ul><li>Thyroid Uptake (Radioactive Iodine Uptake)</li><li>Radioactive Iodine Therapy</li></ul></details><p><a href="https://pdh.com.ph/our-services/nuclear-medicine/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="multi-diagnostic-center" data-search="multi-diagnostic center at our multi-diagnostic center, we provide advanced testing in cardiology, vascular, and neurology using ecg, echocardiograms, eeg, and other cutting-edge tools. cardiology procedures electrocardiogram (ecg) treadmill stress test 24-hour holter monitor 24-hour bp monitor 2d echocardiogram with doppler stress echocardiogram vascular procedures carotid/vertebral duplex scanning peripheral arterial and venous duplex scanning transcranial doppler study venous compression study saphenous vein mapping neuroscience procedures electroencephalogram (eeg) cranial ultrasound (pediatrics) electromyography (emg) nerve conduction velocity (ncv) ecg ekg 2d echo echo echocardiogram eeg stress test treadmill holter heart test" data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Multi-Diagnostic Center</h2>
-                <p class="pdh-svc__desc">At our Multi-Diagnostic Center, we provide advanced testing in cardiology, vascular, and neurology using ECG, Echocardiograms, EEG, and other cutting-edge tools.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-2">2nd Floor</a></dd><dt>Hours</dt><dd>Echo:<br>Monday to Friday (7am – 5pm)<br>Saturday to Sunday (7am – 4pm)<br>Stress Echo: Saturday<br>By Appointment<br>Vascular:<br>Monday to Friday<br>By Appointment</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <details class="pdh-svc__more"><summary>Services offered (18)</summary><ul><li>Cardiology Procedures</li><li>Electrocardiogram (ECG)</li><li>Treadmill Stress Test</li><li>24-Hour Holter Monitor</li><li>24-Hour BP Monitor</li><li>2D Echocardiogram with Doppler</li><li>Stress Echocardiogram</li><li>Vascular Procedures</li><li>Carotid/Vertebral Duplex Scanning</li><li>Peripheral Arterial and Venous Duplex Scanning</li><li>Transcranial Doppler Study</li><li>Venous Compression Study</li><li>Saphenous Vein Mapping</li><li>Neuroscience Procedures</li><li>Electroencephalogram (EEG)</li><li>Cranial Ultrasound (Pediatrics)</li><li>Electromyography (EMG)</li><li>Nerve Conduction Velocity (NCV)</li></ul></details><p><a href="https://pdh.com.ph/our-services/multi-diagnostic-center/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="pulmonary" data-search="pulmonary we provide expert services for respiratory conditions. arterial blood gas analysis breathing exercises bronchodilator therapy chest physiotherapy incentive spirometry (is) oxygen and aerosol administration peak expiratory flow rate (pefr) pulmonary function test (pft) mechanical ventilation nebulization/aerosol therapy breathing test spirometry nebulizer nebulization respiratory therapy" data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Pulmonary</h2>
-                <p class="pdh-svc__desc">We provide expert services for respiratory conditions.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-2">2nd Floor</a></dd><dt>Hours</dt><dd>6 AM – 10 PM (Monday to Friday), 6 AM – 6 PM (Saturdays &amp; Sundays including Holidays)</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <details class="pdh-svc__more"><summary>Services offered (10)</summary><ul><li>Arterial Blood Gas Analysis</li><li>Breathing Exercises</li><li>Bronchodilator Therapy</li><li>Chest Physiotherapy</li><li>Incentive Spirometry (IS)</li><li>Oxygen and Aerosol Administration</li><li>Peak Expiratory Flow Rate (PEFR)</li><li>Pulmonary Function Test (PFT)</li><li>Mechanical Ventilation</li><li>Nebulization/Aerosol Therapy</li></ul></details><p><a href="https://pdh.com.ph/our-services/pulmonary/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="hemodialysis-center" data-search="hemodialysis center our hemodialysis center provides essential dialysis treatment for patients with kidney disease, ensuring quality renal care.  dialysis hemodialysis kidney dialysis" data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Hemodialysis Center</h2>
-                <p class="pdh-svc__desc">Our Hemodialysis Center provides essential dialysis treatment for patients with kidney disease, ensuring quality renal care.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-2">2nd Floor</a></dd><dt>Hours</dt><dd>6 AM – 10 PM (Monday, Wednesday, Friday), 6 AM – 6 PM (Tuesday, Thursday, Saturday)</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <p><a href="https://pdh.com.ph/our-services/hemodialysis-center/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="physical-medicine-and-rehabilitation" data-search="physical medicine and rehabilitation we utilize modern technology and offer therapy programs designed to support faster recovery and improved functionality. physical therapy procedures electrotherapy &amp; ultrasound therapy transcutaneous/electrical nerve stimulation traction machines infrared radiation &amp; hydrotherapy manual therapy &amp; exercise/gym equipment occupational therapy procedures adult &amp; pediatric management dysphagia management activities of daily living (adl) physical therapy rehab therapy pt" data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Physical Medicine and Rehabilitation</h2>
-                <p class="pdh-svc__desc">We utilize modern technology and offer therapy programs designed to support faster recovery and improved functionality.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-2">2nd Floor</a></dd><dt>Hours</dt><dd>7 AM – 7 PM (Monday to Saturday)</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <details class="pdh-svc__more"><summary>Services offered (10)</summary><ul><li>Physical Therapy Procedures</li><li>Electrotherapy &amp; Ultrasound Therapy</li><li>Transcutaneous/Electrical Nerve Stimulation</li><li>Traction Machines</li><li>Infrared Radiation &amp; Hydrotherapy</li><li>Manual Therapy &amp; Exercise/Gym Equipment</li><li>Occupational Therapy Procedures</li><li>Adult &amp; Pediatric Management</li><li>Dysphagia Management</li><li>Activities of Daily Living (ADL)</li></ul></details><p><a href="https://pdh.com.ph/our-services/rehabilitation-facilities/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="operating-room-or" data-search="operating room (or) our or is equipped to support a wide array of surgical procedures. led by our expert medical team, we provide cutting-edge techniques and unmatched surgical precision.  operating room or surgery room" data-cat="service" data-open="24-7">
-                <p class="pdh-svc__cat">Medical service<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">Operating Room (OR)</h2>
-                <p class="pdh-svc__desc">Our OR is equipped to support a wide array of surgical procedures. Led by our expert medical team, we provide cutting-edge techniques and unmatched surgical precision.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-3">3rd Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="icu-intensive-care-unit" data-search="icu (intensive care unit) our icu provides expert critical care and monitoring for adults with life-threatening conditions.  icu intensive care" data-cat="service" data-open="24-7">
-                <p class="pdh-svc__cat">Medical service<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">ICU (Intensive Care Unit)</h2>
-                <p class="pdh-svc__desc">Our ICU provides expert critical care and monitoring for adults with life-threatening conditions.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-3">3rd Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <p><a href="https://pdh.com.ph/our-services/icu-intensive-care-unit/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="nicu-neonatal-intensive-care-unit" data-search="nicu (neonatal intensive care unit) our nicu provides specialized care and intensive monitoring for premature and critically ill newborns, ensuring the best outcomes. newborn screening immunizations nutrition counseling sick and well-baby consultation ear piercing nicu newborn icu" data-cat="service" data-open="24-7">
-                <p class="pdh-svc__cat">Medical service<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">NICU (Neonatal Intensive Care Unit)</h2>
-                <p class="pdh-svc__desc">Our NICU provides specialized care and intensive monitoring for premature and critically ill newborns, ensuring the best outcomes.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-3">3rd Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <details class="pdh-svc__more"><summary>Services offered (5)</summary><ul><li>Newborn Screening</li><li>Immunizations</li><li>Nutrition Counseling</li><li>Sick and Well-Baby Consultation</li><li>Ear Piercing</li></ul></details><p><a href="https://pdh.com.ph/our-services/nicu-neonatal-intensive-care-unit/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="picu-pediatric-intensive-care-unit" data-search="picu (pediatric intensive care unit) our picu delivers expert care for children with severe or critical conditions, offering specialized pediatric treatment. immunizations nutrition counseling sick and well-baby consultation ear piercing picu pediatric icu child icu" data-cat="service" data-open="24-7">
-                <p class="pdh-svc__cat">Medical service<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">PICU (Pediatric Intensive Care Unit)</h2>
-                <p class="pdh-svc__desc">Our PICU delivers expert care for children with severe or critical conditions, offering specialized pediatric treatment.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-5">5th Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <details class="pdh-svc__more"><summary>Services offered (4)</summary><ul><li>Immunizations</li><li>Nutrition Counseling</li><li>Sick and Well-Baby Consultation</li><li>Ear Piercing</li></ul></details><p><a href="https://pdh.com.ph/our-services/picu-pediatric-intensive-care-unit/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="outpatient-department-opd-clinics" data-search="outpatient department (opd) clinics venue for your health consultations with your trusted doctors.  opd outpatient clinic consultation konsulta" data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Outpatient Department (OPD) Clinics</h2>
-                <p class="pdh-svc__desc">Venue for your health consultations with your trusted doctors.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-3">3rd to 6th Floor</a></dd><dt>Hours</dt><dd>By appointment</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="breastfeeding-station" data-search="breastfeeding station a comfortable and safe space for mothers to breastfeed their infants.  breastfeeding lactation pagpapasuso" data-cat="service" data-open="24-7">
-                <p class="pdh-svc__cat">Medical service<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">Breastfeeding Station</h2>
-                <p class="pdh-svc__desc">A comfortable and safe space for mothers to breastfeed their infants.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-4">4th Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="ob-ultrasound-services" data-search="ob ultrasound services the ob ultrasound services offer advanced imaging to monitor maternal and fetal health, ensuring safe pregnancies and informed care. 3d/4d ultrasound biophysical scoring (bps) congenital anomaly scan fetal biometry follicle monitoring transvaginal ultrasound transrectal ultrasound transabdominal ultrasound doppler studies ob ultrasound pregnancy ultrasound pelvic ultrasound transvaginal tvs 3d ultrasound 4d ultrasound ultrasound" data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">OB Ultrasound Services</h2>
-                <p class="pdh-svc__desc">The OB Ultrasound Services offer advanced imaging to monitor maternal and fetal health, ensuring safe pregnancies and informed care.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-4">4th Floor</a></dd><dt>Hours</dt><dd>8 AM to 5 PM</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <details class="pdh-svc__more"><summary>Services offered (9)</summary><ul><li>3D/4D Ultrasound</li><li>Biophysical Scoring (BPS)</li><li>Congenital Anomaly Scan</li><li>Fetal Biometry</li><li>Follicle Monitoring</li><li>Transvaginal Ultrasound</li><li>Transrectal Ultrasound</li><li>Transabdominal Ultrasound</li><li>Doppler Studies</li></ul></details><p><a href="https://pdh.com.ph/our-services/ob-ultrasound-services/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="animal-bite-center" data-search="animal bite center provides pre and post-exposure prophylaxis (pep) for animal bites.  " data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Animal Bite Center</h2>
-                <p class="pdh-svc__desc">Provides pre and post-exposure prophylaxis (PEP) for animal bites.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd>TBD</dd><dt>Hours</dt><dd>TBD</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="eye-center" data-search="eye center our eye center is equipped to handle a variety of eye-related health concerns, including common and specialized eye diseases. diagnosis and treatment of eye diseases modern cataract surgery microsurgery lasik/laser screening blepharoplasty glaucoma screening retina screening optical shop eye eyes mata cataract lasik" data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Eye Center</h2>
-                <p class="pdh-svc__desc">Our Eye Center is equipped to handle a variety of eye-related health concerns, including common and specialized eye diseases.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-2">2nd Floor</a></dd><dt>Hours</dt><dd>10 AM – 7 PM (Monday to Saturday)</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <details class="pdh-svc__more"><summary>Services offered (8)</summary><ul><li>Diagnosis and Treatment of Eye Diseases</li><li>Modern Cataract Surgery</li><li>Microsurgery</li><li>LASIK/Laser Screening</li><li>Blepharoplasty</li><li>Glaucoma Screening</li><li>Retina Screening</li><li>Optical Shop</li></ul></details><p><a href="https://pdh.com.ph/our-services/eye-center/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="dental-services" data-search="dental services we provide comprehensive dental care, offering expert treatments to maintain oral health and confident smiles. cosmetic dentistry and smile design extraction removal of impacted third molars tmj disorder/tmj orthopedics orthodontics dental veneers periodontal/gum treatment oral prophylaxis restorative treatment/light cure fillings prosthetic dentistry (dentures) removable/flexible dentures complete dentures porcelain crowns and fixed bridges teeth whitening dental dentist teeth ngipin braces" data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Dental Services</h2>
-                <p class="pdh-svc__desc">We provide comprehensive dental care, offering expert treatments to maintain oral health and confident smiles.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-3">3rd Floor</a></dd><dt>Hours</dt><dd>9 AM – 5 PM (Monday to Friday)</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                <details class="pdh-svc__more"><summary>Services offered (14)</summary><ul><li>Cosmetic Dentistry and Smile Design</li><li>Extraction</li><li>Removal of Impacted Third Molars</li><li>TMJ Disorder/TMJ Orthopedics</li><li>Orthodontics</li><li>Dental Veneers</li><li>Periodontal/Gum Treatment</li><li>Oral Prophylaxis</li><li>Restorative Treatment/Light Cure Fillings</li><li>Prosthetic Dentistry (Dentures)</li><li>Removable/Flexible Dentures</li><li>Complete Dentures</li><li>Porcelain Crowns and Fixed Bridges</li><li>Teeth Whitening</li></ul></details><p><a href="https://pdh.com.ph/our-services/dental-services/">More details on the PDH website</a></p>
-            </li>
-            <li class="pdh-svc" id="pharmacy" data-search="pharmacy the pharmacy provides convenience and easy access to essential medications, ensuring your needs are met promptly.  pharmacy botika gamot medicine drugstore" data-cat="service" data-open="24-7">
-                <p class="pdh-svc__cat">Medical service<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">Pharmacy</h2>
-                <p class="pdh-svc__desc">The Pharmacy provides convenience and easy access to essential medications, ensuring your needs are met promptly.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-g">Ground Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="admitting-department" data-search="admitting department our admitting department provides a seamless and efficient admission process, ensuring a smooth experience for patients and their families.  admission admit confinement ma-admit" data-cat="service" data-open="24-7">
-                <p class="pdh-svc__cat">Medical service<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">Admitting Department</h2>
-                <p class="pdh-svc__desc">Our Admitting Department provides a seamless and efficient admission process, ensuring a smooth experience for patients and their families.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-g">Ground Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="chemo-infusion-center" data-search="chemo infusion center our dedicated facility serves both inpatients and outpatients, offering safe, personalized chemotherapy treatments in a caring and comfortable setting.  " data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Chemo Infusion Center</h2>
-                <p class="pdh-svc__desc">Our dedicated facility serves both inpatients and outpatients, offering safe, personalized chemotherapy treatments in a caring and comfortable setting.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd>TBD</dd><dt>Hours</dt><dd>TBD</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="medical-records" data-search="medical records we provide secure and organized access to medical records, ensuring patients and healthcare providers receive timely and accurate information.  medical records records medical certificate med cert medcert" data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Medical Records</h2>
-                <p class="pdh-svc__desc">We provide secure and organized access to medical records, ensuring patients and healthcare providers receive timely and accurate information.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-2">2nd Floor</a></dd><dt>Hours</dt><dd>8 AM – 5 PM (Monday to Saturday)</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="patient-experience-department" data-search="patient experience department dedicated to enhancing patient satisfaction, our team ensures compassionate care, clear communication, and a positive hospital journey.  " data-cat="service" data-open="">
-                <p class="pdh-svc__cat">Medical service</p>
-                <h2 class="pdh-svc__name">Patient Experience Department</h2>
-                <p class="pdh-svc__desc">Dedicated to enhancing patient satisfaction, our team ensures compassionate care, clear communication, and a positive hospital journey.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd>TBD</dd><dt>Hours</dt><dd>TBD</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="hmo-hub" data-search="hmo hub facilitates access to healthcare services covered by your health insurance plan.  hmo insurance philhealth loa letter of authorization" data-cat="facility" data-open="">
-                <p class="pdh-svc__cat">Facility</p>
-                <h2 class="pdh-svc__name">HMO Hub</h2>
-                <p class="pdh-svc__desc">Facilitates access to healthcare services covered by your health insurance plan.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-g">Ground Floor</a></dd><dt>Hours</dt><dd>6 AM – 7 PM (Monday to Saturday), 6 AM – 2 PM (Sunday and Holidays)</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="prayer-room" data-search="prayer room a peaceful chapel for prayer and reflection for patients, families, and staff.  chapel prayer kapilya dasal" data-cat="facility" data-open="24-7">
-                <p class="pdh-svc__cat">Facility<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">Prayer Room</h2>
-                <p class="pdh-svc__desc">A peaceful chapel for prayer and reflection for patients, families, and staff.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-2">2nd Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="parking" data-search="parking ample, convenient parking available for patients and visitors, with special slots for persons with disabilities (pwd) and senior citizens.  parking paradahan car park" data-cat="facility" data-open="24-7">
-                <p class="pdh-svc__cat">Facility<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">Parking</h2>
-                <p class="pdh-svc__desc">Ample, convenient parking available for patients and visitors, with special slots for Persons with Disabilities (PWD) and Senior Citizens.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-b">Basement Parking and Allocated Parking Space for Patients and Visitors</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="dietary-canteen" data-search="dietary/canteen our dietary services and canteen offer a wide selection of meals that satisfy both cravings and care needs. from comfort food to medically tailored meal plans, every dish is prepared with your health and well-being in mind—because good food is essential to good care.  canteen food pagkain kainan cafeteria" data-cat="facility" data-open="">
-                <p class="pdh-svc__cat">Facility</p>
-                <h2 class="pdh-svc__name">Dietary/Canteen</h2>
-                <p class="pdh-svc__desc">Our Dietary Services and Canteen offer a wide selection of meals that satisfy both cravings and care needs. From comfort food to medically tailored meal plans, every dish is prepared with your health and well-being in mind—because good food is essential to good care.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-g">Ground Floor</a></dd><dt>Hours</dt><dd>6 AM – 8 PM (Monday to Sunday)</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="automated-teller-machine-atm" data-search="automated teller machine (atm) conveniently located atm within the hospital ensure easy access to banking services for patients, visitors, and staff.  atm cash bank" data-cat="facility" data-open="24-7">
-                <p class="pdh-svc__cat">Facility<span class="pdh-svc__badge">Open 24/7</span></p>
-                <h2 class="pdh-svc__name">Automated Teller Machine (ATM)</h2>
-                <p class="pdh-svc__desc">Conveniently located ATM within the hospital ensure easy access to banking services for patients, visitors, and staff.</p>
-                <dl class="pdh-svc__facts"><dt>Location</dt><dd><a href="/directory/#floor-g">Ground Floor</a></dd><dt>Hours</dt><dd>Open 24/7</dd><dt>Call</dt><dd><a href="tel:+63287760644">8776-0644 to 46</a></dd></dl>
-                
-            </li>
-            <li class="pdh-svc" id="ward" data-search="ward our air-conditioned ward rooms provide a clean, spacious, and comfortable healing space, shared by four patients. divided into pediatric, male, female, and ob categories, each ward is designed for optimal patient care with essential amenities and 24/7 nursing support.  room rooms kwarto ward" data-cat="room" data-open="">
-                <p class="pdh-svc__cat">Room</p>
-                <h2 class="pdh-svc__name">Ward</h2>
-                <p class="pdh-svc__desc">Our air-conditioned ward rooms provide a clean, spacious, and comfortable healing space, shared by four patients. Divided into Pediatric, Male, Female, and OB categories, each ward is designed for optimal patient care with essential amenities and 24/7 nursing support.</p>
-                <dl class="pdh-svc__facts"></dl>
-                <p class="pdh-svc__amenities"><strong>Amenities:</strong> Bed, Bedside Table, Chair, Shared Comfort Room</p>
-            </li>
-            <li class="pdh-svc" id="semi-private-room" data-search="semi-private room designed for comfort and privacy, our air-conditioned semi-private rooms accommodate two patients, offering a spacious and well-equipped healing environment with essential amenities and 24/7 nursing support.  " data-cat="room" data-open="">
-                <p class="pdh-svc__cat">Room</p>
-                <h2 class="pdh-svc__name">Semi-private Room</h2>
-                <p class="pdh-svc__desc">Designed for comfort and privacy, our air-conditioned semi-private rooms accommodate two patients, offering a spacious and well-equipped healing environment with essential amenities and 24/7 nursing support.</p>
-                <dl class="pdh-svc__facts"></dl>
-                <p class="pdh-svc__amenities"><strong>Amenities:</strong> Bed, Bedside Table, Chair, Television, Refrigerator, Couch, Shared Comfort Room</p>
-            </li>
-            <li class="pdh-svc" id="private-room" data-search="private room our air-conditioned private rooms ensure a comfortable and restful stay with enhanced privacy, essential amenities, and round-the-clock nursing care.  private room room rates" data-cat="room" data-open="">
-                <p class="pdh-svc__cat">Room</p>
-                <h2 class="pdh-svc__name">Private Room</h2>
-                <p class="pdh-svc__desc">Our air-conditioned private rooms ensure a comfortable and restful stay with enhanced privacy, essential amenities, and round-the-clock nursing care.</p>
-                <dl class="pdh-svc__facts"></dl>
-                <p class="pdh-svc__amenities"><strong>Amenities:</strong> Bed, Bedside Table, Chair, Cabinet, Television, Refrigerator, Couch, Private Comfort Room</p>
-            </li>
-            <li class="pdh-svc" id="suite" data-search="suite for a premium healing experience, our air-conditioned suite rooms offer spacious accommodations with exclusive amenities, personalized care, and 24/7 nursing support.  " data-cat="room" data-open="">
-                <p class="pdh-svc__cat">Room</p>
-                <h2 class="pdh-svc__name">Suite</h2>
-                <p class="pdh-svc__desc">For a premium healing experience, our air-conditioned suite rooms offer spacious accommodations with exclusive amenities, personalized care, and 24/7 nursing support.</p>
-                <dl class="pdh-svc__facts"></dl>
-                <p class="pdh-svc__amenities"><strong>Amenities:</strong> Bed, Bedside Table, Chair, Cabinet, Television, Refrigerator, Couch, Coffee Table, Private Comfort Room</p>
-            </li>
-            <li class="pdh-svc" id="isolation-room" data-search="isolation room our isolation rooms provide a secure environment for patients requiring containment, equipped with filtration and infection control measures for safety.  " data-cat="room" data-open="">
-                <p class="pdh-svc__cat">Room</p>
-                <h2 class="pdh-svc__name">Isolation Room</h2>
-                <p class="pdh-svc__desc">Our isolation rooms provide a secure environment for patients requiring containment, equipped with filtration and infection control measures for safety.</p>
-                <dl class="pdh-svc__facts"></dl>
-                <p class="pdh-svc__amenities"><strong>Amenities:</strong> Bed, Bedside Table, Cabinet, Television, Refrigerator, Couch, Private Comfort Room, Anteroom</p>
-            </li>
-            <li class="pdh-svc" id="premium-labor-room" data-search="premium labor room our premium labor room provides an advanced, comfortable, and private environment for mothers during childbirth. equipped with the newest facilities and a dedicated team of healthcare professionals, the room ensures a smooth and safe delivery experience. it is designed to provide a serene atmosphere for both mothers and their families, with necessary amenities to enhance comfort during labor.  " data-cat="room" data-open="">
-                <p class="pdh-svc__cat">Room</p>
-                <h2 class="pdh-svc__name">Premium Labor Room</h2>
-                <p class="pdh-svc__desc">Our premium labor room provides an advanced, comfortable, and private environment for mothers during childbirth. Equipped with the newest facilities and a dedicated team of healthcare professionals, the room ensures a smooth and safe delivery experience. It is designed to provide a serene atmosphere for both mothers and their families, with necessary amenities to enhance comfort during labor.</p>
-                <dl class="pdh-svc__facts"></dl>
-                
-            </li>
-            </ul>
+            <div data-pdh-results>
+            <section class="pdh-svc-group" data-group-section="urgent" aria-labelledby="grp-urgent">
+                <h2 class="pdh-svc-group__title" id="grp-urgent">Emergency &amp; critical care</h2>
+                <p class="pdh-svc-group__intro">Open 24/7 for emergencies, intensive care and surgery.</p>
+                <ul class="pdh-services">
+                <li class="pdh-svc" id="emergency-room-er" data-search="emergency room (er) open 24/7, staffed by experienced professionals for all emergency needs.  er emergency room emergency emergency &amp; critical care" data-group="urgent" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/emergency-room-er/">Emergency Room (ER)</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">Open 24/7, staffed by experienced professionals for all emergency needs.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>Ground Floor &middot; <a href="/directory/#floor-g">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/emergency-room-er/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="icu-intensive-care-unit" data-search="icu (intensive care unit) our icu provides expert critical care and monitoring for adults with life-threatening conditions.  icu intensive care emergency &amp; critical care" data-group="urgent" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/icu-intensive-care-unit/">ICU (Intensive Care Unit)</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">Our ICU provides expert critical care and monitoring for adults with life-threatening conditions.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>3rd Floor &middot; <a href="/directory/#floor-3">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/icu-intensive-care-unit/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="nicu-neonatal-intensive-care-unit" data-search="nicu (neonatal intensive care unit) our nicu provides specialized care and intensive monitoring for premature and critically ill newborns, ensuring the best outcomes. newborn screening immunizations nutrition counseling sick and well-baby consultation ear piercing nicu newborn icu emergency &amp; critical care" data-group="urgent" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/nicu-neonatal-intensive-care-unit/">NICU (Neonatal Intensive Care Unit)</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">Our NICU provides specialized care and intensive monitoring for premature and critically ill newborns, ensuring the best outcomes.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>3rd Floor &middot; <a href="/directory/#floor-3">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/nicu-neonatal-intensive-care-unit/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="picu-pediatric-intensive-care-unit" data-search="picu (pediatric intensive care unit) our picu delivers expert care for children with severe or critical conditions, offering specialized pediatric treatment. immunizations nutrition counseling sick and well-baby consultation ear piercing picu pediatric icu child icu emergency &amp; critical care" data-group="urgent" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/picu-pediatric-intensive-care-unit/">PICU (Pediatric Intensive Care Unit)</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">Our PICU delivers expert care for children with severe or critical conditions, offering specialized pediatric treatment.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>5th Floor &middot; <a href="/directory/#floor-5">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/picu-pediatric-intensive-care-unit/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="operating-room-or" data-search="operating room (or) our or is equipped to support a wide array of surgical procedures. led by our expert medical team, we provide cutting-edge techniques and unmatched surgical precision.  operating room or surgery room emergency &amp; critical care" data-group="urgent" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/operating-room-or/">Operating Room (OR)</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">Our OR is equipped to support a wide array of surgical procedures. Led by our expert medical team, we provide cutting-edge techniques and unmatched surgical precision.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>3rd Floor &middot; <a href="/directory/#floor-3">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/operating-room-or/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                </ul>
+            </section>
+            <section class="pdh-svc-group" data-group-section="consult" aria-labelledby="grp-consult">
+                <h2 class="pdh-svc-group__title" id="grp-consult">See a doctor</h2>
+                <p class="pdh-svc-group__intro">Outpatient clinics and specialty centers for consultations.</p>
+                <ul class="pdh-services">
+                <li class="pdh-svc" id="outpatient-department-opd-clinics" data-search="outpatient department (opd) clinics venue for your health consultations with your trusted doctors.  opd outpatient clinic consultation konsulta see a doctor" data-group="consult" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/outpatient-department-opd-clinics/">Outpatient Department (OPD) Clinics</a></h3>
+                    <p class="pdh-svc__desc">Venue for your health consultations with your trusted doctors.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>3rd to 6th Floor &middot; <a href="/directory/#floor-3">floor map</a></dd><dt>Hours</dt><dd>By appointment</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/outpatient-department-opd-clinics/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="eye-center" data-search="eye center our eye center is equipped to handle a variety of eye-related health concerns, including common and specialized eye diseases. diagnosis and treatment of eye diseases modern cataract surgery microsurgery lasik/laser screening blepharoplasty glaucoma screening retina screening optical shop eye eyes mata cataract lasik see a doctor" data-group="consult" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/eye-center/">Eye Center</a></h3>
+                    <p class="pdh-svc__desc">Our Eye Center is equipped to handle a variety of eye-related health concerns, including common and specialized eye diseases.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>2nd Floor &middot; <a href="/directory/#floor-2">floor map</a></dd><dt>Hours</dt><dd>10 AM – 7 PM (Monday to Saturday)</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/eye-center/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="dental-services" data-search="dental services we provide comprehensive dental care, offering expert treatments to maintain oral health and confident smiles. cosmetic dentistry and smile design extraction removal of impacted third molars tmj disorder/tmj orthopedics orthodontics dental veneers periodontal/gum treatment oral prophylaxis restorative treatment/light cure fillings prosthetic dentistry (dentures) removable/flexible dentures complete dentures porcelain crowns and fixed bridges teeth whitening dental dentist teeth ngipin braces see a doctor" data-group="consult" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/dental-services/">Dental Services</a></h3>
+                    <p class="pdh-svc__desc">We provide comprehensive dental care, offering expert treatments to maintain oral health and confident smiles.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>3rd Floor &middot; <a href="/directory/#floor-3">floor map</a></dd><dt>Hours</dt><dd>9 AM – 5 PM (Monday to Friday)</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/dental-services/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="animal-bite-center" data-search="animal bite center provides pre and post-exposure prophylaxis (pep) for animal bites.   see a doctor" data-group="consult" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/animal-bite-center/">Animal Bite Center</a></h3>
+                    <p class="pdh-svc__desc">Provides pre and post-exposure prophylaxis (PEP) for animal bites.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>TBD</dd><dt>Hours</dt><dd>TBD</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/animal-bite-center/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                </ul>
+            </section>
+            <section class="pdh-svc-group" data-group-section="tests" aria-labelledby="grp-tests">
+                <h2 class="pdh-svc-group__title" id="grp-tests">Tests &amp; imaging</h2>
+                <p class="pdh-svc-group__intro">Laboratory tests, X-ray, CT, ultrasound, heart and lung tests.</p>
+                <ul class="pdh-services">
+                <li class="pdh-svc" id="laboratory" data-search="laboratory offers diagnostic tests, including blood works and specialized tests, to provide accurate diagnosis and support treatment. hematology (blood &amp; cell analysis) cbc w/ platelet esr (erythrocyte sedimentation rate) ct, bt (clotting time, bleeding time) prothrombin time (pt), ptt reticulocyte count malarial smear peripheral blood smear microbiology (infection detection) afb stain gram stain &amp; koh smear culture &amp; sensitivity (blood, urine, stool, csf, sputum, swab/discharge) lab labs lab test blood test urinalysis cbc laboratoryo tests &amp; imaging" data-group="tests" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/laboratory/">Laboratory</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">Offers diagnostic tests, including blood works and specialized tests, to provide accurate diagnosis and support treatment.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>Ground Floor &middot; <a href="/directory/#floor-g">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/laboratory/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="radiology" data-search="radiology provides essential imaging services such as x-rays, ct scans, and ultrasound, for accurate diagnoses. x-ray services mobile c-arm services mammography ultrasound services ct scan services specialized imaging procedures x-ray xray x ray ct scan ct imaging ultrasound tests &amp; imaging" data-group="tests" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/radiology/">Radiology</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">Provides essential imaging services such as X-rays, CT scans, and ultrasound, for accurate diagnoses.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>Ground Floor &middot; <a href="/directory/#floor-g">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/radiology/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="ob-ultrasound-services" data-search="ob ultrasound services the ob ultrasound services offer advanced imaging to monitor maternal and fetal health, ensuring safe pregnancies and informed care. 3d/4d ultrasound biophysical scoring (bps) congenital anomaly scan fetal biometry follicle monitoring transvaginal ultrasound transrectal ultrasound transabdominal ultrasound doppler studies ob ultrasound pregnancy ultrasound pelvic ultrasound transvaginal tvs 3d ultrasound 4d ultrasound ultrasound tests &amp; imaging" data-group="tests" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/ob-ultrasound-services/">OB Ultrasound Services</a></h3>
+                    <p class="pdh-svc__desc">The OB Ultrasound Services offer advanced imaging to monitor maternal and fetal health, ensuring safe pregnancies and informed care.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>4th Floor &middot; <a href="/directory/#floor-4">floor map</a></dd><dt>Hours</dt><dd>8 AM to 5 PM</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/ob-ultrasound-services/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="multi-diagnostic-center" data-search="multi-diagnostic center at our multi-diagnostic center, we provide advanced testing in cardiology, vascular, and neurology using ecg, echocardiograms, eeg, and other cutting-edge tools. cardiology procedures electrocardiogram (ecg) treadmill stress test 24-hour holter monitor 24-hour bp monitor 2d echocardiogram with doppler stress echocardiogram vascular procedures carotid/vertebral duplex scanning peripheral arterial and venous duplex scanning transcranial doppler study venous compression study saphenous vein mapping neuroscience procedures electroencephalogram (eeg) cranial ultrasound (pediatrics) electromyography (emg) nerve conduction velocity (ncv) ecg ekg 2d echo echo echocardiogram eeg stress test treadmill holter heart test tests &amp; imaging" data-group="tests" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/multi-diagnostic-center/">Multi-Diagnostic Center</a></h3>
+                    <p class="pdh-svc__desc">At our Multi-Diagnostic Center, we provide advanced testing in cardiology, vascular, and neurology using ECG, Echocardiograms, EEG, and other cutting-edge tools.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>2nd Floor &middot; <a href="/directory/#floor-2">floor map</a></dd><dt>Hours</dt><dd>Hours vary by test</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/multi-diagnostic-center/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="pulmonary" data-search="pulmonary we provide expert services for respiratory conditions. arterial blood gas analysis breathing exercises bronchodilator therapy chest physiotherapy incentive spirometry (is) oxygen and aerosol administration peak expiratory flow rate (pefr) pulmonary function test (pft) mechanical ventilation nebulization/aerosol therapy breathing test spirometry nebulizer nebulization respiratory therapy tests &amp; imaging" data-group="tests" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/pulmonary/">Pulmonary</a></h3>
+                    <p class="pdh-svc__desc">We provide expert services for respiratory conditions.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>2nd Floor &middot; <a href="/directory/#floor-2">floor map</a></dd><dt>Hours</dt><dd>6 AM – 10 PM (Monday to Friday), 6 AM – 6 PM (Saturdays &amp; Sundays including Holidays)</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/pulmonary/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="nuclear-medicine" data-search="nuclear medicine our nuclear medicine services specializes in using small amounts of radioactive materials for diagnostic and therapeutic purposes. it is the only nuclear medicine department in paranaque. thyroid uptake (radioactive iodine uptake) radioactive iodine therapy thyroid scan radioactive iodine nuclear tests &amp; imaging" data-group="tests" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/nuclear-medicine/">Nuclear Medicine</a></h3>
+                    <p class="pdh-svc__desc">Our Nuclear Medicine services specializes in using small amounts of radioactive materials for diagnostic and therapeutic purposes. It is the only Nuclear Medicine Department in Parañaque.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>7th Floor &middot; <a href="/directory/#floor-7">floor map</a></dd><dt>Hours</dt><dd>By Appointment</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/nuclear-medicine/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                </ul>
+            </section>
+            <section class="pdh-svc-group" data-group-section="treatment" aria-labelledby="grp-treatment">
+                <h2 class="pdh-svc-group__title" id="grp-treatment">Treatment &amp; therapy</h2>
+                <p class="pdh-svc-group__intro">Ongoing treatments and rehabilitation.</p>
+                <ul class="pdh-services">
+                <li class="pdh-svc" id="hemodialysis-center" data-search="hemodialysis center our hemodialysis center provides essential dialysis treatment for patients with kidney disease, ensuring quality renal care.  dialysis hemodialysis kidney dialysis treatment &amp; therapy" data-group="treatment" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/hemodialysis-center/">Hemodialysis Center</a></h3>
+                    <p class="pdh-svc__desc">Our Hemodialysis Center provides essential dialysis treatment for patients with kidney disease, ensuring quality renal care.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>2nd Floor &middot; <a href="/directory/#floor-2">floor map</a></dd><dt>Hours</dt><dd>6 AM – 10 PM (Monday, Wednesday, Friday), 6 AM – 6 PM (Tuesday, Thursday, Saturday)</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/hemodialysis-center/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="chemo-infusion-center" data-search="chemo infusion center our dedicated facility serves both inpatients and outpatients, offering safe, personalized chemotherapy treatments in a caring and comfortable setting.   treatment &amp; therapy" data-group="treatment" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/chemo-infusion-center/">Chemo Infusion Center</a></h3>
+                    <p class="pdh-svc__desc">Our dedicated facility serves both inpatients and outpatients, offering safe, personalized chemotherapy treatments in a caring and comfortable setting.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>TBD</dd><dt>Hours</dt><dd>TBD</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/chemo-infusion-center/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="physical-medicine-and-rehabilitation" data-search="physical medicine and rehabilitation we utilize modern technology and offer therapy programs designed to support faster recovery and improved functionality. physical therapy procedures electrotherapy &amp; ultrasound therapy transcutaneous/electrical nerve stimulation traction machines infrared radiation &amp; hydrotherapy manual therapy &amp; exercise/gym equipment occupational therapy procedures adult &amp; pediatric management dysphagia management activities of daily living (adl) physical therapy rehab therapy pt treatment &amp; therapy" data-group="treatment" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/physical-medicine-and-rehabilitation/">Physical Medicine and Rehabilitation</a></h3>
+                    <p class="pdh-svc__desc">We utilize modern technology and offer therapy programs designed to support faster recovery and improved functionality.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>2nd Floor &middot; <a href="/directory/#floor-2">floor map</a></dd><dt>Hours</dt><dd>7 AM – 7 PM (Monday to Saturday)</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/physical-medicine-and-rehabilitation/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                </ul>
+            </section>
+            <section class="pdh-svc-group" data-group-section="mother" aria-labelledby="grp-mother">
+                <h2 class="pdh-svc-group__title" id="grp-mother">Mother &amp; baby</h2>
+                <p class="pdh-svc-group__intro">Support for new mothers before and after delivery.</p>
+                <ul class="pdh-services">
+                <li class="pdh-svc" id="premium-labor-room" data-search="premium labor room our premium labor room provides an advanced, comfortable, and private environment for mothers during childbirth. equipped with the newest facilities and a dedicated team of healthcare professionals, the room ensures a smooth and safe delivery experience. it is designed to provide a serene atmosphere for both mothers and their families, with necessary amenities to enhance comfort during labor.   mother &amp; baby" data-group="mother" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/premium-labor-room/">Premium Labor Room</a></h3>
+                    <p class="pdh-svc__desc">Our premium labor room provides an advanced, comfortable, and private environment for mothers during childbirth. Equipped with the newest facilities and a dedicated team of healthcare professionals, the room ensures a smooth and safe delivery experience. It is designed to provide a serene atmosphere for both mothers and their families, with necessary amenities to enhance comfort during labor.</p>
+                    <dl class="pdh-svc__facts"></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/premium-labor-room/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="breastfeeding-station" data-search="breastfeeding station a comfortable and safe space for mothers to breastfeed their infants.  breastfeeding lactation pagpapasuso mother &amp; baby" data-group="mother" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/breastfeeding-station/">Breastfeeding Station</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">A comfortable and safe space for mothers to breastfeed their infants.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>4th Floor &middot; <a href="/directory/#floor-4">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/breastfeeding-station/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                </ul>
+            </section>
+            <section class="pdh-svc-group" data-group-section="admission" aria-labelledby="grp-admission">
+                <h2 class="pdh-svc-group__title" id="grp-admission">Admission, records &amp; billing</h2>
+                <p class="pdh-svc-group__intro">Getting admitted, your HMO, records and medicines.</p>
+                <ul class="pdh-services">
+                <li class="pdh-svc" id="admitting-department" data-search="admitting department our admitting department provides a seamless and efficient admission process, ensuring a smooth experience for patients and their families.  admission admit confinement ma-admit admission, records &amp; billing" data-group="admission" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/admitting-department/">Admitting Department</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">Our Admitting Department provides a seamless and efficient admission process, ensuring a smooth experience for patients and their families.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>Ground Floor &middot; <a href="/directory/#floor-g">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/admitting-department/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="hmo-hub" data-search="hmo hub facilitates access to healthcare services covered by your health insurance plan.  hmo insurance philhealth loa letter of authorization admission, records &amp; billing" data-group="admission" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/hmo-hub/">HMO Hub</a></h3>
+                    <p class="pdh-svc__desc">Facilitates access to healthcare services covered by your health insurance plan.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>Ground Floor &middot; <a href="/directory/#floor-g">floor map</a></dd><dt>Hours</dt><dd>6 AM – 7 PM (Monday to Saturday), 6 AM – 2 PM (Sunday and Holidays)</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/hmo-hub/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="medical-records" data-search="medical records we provide secure and organized access to medical records, ensuring patients and healthcare providers receive timely and accurate information.  medical records records medical certificate med cert medcert admission, records &amp; billing" data-group="admission" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/medical-records/">Medical Records</a></h3>
+                    <p class="pdh-svc__desc">We provide secure and organized access to medical records, ensuring patients and healthcare providers receive timely and accurate information.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>2nd Floor &middot; <a href="/directory/#floor-2">floor map</a></dd><dt>Hours</dt><dd>8 AM – 5 PM (Monday to Saturday)</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/medical-records/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="pharmacy" data-search="pharmacy the pharmacy provides convenience and easy access to essential medications, ensuring your needs are met promptly.  pharmacy botika gamot medicine drugstore admission, records &amp; billing" data-group="admission" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/pharmacy/">Pharmacy</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">The Pharmacy provides convenience and easy access to essential medications, ensuring your needs are met promptly.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>Ground Floor &middot; <a href="/directory/#floor-g">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/pharmacy/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="patient-experience-department" data-search="patient experience department dedicated to enhancing patient satisfaction, our team ensures compassionate care, clear communication, and a positive hospital journey.   admission, records &amp; billing" data-group="admission" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/patient-experience-department/">Patient Experience Department</a></h3>
+                    <p class="pdh-svc__desc">Dedicated to enhancing patient satisfaction, our team ensures compassionate care, clear communication, and a positive hospital journey.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>TBD</dd><dt>Hours</dt><dd>TBD</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/patient-experience-department/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                </ul>
+            </section>
+            <section class="pdh-svc-group" data-group-section="rooms" aria-labelledby="grp-rooms">
+                <h2 class="pdh-svc-group__title" id="grp-rooms">Patient rooms</h2>
+                <p class="pdh-svc-group__intro">Room types for admitted patients.</p>
+                <ul class="pdh-services">
+                <li class="pdh-svc" id="ward" data-search="ward our air-conditioned ward rooms provide a clean, spacious, and comfortable healing space, shared by four patients. divided into pediatric, male, female, and ob categories, each ward is designed for optimal patient care with essential amenities and 24/7 nursing support.  room rooms kwarto ward patient rooms" data-group="rooms" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/ward/">Ward</a></h3>
+                    <p class="pdh-svc__desc">Our air-conditioned ward rooms provide a clean, spacious, and comfortable healing space, shared by four patients. Divided into Pediatric, Male, Female, and OB categories, each ward is designed for optimal patient care with essential amenities and 24/7 nursing support.</p>
+                    <dl class="pdh-svc__facts"></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/ward/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="semi-private-room" data-search="semi-private room designed for comfort and privacy, our air-conditioned semi-private rooms accommodate two patients, offering a spacious and well-equipped healing environment with essential amenities and 24/7 nursing support.   patient rooms" data-group="rooms" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/semi-private-room/">Semi-private Room</a></h3>
+                    <p class="pdh-svc__desc">Designed for comfort and privacy, our air-conditioned semi-private rooms accommodate two patients, offering a spacious and well-equipped healing environment with essential amenities and 24/7 nursing support.</p>
+                    <dl class="pdh-svc__facts"></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/semi-private-room/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="private-room" data-search="private room our air-conditioned private rooms ensure a comfortable and restful stay with enhanced privacy, essential amenities, and round-the-clock nursing care.  private room room rates patient rooms" data-group="rooms" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/private-room/">Private Room</a></h3>
+                    <p class="pdh-svc__desc">Our air-conditioned private rooms ensure a comfortable and restful stay with enhanced privacy, essential amenities, and round-the-clock nursing care.</p>
+                    <dl class="pdh-svc__facts"></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/private-room/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="suite" data-search="suite for a premium healing experience, our air-conditioned suite rooms offer spacious accommodations with exclusive amenities, personalized care, and 24/7 nursing support.   patient rooms" data-group="rooms" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/suite/">Suite</a></h3>
+                    <p class="pdh-svc__desc">For a premium healing experience, our air-conditioned suite rooms offer spacious accommodations with exclusive amenities, personalized care, and 24/7 nursing support.</p>
+                    <dl class="pdh-svc__facts"></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/suite/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="isolation-room" data-search="isolation room our isolation rooms provide a secure environment for patients requiring containment, equipped with filtration and infection control measures for safety.   patient rooms" data-group="rooms" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/isolation-room/">Isolation Room</a></h3>
+                    <p class="pdh-svc__desc">Our isolation rooms provide a secure environment for patients requiring containment, equipped with filtration and infection control measures for safety.</p>
+                    <dl class="pdh-svc__facts"></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/isolation-room/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                </ul>
+            </section>
+            <section class="pdh-svc-group" data-group-section="visit" aria-labelledby="grp-visit">
+                <h2 class="pdh-svc-group__title" id="grp-visit">For visitors</h2>
+                <p class="pdh-svc-group__intro">Parking, food and other amenities.</p>
+                <ul class="pdh-services">
+                <li class="pdh-svc" id="parking" data-search="parking ample, convenient parking available for patients and visitors, with special slots for persons with disabilities (pwd) and senior citizens.  parking paradahan car park for visitors" data-group="visit" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/parking/">Parking</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">Ample, convenient parking available for patients and visitors, with special slots for Persons with Disabilities (PWD) and Senior Citizens.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>Basement Parking and Allocated Parking Space for Patients and Visitors &middot; <a href="/directory/#floor-b">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/parking/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="dietary-canteen" data-search="dietary/canteen our dietary services and canteen offer a wide selection of meals that satisfy both cravings and care needs. from comfort food to medically tailored meal plans, every dish is prepared with your health and well-being in mind—because good food is essential to good care.  canteen food pagkain kainan cafeteria for visitors" data-group="visit" data-open="">
+                    <h3 class="pdh-svc__name"><a href="/services/dietary-canteen/">Dietary/Canteen</a></h3>
+                    <p class="pdh-svc__desc">Our Dietary Services and Canteen offer a wide selection of meals that satisfy both cravings and care needs. From comfort food to medically tailored meal plans, every dish is prepared with your health and well-being in mind—because good food is essential to good care.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>Ground Floor &middot; <a href="/directory/#floor-g">floor map</a></dd><dt>Hours</dt><dd>6 AM – 8 PM (Monday to Sunday)</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/dietary-canteen/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="automated-teller-machine-atm" data-search="automated teller machine (atm) conveniently located atm within the hospital ensure easy access to banking services for patients, visitors, and staff.  atm cash bank for visitors" data-group="visit" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/automated-teller-machine-atm/">Automated Teller Machine (ATM)</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">Conveniently located ATM within the hospital ensure easy access to banking services for patients, visitors, and staff.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>Ground Floor &middot; <a href="/directory/#floor-g">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/automated-teller-machine-atm/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                <li class="pdh-svc" id="prayer-room" data-search="prayer room a peaceful chapel for prayer and reflection for patients, families, and staff.  chapel prayer kapilya dasal for visitors" data-group="visit" data-open="24-7">
+                    <h3 class="pdh-svc__name"><a href="/services/prayer-room/">Prayer Room</a><span class="pdh-svc__badge">Open 24/7</span></h3>
+                    <p class="pdh-svc__desc">A peaceful chapel for prayer and reflection for patients, families, and staff.</p>
+                    <dl class="pdh-svc__facts"><dt>Where</dt><dd>2nd Floor &middot; <a href="/directory/#floor-2">floor map</a></dd><dt>Hours</dt><dd>Open 24/7</dd></dl>
+                    <p class="pdh-svc__more-link"><a href="/services/prayer-room/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>
+                </ul>
+            </section>
+            </div>
             <p class="pdh-finder__empty" data-pdh-empty hidden>Nothing matches your search. Call
                 <a href="tel:+63287760644">8776-0644 to 46</a> and we'll point you to the right department.</p>
 
@@ -680,7 +696,7 @@ Critical &amp; Inpatient Care                                                   
     <footer id="footer" class="footer">
     <div class="footer__inner" data-in-view="once">
         <div class="footer__col">
-            <a href="/" class="footer__logo"><img loading="lazy" decoding="async" src="/assets/images/pdh-logo.png" alt="Parañaque Doctors Hospital logo"></a>
+            <a href="/" class="footer__logo"><img loading="lazy" decoding="async" src="/assets/images/pdh-logo.png" width="2048" height="432" alt="Parañaque Doctors Hospital logo"></a>
             <p class="pdh-footer-sign" lang="tl">Alagang PDH, Pusong PDH</p>
             <div class="footer__meta">
                     <div class="footer__contact-info"><a href="tel:+63287760644">(02) 8776 0644</a></div>
@@ -782,13 +798,13 @@ Critical &amp; Inpatient Care                                                   
     }
 </script>
 <script src="/assets/js/main.js?v=ac4d8d7b79"></script>
-<script src="/assets/js/pdh-concierge.js?v=5b941e1b79" defer></script>
-<script src="/assets/js/pdh-site.js?v=06524738aa" defer></script>
+<script src="/assets/js/pdh-concierge.js?v=4238747c08" defer></script>
+<script src="/assets/js/pdh-site.js?v=a699c1fab6" defer></script>
 
 
 
 
 
-<script src="/assets/js/pdh-services.js?v=43b9388d10" defer></script>
+<script src="/assets/js/pdh-services.js?v=74d07b5c01" defer></script>
 </body>
 </html>

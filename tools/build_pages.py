@@ -24,8 +24,12 @@ import json
 import os
 import re
 import shutil
+import sys
 import unicodedata
 import urllib.parse
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from schedule_format import parse as parse_schedule, readable as readable_schedule, day_list  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "doctors")
@@ -127,7 +131,7 @@ def card(d):
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">{e(d['name'])}</span>
                         <span class="pdh-doc__spec">{e(specialty_line(d))}</span>
-                        <span class="pdh-doc__sched">{e(d['schedule'] or 'Schedule not listed')}</span>
+                        <span class="pdh-doc__sched">{e(readable_schedule(d['schedule'], short=True))}</span>
                     </span>
                 </a>
             </li>"""
@@ -183,15 +187,33 @@ def finder(doctors):
     </section>"""
 
 
-def profile(d, contacts):
-    info = next((h for h in contacts["hotlines"] if h["id"] == "information-services"), None)
-    days = "".join(f'<li>{DAY_NAMES[x]}</li>' for x in (d["days"] or []))
-    days_html = f'<ul class="pdh-days" aria-label="Clinic days">{days}</ul>' if days else ""
-    on_call = '<p class="pdh-profile__oncall">Available on call. Please contact the hospital to arrange a consultation.</p>' if d["on_call"] else ""
-    mobile = ""
-    if info and info["mobile"]:
-        digits = re.sub(r"\D", "", info["mobile"])
-        mobile = f' or <a href="tel:+63{digits[1:]}">{e(info["mobile"])}</a>'
+def hotline_link(contacts, hid):
+    h = next((h for h in contacts["hotlines"] if h["id"] == hid), None)
+    return f'<a href="{tel(h["mobile"])}">{e(h["mobile"])}</a>' if h and h["mobile"] else ""
+
+
+def profile(d, contacts, services):
+    """When to inquire, where to go and whom to contact, using only published data (no invented room numbers)."""
+    sessions = parse_schedule(d["schedule"])
+    if sessions:
+        rows = "".join(f'<li><strong>{e(day_list(x["days"]))}</strong><span>{e(" and ".join(x["times"]))}</span></li>' for x in sessions)
+        when = f'<ul class="pdh-sched" aria-label="Clinic days and hours">{rows}</ul>'
+    elif d["on_call"]:
+        when = '<p>Available <strong>on call</strong>: there are no regular clinic hours. Call the appointment line and the hospital will arrange the consultation.</p>'
+    else:
+        when = f'<p>{e(readable_schedule(d["schedule"]))}. Please call the appointment line for this doctor\'s clinic hours.</p>'
+    opd = next((s for s in services if s["id"] == "outpatient-department-opd-clinics"), None)
+    hmo_hub = next((s for s in services if s["id"] == "hmo-hub"), None)
+    where = ("<p>PDH's outpatient (OPD) clinics are on the <strong>" + e(opd["location"]) + "</strong>. "
+             if opd and opd["location"] else "<p>") + \
+        "This doctor's clinic room isn't published yet, so please confirm where to go when you call. " \
+        '<a href="/directory/">Floor directory</a></p>'
+    info = hotline_link(contacts, "information-services")
+    hub = hotline_link(contacts, "hmo-hub")
+    hub_where = f' ({e(hmo_hub["location"])})' if hmo_hub and hmo_hub["location"] else ""
+    contacts_html = (f'<li><span>Book or confirm a schedule</span><a href="{APPOINTMENT_LINE[1]}">{APPOINTMENT_LINE[0]}</a></li>'
+                     + (f'<li><span>Information Services</span>{info}</li>' if info else "")
+                     + (f'<li><span>HMO Hub{hub_where}</span>{hub}</li>' if hub else ""))
     return f"""<section class="pdh-profile" aria-labelledby="pdh-profile-name">
         <div class="pdh-finder__inner">
             <nav class="pdh-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/doctors/">Find a Doctor</a> <span aria-hidden="true">/</span> <span aria-current="page">{e(d['name'])}</span></nav>
@@ -201,16 +223,30 @@ def profile(d, contacts):
                     <h1 class="pdh-profile__name" id="pdh-profile-name">{e(d['name'])}</h1>
                     <p class="pdh-profile__spec">{e(specialty_line(d))}</p>
 
-                    <h2 class="pdh-profile__heading">Clinic schedule</h2>
-                    <p class="pdh-profile__sched">{e(d['schedule'] or 'Schedule not listed')}</p>
-                    {days_html}
-                    {on_call}
-
-                    <h2 class="pdh-profile__heading">Book a consultation</h2>
-                    <p>Call our appointments line at <a href="{APPOINTMENT_LINE[1]}">{APPOINTMENT_LINE[0]}</a>{mobile}.</p>
-                    <a class="pdh-button" href="{APPOINTMENT_LINE[1]}">Call {APPOINTMENT_LINE[0].split(' ')[0]}</a>
-
-                    <p class="pdh-note">Schedules come from PDH's doctor directory and may change. Please call to confirm before your visit.</p>
+                    <div class="pdh-profile__grid">
+                        <section class="pdh-pbox" aria-labelledby="pdh-when">
+                            <h2 class="pdh-profile__heading" id="pdh-when">When</h2>
+                            {when}
+                            <p class="pdh-pbox__note">Published schedule. Doctors' clinic days can change, so call to confirm before you go.</p>
+                        </section>
+                        <section class="pdh-pbox" aria-labelledby="pdh-where">
+                            <h2 class="pdh-profile__heading" id="pdh-where">Where</h2>
+                            {where}
+                        </section>
+                        <section class="pdh-pbox" aria-labelledby="pdh-who">
+                            <h2 class="pdh-profile__heading" id="pdh-who">Who to contact</h2>
+                            <ul class="pdh-contacts">{contacts_html}</ul>
+                            <a class="pdh-button" href="{APPOINTMENT_LINE[1]}">Call to book</a>
+                        </section>
+                        <section class="pdh-pbox pdh-pbox--hmo" aria-labelledby="pdh-hmo">
+                            <h2 class="pdh-profile__heading" id="pdh-hmo">Using an HMO?</h2>
+                            <ol class="pdh-steps">
+                                <li>Ask the HMO Hub{(" at " + hub) if hub else ""} whether your HMO covers a consultation with this doctor.</li>
+                                <li>Request approval before your visit with the <a href="{HMO_APPROVAL_URL}" target="_blank" rel="noopener">HMO online approval form</a>.</li>
+                                <li>Bring your HMO card and a valid ID.</li>
+                            </ol>
+                        </section>
+                    </div>
                     <p><a class="pdh-back" href="/doctors/">&larr; Back to Find a Doctor</a></p>
                 </div>
             </div>
@@ -268,6 +304,10 @@ def load_terms(doctors, services, contacts):
         if group["service"] not in service_ids:
             errors.append(f"unknown service id {group['service']!r}")
         service_terms.setdefault(group["service"], []).extend(group["terms"])
+    for c in raw.get("clarify", []):
+        for o in c["options"]:
+            if o["service"] not in service_ids:
+                errors.append(f"clarify: unknown service id {o['service']!r}")
     hotline = next((h for h in contacts["hotlines"] if h["id"] == raw["emergency"]["hotline_id"]), None)
     if not hotline:
         errors.append(f"unknown hotline id {raw['emergency']['hotline_id']!r}")
@@ -290,46 +330,83 @@ def is_24_7(s):
     return (s["schedule"] or "").strip().lower() == "open 24/7"
 
 
-def service_card(s, terms):
-    search = fold(" ".join([s["name"], s["description"] or "", " ".join(s["services_offered"] or []), " ".join(terms)]))
+def load_groups(services):
+    groups = json.load(open(os.path.join(ROOT, "data", "service-groups.json"), encoding="utf-8"))["groups"]
+    ids = [x for g in groups for x in g["services"]]
+    known = {s["id"] for s in services}
+    problems = sorted(known - set(ids)) + sorted(set(ids) - known) + sorted({x for x in ids if ids.count(x) > 1})
+    if problems:
+        raise SystemExit("data/service-groups.json must list every service exactly once; check: " + ", ".join(problems))
+    return groups
+
+
+def call_line(s):
+    """Who to call. No department has its own published number yet, so name the department on the main line."""
+    if s["contact"] and s["contact"] != APPOINTMENT_LINE[0]:
+        return f'<a href="{tel(s["contact"])}">{e(s["contact"])}</a>'
+    return (f'Main line <a href="{APPOINTMENT_LINE[1]}">{APPOINTMENT_LINE[0]}</a>'
+            f' <span class="pdh-svc__ask">(ask for {e(s["name"].split(" (")[0])})</span>')
+
+
+def location_html(s):
+    if not s["location"]:
+        return None
+    loc = e(s["location"])
+    if s["floors"]:
+        loc = f'{loc} &middot; <a href="/directory/#floor-{floor_key(s["floors"][0])}">floor map</a>'
+    return loc
+
+
+def service_card(s, terms, group):
+    search = fold(" ".join([s["name"], s["description"] or "", " ".join(s["services_offered"] or []), " ".join(terms), group["label"]]))
     rows = []
-    if s["location"]:
-        loc = e(s["location"])
-        if s["floors"]:
-            loc = f'<a href="/directory/#floor-{floor_key(s["floors"][0])}">{loc}</a>'
-        rows.append(("Location", loc))
+    if location_html(s):
+        rows.append(("Where", location_html(s)))
     if s["schedule"]:
-        rows.append(("Hours", "<br>".join(e(l) for l in s["schedule"].split("\n"))))
-    if s["contact"]:
-        rows.append(("Call", f'<a href="{APPOINTMENT_LINE[1]}">{e(s["contact"])}</a>'))
+        first = s["schedule"].split("\n")[0]
+        rows.append(("Hours", e("Hours vary by test" if first.rstrip().endswith(":") else first)))
     facts = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in rows)
-    extra = ""
-    if s["services_offered"]:
-        items = "".join(f"<li>{e(x)}</li>" for x in s["services_offered"])
-        extra += f'<details class="pdh-svc__more"><summary>Services offered ({len(s["services_offered"])})</summary><ul>{items}</ul></details>'
-    if s["amenities"]:
-        extra += '<p class="pdh-svc__amenities"><strong>Amenities:</strong> ' + ", ".join(e(x) for x in s["amenities"]) + "</p>"
-    if s["detail_url"]:
-        extra += f'<p><a href="{e(s["detail_url"])}">More details on the PDH website</a></p>'
     badge = '<span class="pdh-svc__badge">Open 24/7</span>' if is_24_7(s) else ""
-    return f"""            <li class="pdh-svc" id="{s['id']}" data-search="{e(search)}" data-cat="{s['category']}" data-open="{'24-7' if is_24_7(s) else ''}">
-                <p class="pdh-svc__cat">{CATEGORY_LABELS[s['category']]}{badge}</p>
-                <h2 class="pdh-svc__name">{e(s['name'])}</h2>
-                <p class="pdh-svc__desc">{e(s['description'])}</p>
-                <dl class="pdh-svc__facts">{facts}</dl>
-                {extra}
-            </li>"""
+    return f"""                <li class="pdh-svc" id="{s['id']}" data-search="{e(search)}" data-group="{group['id']}" data-open="{'24-7' if is_24_7(s) else ''}">
+                    <h3 class="pdh-svc__name"><a href="/services/{s['id']}/">{e(s['name'])}</a>{badge}</h3>
+                    <p class="pdh-svc__desc">{e(s['description'] or '')}</p>
+                    <dl class="pdh-svc__facts">{facts}</dl>
+                    <p class="pdh-svc__more-link"><a href="/services/{s['id']}/">Details, hours &amp; who to call<span aria-hidden="true"> &rarr;</span></a></p>
+                </li>"""
 
 
-def services_page(services, service_terms):
-    medical_24_7 = sum(1 for s in services if s["category"] == "service" and is_24_7(s))
-    cats = "".join(f'<option value="{k}">{v}s</option>' for k, v in CATEGORY_LABELS.items())
-    cards = "\n".join(service_card(s, service_terms.get(s["id"], [])) for s in services)
+def clarify_html(raw_terms, services):
+    by_id = {s["id"]: s for s in services}
+    out = []
+    for c in raw_terms.get("clarify", []):
+        opts = "".join(f'<li><a href="/services/{o["service"]}/"><strong>{e(o["label"])}</strong>'
+                       f'<span>{e(o["detail"])} &middot; {e(by_id[o["service"]]["name"])}</span></a></li>' for o in c["options"])
+        out.append(f'<div class="pdh-clarify" data-clarify="{e("|".join(fold(t) for t in c["terms"]))}" hidden role="note">'
+                   f'<p>{e(c["note"])}</p><ul>{opts}</ul></div>')
+    return "\n            ".join(out)
+
+
+def services_page(services, service_terms, groups, raw_terms):
+    by_id = {s["id"]: s for s in services}
+    open_24_7 = sum(1 for s in services if is_24_7(s))
+    opts = "".join(f'<option value="{g["id"]}">{e(g["label"])}</option>' for g in groups)
+    sections = []
+    for g in groups:
+        cards = "\n".join(service_card(by_id[x], service_terms.get(x, []), g) for x in g["services"])
+        sections.append(f"""            <section class="pdh-svc-group" data-group-section="{g['id']}" aria-labelledby="grp-{g['id']}">
+                <h2 class="pdh-svc-group__title" id="grp-{g['id']}">{e(g['label'])}</h2>
+                <p class="pdh-svc-group__intro">{e(g['intro'])}</p>
+                <ul class="pdh-services">
+{cards}
+                </ul>
+            </section>""")
+    jump = "".join(f'<li><a href="#grp-{g["id"]}">{e(g["label"])}</a></li>' for g in groups)
+    nl = "\n"
     return f"""<section class="pdh-finder" aria-labelledby="pdh-services-title">
         <div class="pdh-finder__inner">
             <nav class="pdh-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Services</span></nav>
             <h1 class="pdh-finder__title" id="pdh-services-title">Services &amp; Facilities</h1>
-            <p class="pdh-finder__lede">Where to find each service, when it's open and who to call. {medical_24_7} medical services are open 24/7.</p>
+            <p class="pdh-finder__lede">Find what you need, where it is and who to call. {open_24_7} services and facilities are open 24/7.</p>
 
             <form class="pdh-finder__filters pdh-finder__filters--services" role="search" data-pdh-services>
                 <div class="pdh-field pdh-field--search">
@@ -337,8 +414,8 @@ def services_page(services, service_terms):
                     <input id="pdh-sq" name="q" type="search" autocomplete="off" placeholder="e.g. X-ray, dialysis, pharmacy">
                 </div>
                 <div class="pdh-field">
-                    <label for="pdh-cat">Type</label>
-                    <select id="pdh-cat" name="cat"><option value="">All types</option>{cats}</select>
+                    <label for="pdh-grp">What do you need?</label>
+                    <select id="pdh-grp" name="need"><option value="">Everything</option>{opts}</select>
                 </div>
                 <div class="pdh-field pdh-field--check">
                     <input id="pdh-open" name="open" type="checkbox" value="24-7">
@@ -346,15 +423,53 @@ def services_page(services, service_terms):
                 </div>
                 <button class="pdh-finder__reset" type="reset">Clear filters</button>
             </form>
+            <ul class="pdh-svc-jump" aria-label="Jump to">{jump}</ul>
 
+            {clarify_html(raw_terms, services)}
             <p class="pdh-finder__count" aria-live="polite" data-pdh-count>{len(services)} services and facilities</p>
-            <ul class="pdh-services" data-pdh-results>
-{cards}
-            </ul>
+            <div data-pdh-results>
+{nl.join(sections)}
+            </div>
             <p class="pdh-finder__empty" data-pdh-empty hidden>Nothing matches your search. Call
                 <a href="{APPOINTMENT_LINE[1]}">{APPOINTMENT_LINE[0]}</a> and we'll point you to the right department.</p>
 
             <p class="pdh-note">Locations and hours come from PDH's published service list and may change. Please call to confirm before your visit.</p>
+        </div>
+    </section>"""
+
+
+def service_page(s, group):
+    rows = []
+    if location_html(s):
+        rows.append(("Where", location_html(s)))
+    if s["schedule"]:
+        rows.append(("Hours", "<br>".join(e(l) for l in s["schedule"].split("\n"))))
+    rows.append(("Who to call", call_line(s)))
+    facts = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in rows)
+    offered = ""
+    if s["services_offered"]:
+        offered = ('<h2 class="pdh-profile__heading">Services offered</h2><ul class="pdh-offered">'
+                   + "".join(f"<li>{e(x)}</li>" for x in s["services_offered"]) + "</ul>")
+    amen = ""
+    if s["amenities"]:
+        amen = '<h2 class="pdh-profile__heading">Amenities</h2><ul class="pdh-offered">' + "".join(f"<li>{e(x)}</li>" for x in s["amenities"]) + "</ul>"
+    more = f'<p><a href="{e(s["detail_url"])}" target="_blank" rel="noopener">More on the PDH website</a></p>' if s["detail_url"] else ""
+    badge = '<span class="pdh-svc__badge">Open 24/7</span>' if is_24_7(s) else ""
+    return f"""<section class="pdh-finder pdh-service" aria-labelledby="pdh-svc-title">
+        <div class="pdh-finder__inner">
+            <nav class="pdh-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/services/">Services</a> <span aria-hidden="true">/</span> <a href="/services/#grp-{group['id']}">{e(group['label'])}</a> <span aria-hidden="true">/</span> <span aria-current="page">{e(s['name'])}</span></nav>
+            <div class="pdh-service__card">
+                <p class="pdh-svc__cat">{e(group['label'])}{badge}</p>
+                <h1 class="pdh-finder__title" id="pdh-svc-title">{e(s['name'])}</h1>
+                <p class="pdh-finder__lede">{e(s['description'] or '')}</p>
+                <dl class="pdh-svc__facts pdh-svc__facts--big">{facts}</dl>
+                <a class="pdh-button" href="{APPOINTMENT_LINE[1]}">Call {APPOINTMENT_LINE[0]}</a>
+                {offered}
+                {amen}
+                {more}
+                <p class="pdh-note">From PDH's published service list. Hours and locations can change, so please call to confirm before your visit.</p>
+                <p><a class="pdh-back" href="/services/">&larr; All services</a></p>
+            </div>
         </div>
     </section>"""
 
@@ -386,7 +501,8 @@ def search_index(doctors, services, raw_terms, specialties, service_terms, hotli
             depts[d["department"]] = depts.get(d["department"], 0) + 1
     return {
         "doctors": [{"id": d["id"], "n": d["name"], "s": d["specialty"], "d": d["department"], "days": d["days"] or [],
-                     "oc": d["on_call"], "sch": d["schedule"]} for d in doctors],
+                     "oc": d["on_call"], "sch": readable_schedule(d["schedule"], short=True)} for d in doctors],
+        "clarify": raw_terms.get("clarify", []),
         "departments": [{"name": k, "count": v, "url": target_url({"dept": k})} for k, v in sorted(depts.items(), key=lambda x: -x[1])],
         "faces": faces,
         "specialty_count": len({d["specialty"] for d in doctors if d["specialty"]}),
@@ -432,7 +548,7 @@ def directory_card(s, terms):
                             <p class="pdh-svc__cat">{CATEGORY_LABELS[s['category']]}{badge}</p>
                             <h3 class="pdh-dir__name">{e(s['name'])}{multi}</h3>
                             <p class="pdh-dir__meta">{e(hours) if hours else 'Hours not listed'}</p>
-                            <p class="pdh-dir__links"><a href="{APPOINTMENT_LINE[1]}">Call {e(s['contact'] or APPOINTMENT_LINE[0])}</a> <a href="/services/#{s['id']}">Details</a></p>
+                            <p class="pdh-dir__links"><a href="{APPOINTMENT_LINE[1]}">Call {e(s['contact'] or APPOINTMENT_LINE[0])}</a> <a href="/services/{s['id']}/">Details</a></p>
                         </li>"""
 
 
@@ -461,7 +577,7 @@ def directory_page(services, service_terms, contacts):
                 </section>""")
     tbd_html = ""
     if tbd:
-        items = "".join(f'<li><a href="/services/#{s["id"]}">{e(s["name"])}</a></li>' for s in tbd)
+        items = "".join(f'<li><a href="/services/{s["id"]}/">{e(s["name"])}</a></li>' for s in tbd)
         tbd_html = f'<p class="pdh-dir__tbd"><strong>Location to be announced:</strong></p><ul class="pdh-dir__tbd-list">{items}</ul>'
     parking = next((s for s in services if s["id"] == "parking"), None)
     er_line = next((h for h in contacts["hotlines"] if h["id"] == "emergency"), None)
@@ -551,7 +667,7 @@ def hospital_jsonld(hospital, contacts, services, doctors):
         "sameAs": SAME_AS,
         "contactPoint": points,
         "medicalSpecialty": sorted({d["department"] for d in doctors if d["department"]}),
-        "department": [{"@type": "MedicalOrganization", "name": s["name"], "url": f"{SITE_URL}/services/#{s['id']}",
+        "department": [{"@type": "MedicalOrganization", "name": s["name"], "url": f"{SITE_URL}/services/{s['id']}/",
                         **({"openingHours": "Mo-Su 00:00-23:59"} if is_24_7(s) else {})}
                        for s in services if s["category"] == "service" and s["floors"]],
     }
@@ -573,8 +689,9 @@ def inject_homepage_jsonld(block):
         f.write(page_html)
 
 
-def write_sitemap(doctors, lastmod):
-    paths = ["/", "/doctors/", "/services/", "/directory/"] + [f"/doctors/{d['id']}/" for d in doctors]
+def write_sitemap(doctors, services, lastmod):
+    paths = (["/", "/doctors/", "/services/", "/directory/"] + [f"/doctors/{d['id']}/" for d in doctors]
+             + [f"/services/{s['id']}/" for s in services])
     urls = "\n".join(f"  <url><loc>{SITE_URL}{p}</loc><lastmod>{lastmod}</lastmod></url>" for p in paths)
     write(os.path.join(ROOT, "sitemap.xml"),
           f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n')
@@ -668,6 +785,7 @@ def main():
     contacts = load("contacts")[0]
     inject_robots_meta()
     head, body_top, footer = shell()
+    services = load("services")
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)  # generated output only; removes pages for doctors no longer listed
 
@@ -684,15 +802,15 @@ def main():
         write(os.path.join(OUT, d["id"], "index.html"), page(
             head, body_top, footer,
             title=f"{d['name']}{' – ' + spec if spec else ''} | {HOSPITAL}",
-            description=f"{d['name']}{', ' + spec if spec else ''} at {HOSPITAL}. Clinic schedule: {d['schedule'] or 'not listed'}.",
+            description=f"{d['name']}{', ' + spec if spec else ''} at {HOSPITAL}. Clinic schedule: {readable_schedule(d['schedule'])}.",
             path=f"/doctors/{d['id']}/",
             extra_head=physician_jsonld(d, contacts),
-            main=profile(d, contacts),
+            main=profile(d, contacts, services),
         ))
     print(f"Wrote doctors/index.html and {len(doctors)} profile pages")
 
-    services = load("services")
     raw_terms, specialties, service_terms, hotline = load_terms(doctors, services, contacts)
+    groups = load_groups(services)
     if os.path.isdir(SERVICES_OUT):
         shutil.rmtree(SERVICES_OUT)
     write(os.path.join(SERVICES_OUT, "index.html"), page(
@@ -700,10 +818,20 @@ def main():
         title=f"Services & Facilities | {HOSPITAL}",
         description=f"Find services and facilities at {HOSPITAL}: location, opening hours and who to call.",
         path="/services/",
-        main=services_page(services, service_terms),
+        main=services_page(services, service_terms, groups, raw_terms),
         scripts='<script src="/assets/js/pdh-services.js" defer></script>\n',
     ))
-    print(f"Wrote services/index.html ({len(services)} services and facilities)")
+    group_of = {x: g for g in groups for x in g["services"]}
+    for sv in services:
+        summary = "; ".join(filter(None, [sv["location"], (sv["schedule"] or "").split("\n")[0]]))
+        write(os.path.join(SERVICES_OUT, sv["id"], "index.html"), page(
+            head, body_top, footer,
+            title=f"{sv['name']} | {HOSPITAL}",
+            description=f"{sv['name']} at {HOSPITAL}" + (f": {summary}" if summary else "") + ". Where it is, hours and who to call.",
+            path=f"/services/{sv['id']}/",
+            main=service_page(sv, group_of[sv["id"]]),
+        ))
+    print(f"Wrote services/index.html and {len(services)} service pages")
 
     index = search_index(doctors, services, raw_terms, specialties, service_terms, hotline, load("hmo-partners"), contacts)
     with open(os.path.join(ROOT, "data", "search-index.json"), "w", encoding="utf-8", newline="\n") as f:
@@ -726,11 +854,16 @@ def main():
     hospital = load("hospital")[0]
     inject_homepage_jsonld(hospital_jsonld(hospital, contacts, services, doctors))
     lastmod = json.load(open(os.path.join(ROOT, "data", "doctors.json"), encoding="utf-8"))["meta"]["generated_at"][:10]
-    n = write_sitemap(doctors, lastmod)
+    n = write_sitemap(doctors, services, lastmod)
     write_robots()
     write_llms(hospital, contacts, services, doctors, load("hmo-partners"))
     index_path = os.path.join(ROOT, "index.html")
-    write(index_path, open(index_path, encoding="utf-8").read())  # stamps the homepage's CSS/JS versions too
+    home = open(index_path, encoding="utf-8").read()
+    # Homepage trust line in its final form (pdh-home.js writes the same text), so nothing shifts while loading.
+    home = re.sub(r'(<p class="pdh-trust__text" data-pdh-trust-text>).*?(</p>)',
+                  lambda m: f'{m.group(1)}<strong>{len(doctors)} doctors</strong> across {index["specialty_count"]} specialties '
+                            f'<a href="/doctors/">Meet them</a>{m.group(2)}', home, count=1)
+    write(index_path, home)  # also stamps the homepage's CSS/JS versions
     print(f"Wrote Hospital JSON-LD into index.html, sitemap.xml ({n} URLs), robots.txt, llms.txt; versioned CSS/JS links")
 
 

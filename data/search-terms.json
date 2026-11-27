@@ -80,5 +80,17 @@
     ],
     "sources": ["https://findahelpline.com/organizations/ncmh-crisis-hotline", "https://philippines.un.org/en/node/90419"],
     "review_note": "Hotline numbers verified via web sources on 2026-11-25; PDH should confirm before launch."
-  }
+  },
+  "clarify": [
+    {
+      "terms": ["ultrasound", "ultra sound", "ultrasonic", "utz", "sonogram"],
+      "note": "“Ultrasound” can mean different things at PDH. Pick the one you need:",
+      "options": [
+        {"service": "radiology", "label": "Diagnostic ultrasound", "detail": "Imaging of organs such as the abdomen"},
+        {"service": "ob-ultrasound-services", "label": "Pregnancy & pelvic ultrasound", "detail": "3D/4D, transvaginal and other OB scans"},
+        {"service": "multi-diagnostic-center", "label": "Heart & blood-vessel ultrasound", "detail": "2D Echo, Doppler and duplex scans"},
+        {"service": "physical-medicine-and-rehabilitation", "label": "Therapeutic ultrasound", "detail": "A physical therapy treatment, not an imaging test"}
+      ]
+    }
+  ]
 }

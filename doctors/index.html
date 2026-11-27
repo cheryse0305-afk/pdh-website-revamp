@@ -39,11 +39,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Yellowtail&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Lora:ital,wght@0,700;1,600;1,700&family=Allura&family=Yellowtail&display=swap">
 <link rel="stylesheet" href="/assets/css/global.css?v=afd8c13f8e">
 <link rel="stylesheet" href="/assets/css/pdh-tgh-header.css?v=c3c2a5f2fa">
-<link rel="stylesheet" href="/assets/css/pdh-site.css?v=be9fad6ff1">
-<link rel="stylesheet" href="/assets/css/pdh-concierge.css?v=ebba1ffcd4">
+<link rel="stylesheet" href="/assets/css/pdh-site.css?v=e8d54bc864">
+<link rel="stylesheet" href="/assets/css/pdh-concierge.css?v=a579686049">
 <style>
 /* PDH logo: the PDH lockup is wider (~4.7:1) than TGH's (~3:1), so widen the
    logo slot per breakpoint to keep a comparable visual height in the header. */
@@ -78,7 +78,7 @@
 
 
     
-<link rel="stylesheet" href="/assets/css/pdh-pages.css?v=8a6ce3e3db">
+<link rel="stylesheet" href="/assets/css/pdh-pages.css?v=854f50af07">
 </head>
 
 <body id="body" data-theme="tgh" class="u-no-hero">
@@ -96,7 +96,7 @@
 
         <div class="global-navigation js-global-navigation">
             <div class="inner">
-                <a href="/" class="nav__logo"><img src="/assets/images/pdh-logo.png" alt="Parañaque Doctors Hospital logo"></a>
+                <a href="/" class="nav__logo"><img src="/assets/images/pdh-logo.png" width="2048" height="432" alt="Parañaque Doctors Hospital logo"></a>
                 <nav class="nav-main show-for-tablet-l" aria-label="Desktop Main Navigation Menu">
                     <div class="nav-main__inner">
                         <ul class="nav-main-items dropdown menu js-nav-main" data-dropdown-menu id="nav" data-close-on-click-inside="false">
@@ -168,7 +168,7 @@ Critical &amp; Inpatient Care                                                   
                                                                 </div>
                                                                 <ul class="flyout__links" role="none">
                                                                         <li class="flyout__item">
-                                                                            <a href="/services/#emergency-room-er"  class="flyout__link">
+                                                                            <a href="/services/emergency-room-er/"  class="flyout__link">
                                                                                 <span>Emergency Room</span> <svg width="8" height="16" viewBox="0 0 8 16" class="icon icon--chevron-right" aria-hidden="true"><use xlink:href="#icon-chevron-right"></use></svg>
                                                                             </a>
                                                                         </li>
@@ -348,7 +348,7 @@ Critical &amp; Inpatient Care                                                   
             <a href="/services/" class="nav-mobile__l2-link">Our Services</a>
         </li>
         <li class="nav-mobile__l2-item">
-            <a href="/services/?cat=facility" class="nav-mobile__l2-link">Our Facilities</a>
+            <a href="/services/?need=visit" class="nav-mobile__l2-link">Our Facilities</a>
         </li>
         <li class="nav-mobile__l2-item">
             <a href="https://pdh.com.ph/our-services/room-gallery/" class="nav-mobile__l2-link">Room Gallery</a>
@@ -432,7 +432,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Abastillas, Hellene Claire</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -443,7 +443,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Abong, Josephine R.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MW 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon &amp; Wed: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -465,7 +465,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Abuel, Maximo</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am/10:00-12:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM and 10:00 AM – 12:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -476,7 +476,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Agno, Vanessa Navarro</span>
                         <span class="pdh-doc__spec">Gastroenterology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -487,7 +487,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Aguilar, Diana</span>
                         <span class="pdh-doc__spec">Sonology · Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -498,7 +498,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Agustin, Frederick</span>
                         <span class="pdh-doc__spec">Oncology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">M 1:00-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -509,7 +509,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Agustin, Jeniffer</span>
                         <span class="pdh-doc__spec">Allergology &amp; Immunology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">M 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -531,7 +531,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Alay-ay, Eliza Blanche</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -553,7 +553,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Alcantara, Orlina</span>
                         <span class="pdh-doc__spec">Pulmonology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -564,7 +564,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Alcaraz, Conrado Jr.</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30nn</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -575,7 +575,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Aliwalas, Lucia Liz</span>
                         <span class="pdh-doc__spec">Neonatology · Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -586,7 +586,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Almoro, Emil Bautista</span>
                         <span class="pdh-doc__spec">Orthodontics &amp; Dentistry · Dentistry</span>
-                        <span class="pdh-doc__sched">MTH 9:00am-5:00pm</span>
+                        <span class="pdh-doc__sched">Mon &amp; Thu: 9:00 AM – 5:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -597,7 +597,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Alvarez, Ma. Ethel L.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -608,7 +608,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ambrosio, Doreen</span>
                         <span class="pdh-doc__spec">Pulmonology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTH 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue &amp; Thu: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -619,7 +619,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Amisola, Antonio</span>
                         <span class="pdh-doc__spec">ENT</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -630,7 +630,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ampil, Encarnita</span>
                         <span class="pdh-doc__spec">Neurology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -641,7 +641,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ancheta, Eduardo</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -652,7 +652,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Anichoche, Ma. Melmar</span>
                         <span class="pdh-doc__spec">Nephrology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -663,7 +663,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Aniscol, Mary Grace</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -674,7 +674,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Anyayahan-Atienza, Oliva Maila C.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -685,7 +685,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Anyog, Mario</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -696,7 +696,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Apelo, Ma. Rima</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -707,7 +707,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Areglado, Emilyn Briones</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">WTH 10:00-1:00pm</span>
+                        <span class="pdh-doc__sched">Wed &amp; Thu: 10:00 AM – 1:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -718,7 +718,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ariola, Sonia</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -729,7 +729,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Armand Sarmiento</span>
                         <span class="pdh-doc__spec">Thoracic &amp; Cardiovascular Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 9:00am-11:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 9:00 AM – 11:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -762,7 +762,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Atienza, Mary Jean</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -773,7 +773,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Avena, Rhoda</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -795,7 +795,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Badr, Mohammad</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -817,7 +817,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Balce Santos, Dulcinea</span>
                         <span class="pdh-doc__spec">Gastroenterology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -828,7 +828,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Baleros, Lorena Divinia D.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -839,7 +839,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Baluyot, Ana Maria B.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -850,7 +850,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Bambalan, Nelson</span>
                         <span class="pdh-doc__spec">Thoracic &amp; Cardiovascular Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 3:30-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -861,7 +861,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Baquiran, Fernando Roman</span>
                         <span class="pdh-doc__spec">ENT</span>
-                        <span class="pdh-doc__sched">S 10:00am-12:00nn</span>
+                        <span class="pdh-doc__sched">Sat: 10:00 AM – 12:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -872,7 +872,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Baquiran, Geraldine B.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">THS 3:00-5:00pm&amp;12:00pm-2:00pm</span>
+                        <span class="pdh-doc__sched">Thu &amp; Sat: 3:00 PM – 5:00 PM and 12:00 PM – 2:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -883,7 +883,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Barroso III, Antonio</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MFS 3:00pm-5:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Fri &amp; Sat: 3:00 PM – 5:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -894,7 +894,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Barza, Emily E.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -905,7 +905,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Barzaga, Roberto</span>
                         <span class="pdh-doc__spec">Pulmonology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -916,7 +916,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Basman, Saud</span>
                         <span class="pdh-doc__spec">Orthopedic Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -938,7 +938,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Bayog, Delia</span>
                         <span class="pdh-doc__spec">Nephrology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -949,7 +949,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Benedicto, James</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -971,7 +971,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Berroya, Elizabeth Y.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -982,7 +982,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Bituin, Xavier</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -993,7 +993,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Blas Maritess</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1004,7 +1004,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Bondoc, Elmer</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1015,7 +1015,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Buendia, Maria Nieves.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1026,7 +1026,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Bugaoan, Ma. Adelina</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1070,7 +1070,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Cabais, Maria Carlota Gamboa</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1081,7 +1081,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Cabantog, Danilo</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1092,7 +1092,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Cabrera, Ada Angela</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1103,7 +1103,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Cabutihan, Andeylef Joy</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1114,7 +1114,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Calimon, Mary Anne</span>
                         <span class="pdh-doc__spec">Endocrinology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1125,7 +1125,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Calinisan, Rommel</span>
                         <span class="pdh-doc__spec">Gastroenterology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">S 10:30am-12:30nn</span>
+                        <span class="pdh-doc__sched">Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1147,7 +1147,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Calub, Peter Noel</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1158,7 +1158,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Canson, Jayson</span>
                         <span class="pdh-doc__spec">Ophthalmology</span>
-                        <span class="pdh-doc__sched">M 10:00am-12:00nn</span>
+                        <span class="pdh-doc__sched">Mon: 10:00 AM – 12:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1169,7 +1169,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Cantiller, Aurora C.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">THS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1180,7 +1180,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Cantiller, Erwin</span>
                         <span class="pdh-doc__spec">Orthopedic Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1191,7 +1191,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Cantonjos, Ofelia</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1202,7 +1202,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Carag, Andrea</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">M 1:00pm-3:00pm/F 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon: 1:00 PM – 3:00 PM; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1224,7 +1224,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Carlos-Villapando, Empress Eliza C.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTH 1:00pm-3:00pm / Sat 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue &amp; Thu: 1:00 PM – 3:00 PM; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1235,7 +1235,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Casanova, Leonila</span>
                         <span class="pdh-doc__spec">Reproductive Endocrinology Infertility · Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1246,7 +1246,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Castell, Christopher</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1257,7 +1257,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Castell, Maria May</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -1268,7 +1268,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Cellona, Mark</span>
                         <span class="pdh-doc__spec">Urology · Surgery</span>
-                        <span class="pdh-doc__sched">TTH 1:00-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue &amp; Thu: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1279,7 +1279,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Chua, Earl</span>
                         <span class="pdh-doc__spec">Pulmonology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1301,7 +1301,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Compuesto, Ma. Cielo</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1312,7 +1312,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Coseip, Tyrone Francis</span>
                         <span class="pdh-doc__spec">Nephrology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TS 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Tue &amp; Sat: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1323,7 +1323,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Crisaldo, Maria Arlene</span>
                         <span class="pdh-doc__spec">Endocrinology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTH 8:00am-11:00am</span>
+                        <span class="pdh-doc__sched">Tue &amp; Thu: 8:00 AM – 11:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -1334,7 +1334,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Cruz, Julius</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -1345,7 +1345,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Dacir, Eleanor</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1356,7 +1356,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Dalisay, Celestino</span>
                         <span class="pdh-doc__spec">Pulmonology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">M 4:00pm-6:00pm</span>
+                        <span class="pdh-doc__sched">Mon: 4:00 PM – 6:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1367,7 +1367,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Dasig, Frances Charlotte</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1378,7 +1378,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Dayanghirang, Eliez Anne</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MW 3:00pm-5:00Pm</span>
+                        <span class="pdh-doc__sched">Mon &amp; Wed: 3:00 PM – 5:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1389,7 +1389,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">De Guzman, Jan</span>
                         <span class="pdh-doc__spec">Neurology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 3:30-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1400,7 +1400,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">De Guzman, Noel</span>
                         <span class="pdh-doc__spec">ENT-HNS · ENT</span>
-                        <span class="pdh-doc__sched">TTHS 9:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 9:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -1422,7 +1422,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">De Jesus, Ma. Theresa B.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1433,7 +1433,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">De Jesus, Noel</span>
                         <span class="pdh-doc__spec">ENT-HNS · ENT</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1444,7 +1444,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">De Leon-Dela Rosa, Rozelle</span>
                         <span class="pdh-doc__spec">ENT</span>
-                        <span class="pdh-doc__sched">MF 10:00am-12:00nn</span>
+                        <span class="pdh-doc__sched">Mon &amp; Fri: 10:00 AM – 12:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1455,7 +1455,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Del Fuerte, Enrique</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">S 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -1477,7 +1477,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Dela Rosa, Esmeralda</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 10:00am-12:00nn</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:00 AM – 12:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1488,7 +1488,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Dela Rosa, Patricia</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1499,7 +1499,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Delos Reyes, Christorpher</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1510,7 +1510,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Delos Reyes, Cip</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">WF 12:00pm-2:00pm</span>
+                        <span class="pdh-doc__sched">Wed &amp; Fri: 12:00 PM – 2:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1521,7 +1521,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Delos Reyes, Jhoanna O.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1532,7 +1532,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Delos Reyes, Portia</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1554,7 +1554,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Desquitado, Buenaventura</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -1565,7 +1565,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Desquitado, MA. Caridad</span>
                         <span class="pdh-doc__spec">Neurology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 3:30-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1587,7 +1587,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Dollano, Rachel Zosima M.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1631,7 +1631,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Duque, Arlene</span>
                         <span class="pdh-doc__spec">Peripheral Vascular &amp; Transplant Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 9:00am-11:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 9:00 AM – 11:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -1642,7 +1642,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Dy, Virgie Ritz</span>
                         <span class="pdh-doc__spec">Dermatology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTH 1:00-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue &amp; Thu: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1653,7 +1653,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Enriquez ,Irene</span>
                         <span class="pdh-doc__spec">Ophthalmology</span>
-                        <span class="pdh-doc__sched">TTH 10:00am-1:00pm</span>
+                        <span class="pdh-doc__sched">Tue &amp; Thu: 10:00 AM – 1:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1664,7 +1664,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Entienza, Kim N.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -1675,7 +1675,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Escano, Maria Catherine Adele Cruz</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1686,7 +1686,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Eseque, Eduardo</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">S 4:00pm-6:00pm</span>
+                        <span class="pdh-doc__sched">Sat: 4:00 PM – 6:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1697,7 +1697,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Eseque, Eleanor</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 04:00am-06:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 4:00 AM – 6:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1708,7 +1708,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Estolano, Raymundo</span>
                         <span class="pdh-doc__spec">ENT, Ophthalmology</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1719,7 +1719,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ethel Garcia</span>
                         <span class="pdh-doc__spec">Dermatology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 8:00-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -1730,7 +1730,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Evangelista, Charina Nancy</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1741,7 +1741,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Evangelista, Charina Nancy</span>
                         <span class="pdh-doc__spec">Family Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MF 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon &amp; Fri: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1752,7 +1752,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Fabian, Charles</span>
                         <span class="pdh-doc__spec">Orthopedic Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">W 10:00-12:00nn</span>
+                        <span class="pdh-doc__sched">Wed: 10:00 AM – 12:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1763,7 +1763,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Feliciano, Roderick</span>
                         <span class="pdh-doc__spec">Ophthalmology</span>
-                        <span class="pdh-doc__sched">TS 5:00pm-7:00pm/10:00am-12:00nn</span>
+                        <span class="pdh-doc__sched">Tue &amp; Sat: 5:00 PM – 7:00 PM and 10:00 AM – 12:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1785,7 +1785,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Flores, Maria Nerizza</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1796,7 +1796,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Fran, Mary Anne</span>
                         <span class="pdh-doc__spec">Allergology, Immunology · Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1829,7 +1829,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Gabriel, Maria Cecilia B.</span>
                         <span class="pdh-doc__spec">Orthodontics &amp; Dentistry · Dentistry</span>
-                        <span class="pdh-doc__sched">TF 9:00am-5:00pm</span>
+                        <span class="pdh-doc__sched">Tue &amp; Fri: 9:00 AM – 5:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1840,7 +1840,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Galutira, Paul Joseph</span>
                         <span class="pdh-doc__spec">Nephrology · Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -1851,7 +1851,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Gamboa, Aldrin</span>
                         <span class="pdh-doc__spec">Urology · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 5:30pm-7:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 5:30 PM – 7:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1862,7 +1862,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Gamboa, Vanessa V.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 10:00am-12:00nn/8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:00 AM – 12:00 PM and 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -1873,7 +1873,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ganzon, Esther</span>
                         <span class="pdh-doc__spec">Oncology · Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">FS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Fri &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1884,7 +1884,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Garcellano, Juliet Ann</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1895,7 +1895,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Garcia, Jemalyn</span>
                         <span class="pdh-doc__spec">Infectious Diseases · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1906,7 +1906,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Garcia, Ma. Cresli</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1928,7 +1928,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Gaviola, Christopher</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1939,7 +1939,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Gellido, Yvette</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1950,7 +1950,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Gemma David (BA)</span>
                         <span class="pdh-doc__spec">Dermatology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">F</span>
+                        <span class="pdh-doc__sched">Fri · clinic hours not published</span>
                     </span>
                 </a>
             </li>
@@ -1961,7 +1961,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Genio, Marie Arlene</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -1972,7 +1972,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Go, Elynn</span>
                         <span class="pdh-doc__spec">Ambulatory · Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1983,7 +1983,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Go-Anat, Natividad</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">M 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -1994,7 +1994,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Grafil, Darryl</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30nn</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2005,7 +2005,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Gubat, Trinita</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TS</span>
+                        <span class="pdh-doc__sched">Tue &amp; Sat · clinic hours not published</span>
                     </span>
                 </a>
             </li>
@@ -2016,7 +2016,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Guce, Glenn Kay</span>
                         <span class="pdh-doc__spec">Nephrology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">THS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2027,7 +2027,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Guloy, Alvin</span>
                         <span class="pdh-doc__spec">Family Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2038,7 +2038,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Hipolito, Caridad</span>
                         <span class="pdh-doc__spec">Diabetology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2049,7 +2049,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Horca, Liberty</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2071,7 +2071,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Imbao, Jocelyn</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2082,7 +2082,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Jacob, Mary Grace</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHF 8:00am-10:00am / Sunday 10:00am - 12:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Fri: 8:00 AM – 10:00 AM; Sun: 10:00 AM – 12:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2093,7 +2093,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Jerusalem, Joy Grace G.</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">W 4:00pm-6:00pm</span>
+                        <span class="pdh-doc__sched">Wed: 4:00 PM – 6:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2115,7 +2115,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Jumarang, Julieta</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 9:00am-11:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 9:00 AM – 11:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2137,7 +2137,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Lantano, Louie</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2148,7 +2148,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Lawas, Edna Alexander</span>
                         <span class="pdh-doc__spec">ENT</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2159,7 +2159,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Layson Nannete</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2170,7 +2170,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Lazaro, Heide</span>
                         <span class="pdh-doc__spec">Pulmonology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30nn</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2181,7 +2181,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Leonor, Rona Marie</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">WS 9:00am-11:00am</span>
+                        <span class="pdh-doc__sched">Wed &amp; Sat: 9:00 AM – 11:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2203,7 +2203,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Lobrin, Maria Paz Christina</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2214,7 +2214,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Lojo, Annelee</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2225,7 +2225,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Lopez, Dorothy</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2247,7 +2247,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Lukban, Ma. Eloisa S.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2302,7 +2302,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Macaisa, Reynand C.</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2313,7 +2313,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Macalintal, Corina</span>
                         <span class="pdh-doc__spec">Neurology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 10:30-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2324,7 +2324,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Magbuhos, Anna Lyn</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2335,7 +2335,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Malubay, Nelia.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2346,7 +2346,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Mancao, Betty</span>
                         <span class="pdh-doc__spec">Rehabilitation · Physical Medicine &amp; Rehabilitation</span>
-                        <span class="pdh-doc__sched">MWF 2:30-4:00 PM</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 2:30 PM – 4:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2357,7 +2357,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Maranan, Ephraim</span>
                         <span class="pdh-doc__spec">Neurology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 3:30-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2368,7 +2368,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Marfori, Anne Jelynne</span>
                         <span class="pdh-doc__spec">Ophthalmology</span>
-                        <span class="pdh-doc__sched">M 2:00pm-4:30pm</span>
+                        <span class="pdh-doc__sched">Mon: 2:00 PM – 4:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2390,7 +2390,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Martinez, Karina</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2401,7 +2401,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Martinez, Ma. Filipinas P.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2412,7 +2412,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Martinez, Robert Eric</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2423,7 +2423,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Martinez, Xandra Regina</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2434,7 +2434,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Masanga, Emmanuel</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTH 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue &amp; Thu: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2445,7 +2445,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Mata, Josefina</span>
                         <span class="pdh-doc__spec">Dermatology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">S 3:30-5:30pm</span>
+                        <span class="pdh-doc__sched">Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2456,7 +2456,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Melendres, Mario</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2467,7 +2467,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Mendiola, Frederick</span>
                         <span class="pdh-doc__spec">Urology · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2478,7 +2478,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Mendoza, Anna Katherina</span>
                         <span class="pdh-doc__spec">Nephrology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">W 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Wed: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2500,7 +2500,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Mendoza, Kristine</span>
                         <span class="pdh-doc__spec">Neurology · Pediatrics</span>
-                        <span class="pdh-doc__sched">Saturday 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2511,7 +2511,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Mendoza, Madonna T.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2533,7 +2533,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Mojica, Michael</span>
                         <span class="pdh-doc__spec">Orthodontics &amp; Dentistry · Dentistry</span>
-                        <span class="pdh-doc__sched">WS 9:00am-5:00pm</span>
+                        <span class="pdh-doc__sched">Wed &amp; Sat: 9:00 AM – 5:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2544,7 +2544,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Montesa, Lourdes M.</span>
                         <span class="pdh-doc__spec">Infectious · Pediatrics</span>
-                        <span class="pdh-doc__sched">MW 10:30am-12:30pm and Sat 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon &amp; Wed: 10:30 AM – 12:30 PM; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2555,7 +2555,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Mutuc, Jason</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12;30NN</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2566,7 +2566,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Oabel, Roselle</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2577,7 +2577,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ocampo, Marah Candy</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2588,7 +2588,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Odevilas, Maria Teresa Asuncion</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 9:00am-11:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 9:00 AM – 11:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2610,7 +2610,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ortega, Ruben</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTH 3:00pm-5:00pm</span>
+                        <span class="pdh-doc__sched">Tue &amp; Thu: 3:00 PM – 5:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2621,7 +2621,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Otayco, Michelle Yau</span>
                         <span class="pdh-doc__spec">Nephrology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2632,7 +2632,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Pablo, Romina</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm, 3:30-5:30</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM and 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2643,7 +2643,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Padua, Kiara</span>
                         <span class="pdh-doc__spec">Nephrology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30nn</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2654,7 +2654,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Pamintuan, Maria Angeli</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">M 10:00am-12:00nn / WF 08:00am-11:00am</span>
+                        <span class="pdh-doc__sched">Mon: 10:00 AM – 12:00 PM; Wed &amp; Fri: 8:00 AM – 11:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2665,7 +2665,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Pamintuan, Philbert</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 10:00am-12:00nn</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:00 AM – 12:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2676,7 +2676,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Paraguya, Liza G.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">T 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2687,7 +2687,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Pauline Eustaquio-Velasco</span>
                         <span class="pdh-doc__spec">Sonology, Perinatology · Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2698,7 +2698,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Perez, Marc Francis</span>
                         <span class="pdh-doc__spec">Rehabilitation · Physical Medicine &amp; Rehabilitation</span>
-                        <span class="pdh-doc__sched">TTHS 8:00-10:00 AM</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2709,7 +2709,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Pidlaoan, Ronald</span>
                         <span class="pdh-doc__spec">Orthopedic Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 8:00-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2720,7 +2720,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Pineda, Catherine</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2731,7 +2731,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Puti, Antonio</span>
                         <span class="pdh-doc__spec">Orthopedic Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2742,7 +2742,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Quetua, Anna Mae</span>
                         <span class="pdh-doc__spec">Nephrology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MW 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon &amp; Wed: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2753,7 +2753,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Quetua, Paul</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2764,7 +2764,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Quidlat, Adrien</span>
                         <span class="pdh-doc__spec">Orthopedic Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">TTHS 8:00-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2797,7 +2797,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Racpan, Amando</span>
                         <span class="pdh-doc__spec">Orthopedic Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2808,7 +2808,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ramos, Galilee</span>
                         <span class="pdh-doc__spec">Pulmonology · Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2819,7 +2819,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ramos, Lotis</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2830,7 +2830,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ramos, Sherwin</span>
                         <span class="pdh-doc__spec">Orthopedic Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2841,7 +2841,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Reyes, Francis</span>
                         <span class="pdh-doc__spec">Orthopedic Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 9:00am-11:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 9:00 AM – 11:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2852,7 +2852,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Reyes, Maria Niza B.</span>
                         <span class="pdh-doc__spec">Sonology, Perinatology · Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">M 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2863,7 +2863,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Reyes, Nerissa</span>
                         <span class="pdh-doc__spec">Neurology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MF 10:30-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2885,7 +2885,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Rivera, Elma Joy</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2896,7 +2896,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Rivera, Lydia</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 10:30-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2907,7 +2907,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Rivera, Ma. Regina V.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2929,7 +2929,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Rodriguez, Rolando</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2940,7 +2940,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Roura, Francisco</span>
                         <span class="pdh-doc__spec">Orthopedic Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">TTHS 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -2951,7 +2951,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Rozul, Pilar</span>
                         <span class="pdh-doc__spec">Pulmonology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -2962,7 +2962,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Rubio Christine Marie Z.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am, 10:30-12:30</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM and 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2984,7 +2984,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Rubio, Rogel</span>
                         <span class="pdh-doc__spec">Ophthalmology</span>
-                        <span class="pdh-doc__sched">WS 2:00pm-4:30pm</span>
+                        <span class="pdh-doc__sched">Wed &amp; Sat: 2:00 PM – 4:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -2995,7 +2995,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Saguros, Laren</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3006,7 +3006,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Salazar, Alexander</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3028,7 +3028,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Salonga, Darwin</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3050,7 +3050,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Samonte, Ronald</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3061,7 +3061,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Sanchez, Xiemera S.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MW 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon &amp; Wed: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3072,7 +3072,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Sandoval, Aurora C.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3083,7 +3083,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Santiago, Rubilyn</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 1:00-3:00/6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM and 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3094,7 +3094,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Santos, Evangeline F.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">M 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -3105,7 +3105,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Santos, Noel</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3127,7 +3127,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Sarmiento, Ma. Criselda</span>
                         <span class="pdh-doc__spec">Pulmonology · Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3138,7 +3138,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Sayson, Julie</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 10:30am-12:30nn</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3149,7 +3149,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Serrano, Grace Kathleen</span>
                         <span class="pdh-doc__spec">Neurology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 10:30-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3160,7 +3160,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Sia Kho Po, Denise-Ann P.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3171,7 +3171,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Sierra, Cherrie Anne</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 10:00am-12:00nn</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:00 AM – 12:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3182,7 +3182,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Sison-Pena, Cherri</span>
                         <span class="pdh-doc__spec">Endocrinology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3193,7 +3193,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Sombrero, Cristine</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MFS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Fri &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3204,7 +3204,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Somera, Maria Carmelita</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3215,7 +3215,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Sta Ana, Charry Solidum</span>
                         <span class="pdh-doc__spec">Pulmonology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3226,7 +3226,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Sta. Ana, Cecile</span>
                         <span class="pdh-doc__spec">Perinatology, Maternal - Fetal Medicine Sub-Specialist (Perinatology) · Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">MW 5:00pm-7:00pm / Sat 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon &amp; Wed: 5:00 PM – 7:00 PM; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3248,7 +3248,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Subida, Vanessa Nieves Diaro</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3259,7 +3259,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Tamayo, Cristina R.</span>
                         <span class="pdh-doc__spec">Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3270,7 +3270,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Tamayo, Ernesto Cristo</span>
                         <span class="pdh-doc__spec">Gastroenterology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3281,7 +3281,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Tamayo, Marietta</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3292,7 +3292,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Tan, Frederick</span>
                         <span class="pdh-doc__spec">General Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3303,7 +3303,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Tan, Gerry</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">W 8:00-10:00am</span>
+                        <span class="pdh-doc__sched">Wed: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -3314,7 +3314,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Tan, Sheryl S.</span>
                         <span class="pdh-doc__spec">Sonology · Obstetrics &amp; Gynecology</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3336,7 +3336,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Tee, Rico</span>
                         <span class="pdh-doc__spec">Hematology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MW 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon &amp; Wed: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3347,7 +3347,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Terencio, Bernadette B.</span>
                         <span class="pdh-doc__spec">Neurology · Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3358,7 +3358,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Tirante, Glenda</span>
                         <span class="pdh-doc__spec">Family Medicine · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3369,7 +3369,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Tongol, Ana Frances C.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -3380,7 +3380,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Torio, Ma. Kristina Ulob</span>
                         <span class="pdh-doc__spec">Infectious · Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 4:00pm-6:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 4:00 PM – 6:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3391,7 +3391,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Torreda, Maria Victoria C.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 10:30am-12:30pm/1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 10:30 AM – 12:30 PM and 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3402,7 +3402,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Torres, Paul</span>
                         <span class="pdh-doc__spec">Cardiology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 9:00am-11:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 9:00 AM – 11:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -3413,7 +3413,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Torrijos, Rhodel</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3424,7 +3424,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Traboco, Lisa</span>
                         <span class="pdh-doc__spec">Rheumatology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3435,7 +3435,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Ugalino, Sheila Rose Ann</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -3457,7 +3457,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Valeros, Katherine</span>
                         <span class="pdh-doc__spec">Endocrinology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 10:00am-12:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 10:00 AM – 12:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3468,7 +3468,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Vasquez, Lea Grace</span>
                         <span class="pdh-doc__spec">Nephrology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">S 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -3479,7 +3479,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Vidamo, Maybelle V.</span>
                         <span class="pdh-doc__spec">Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3490,7 +3490,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Villa-Lucas, Roselle</span>
                         <span class="pdh-doc__spec">Hematology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">S 8:00am-10:00am</span>
+                        <span class="pdh-doc__sched">Sat: 8:00 AM – 10:00 AM</span>
                     </span>
                 </a>
             </li>
@@ -3501,7 +3501,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Villaluz, Mel Michel G.</span>
                         <span class="pdh-doc__spec">Neurology · Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 6:00pm-8:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 6:00 PM – 8:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3512,7 +3512,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Villalva, Corazon</span>
                         <span class="pdh-doc__spec">ENT, Ophthalmology</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3523,7 +3523,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Villamiel, Katherine Marie</span>
                         <span class="pdh-doc__spec">Endocrinology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3534,7 +3534,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Villamin, Jaime Jr.</span>
                         <span class="pdh-doc__spec">General Surgery · Surgery</span>
-                        <span class="pdh-doc__sched">TTHS 5:30pm-7:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 5:30 PM – 7:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3545,7 +3545,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Villamor, Hannah Vera</span>
                         <span class="pdh-doc__spec">Intensivist · Pediatrics</span>
-                        <span class="pdh-doc__sched">TTHS 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3556,7 +3556,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Villapol, Maria Alexandra</span>
                         <span class="pdh-doc__spec">Endocrinology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">TTHS 4:00pm-6:00pm</span>
+                        <span class="pdh-doc__sched">Tue, Thu &amp; Sat: 4:00 PM – 6:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3567,7 +3567,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Villaver, Venjilyn S.</span>
                         <span class="pdh-doc__spec">Allergology, Asthma · Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3578,7 +3578,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Villon, Rozaida R.</span>
                         <span class="pdh-doc__spec">Pulmonology · Pediatrics</span>
-                        <span class="pdh-doc__sched">MWF 1:00pm-3:00pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 1:00 PM – 3:00 PM</span>
                     </span>
                 </a>
             </li>
@@ -3589,7 +3589,7 @@ Critical &amp; Inpatient Care                                                   
                     <span class="pdh-doc__body">
                         <span class="pdh-doc__name">Yarisantos, Cherri Rachel</span>
                         <span class="pdh-doc__spec">Pulmonology · Internal Medicine</span>
-                        <span class="pdh-doc__sched">MWF 3:30pm-5:30pm</span>
+                        <span class="pdh-doc__sched">Mon, Wed &amp; Fri: 3:30 PM – 5:30 PM</span>
                     </span>
                 </a>
             </li>
@@ -3627,7 +3627,7 @@ Critical &amp; Inpatient Care                                                   
     <footer id="footer" class="footer">
     <div class="footer__inner" data-in-view="once">
         <div class="footer__col">
-            <a href="/" class="footer__logo"><img loading="lazy" decoding="async" src="/assets/images/pdh-logo.png" alt="Parañaque Doctors Hospital logo"></a>
+            <a href="/" class="footer__logo"><img loading="lazy" decoding="async" src="/assets/images/pdh-logo.png" width="2048" height="432" alt="Parañaque Doctors Hospital logo"></a>
             <p class="pdh-footer-sign" lang="tl">Alagang PDH, Pusong PDH</p>
             <div class="footer__meta">
                     <div class="footer__contact-info"><a href="tel:+63287760644">(02) 8776 0644</a></div>
@@ -3729,8 +3729,8 @@ Critical &amp; Inpatient Care                                                   
     }
 </script>
 <script src="/assets/js/main.js?v=ac4d8d7b79"></script>
-<script src="/assets/js/pdh-concierge.js?v=5b941e1b79" defer></script>
-<script src="/assets/js/pdh-site.js?v=06524738aa" defer></script>
+<script src="/assets/js/pdh-concierge.js?v=4238747c08" defer></script>
+<script src="/assets/js/pdh-site.js?v=a699c1fab6" defer></script>
 
 
 

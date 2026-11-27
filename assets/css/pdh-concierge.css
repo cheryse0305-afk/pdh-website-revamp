@@ -18,7 +18,7 @@
 .pdh-kriss.is-open .pdh-kriss__launcher { display: none; }
 
 /* Panel: full screen on phones */
-.pdh-kriss__panel { background: #fff; display: flex; flex-direction: column; inset: 0; position: fixed; z-index: 10000; }
+.pdh-kriss__panel { background: #fff; display: flex; flex-direction: column; height: 100dvh; inset: 0; position: fixed; z-index: 10000; }
 .pdh-kriss__panel[hidden] { display: none; }
 @media screen and (max-width: 63.99em) { html.pdh-kriss-open, html.pdh-kriss-open body { overflow: hidden; } }
 
@@ -79,6 +79,13 @@
 .pdh-kriss__foot { color: #48606a; font-size: .75rem; margin: 0; padding: 0 1rem calc(.75rem + env(safe-area-inset-bottom)); }
 .pdh-kriss__foot a { color: var(--k-teal); font-weight: 700; }
 
+/* Kriss.ai embed: CustomGPT's chat (its script fills #customgpt_chat) takes the panel under the notice */
+.pdh-kriss__frame { background: var(--k-soft); flex: 1; min-height: 0; position: relative; }
+.pdh-kriss__frame #customgpt_chat { height: 100%; inset: 0; position: absolute; width: 100%; z-index: 1; }
+.pdh-kriss__frame iframe { border: 0; display: block; }
+.pdh-kriss__loading { color: #48606a; font-size: .875rem; left: 0; margin: 0; position: absolute; right: 0; text-align: center; top: 40%; }
+.pdh-kriss__frame.is-loaded .pdh-kriss__loading { display: none; }
+
 /* Desktop: pill launcher, floating panel. */
 @media screen and (min-width: 64em) {
     .pdh-kriss__launcher { bottom: 1.5rem; height: auto; padding: .5rem 1.25rem .5rem .5rem; right: 1.5rem; width: auto; }
@@ -89,6 +96,7 @@
     .pdh-kriss__panel { border-radius: 1.25rem; box-shadow: 0 30px 60px -20px rgba(13, 59, 64, .5), 0 0 0 1px rgba(13, 59, 64, .08);
         height: min(40rem, calc(100vh - 3rem)); inset: auto 1.5rem 1.5rem auto; overflow: hidden; width: 25rem; }
     .pdh-kriss__head { padding-top: .875rem; }
+    .pdh-kriss--embed .pdh-kriss__panel { height: min(44rem, calc(100vh - 3rem)); width: 26.5rem; }
 }
 
 @media (prefers-reduced-motion: no-preference) {

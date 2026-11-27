@@ -17,7 +17,6 @@ const MAX_USER_CHARS = 600;
 const MAX_ASSISTANT_CHARS = 2500;
 const RATE_LIMIT = { max: 20, windowMs: 10 * 60 * 1000 };  // per IP, per warm instance (best effort)
 
-const DAY_NAMES = { Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday', Sun: 'Sunday' };
 
 function knowledge() {
     const lines = [];
@@ -38,7 +37,7 @@ function knowledge() {
     lines.push('', '# Emergency', 'The Emergency Room is on the Ground Floor and open 24/7. ER hotline: ' +
         index.emergency.hotline.mobile + '. National emergency number: 911.');
 
-    lines.push('', '# Services and facilities (link: /services/#<id>; floor directory: /directory/)');
+    lines.push('', '# Services and facilities (link: /services/<id>/; floor directory: /directory/)');
     services.forEach(s => {
         const parts = [s.name, 'id=' + s.id];
         if (s.location) parts.push('location: ' + s.location);
@@ -55,12 +54,14 @@ function knowledge() {
     lines.push('', '# Specialties (Doctor Finder link, number of doctors)');
     index.specialties.forEach(s => lines.push('- ' + s.label + ': ' + s.url + ' (' + s.count + ')'));
 
-    lines.push('', '# Doctors (name | specialty | department | clinic schedule | profile link). Day codes: M Mon, T Tue, W Wed, TH Thu, F Fri, S Sat.');
+    lines.push('', '# Doctors (name | specialty | department | published clinic schedule | profile link). Schedules can change: always tell visitors to call to confirm.');
     index.doctors.forEach(d => {
-        const days = d.days.length ? d.days.map(x => DAY_NAMES[x]).join(', ') : '';
-        lines.push('- ' + [d.n, d.s || '-', d.d || '-', (d.sch || 'not listed') + (days ? ' (' + days + ')' : '') + (d.oc ? ' (on call)' : ''),
-            '/doctors/' + d.id + '/'].join(' | '));
+        lines.push('- ' + [d.n, d.s || '-', d.d || '-', (d.sch || 'not listed'), '/doctors/' + d.id + '/'].join(' | '));
     });
+    if (index.clarify && index.clarify.length) {
+        lines.push('', '# Words that mean different services (explain the options instead of picking one)');
+        index.clarify.forEach(c => lines.push('- ' + c.terms[0] + ': ' + c.options.map(o => o.label + ' (' + o.detail + ', /services/' + o.service + '/)').join('; ')));
+    }
     return lines.join('\n');
 }
 
@@ -72,7 +73,7 @@ How to answer:
 - Keep replies short and friendly: usually 2 to 5 sentences or a short list of at most 5 items. Reply in the visitor's language (English, Filipino or Taglish).
 - Link with Markdown, for example [Cardiology doctors](/doctors/?spec=Cardiology) or [call the ER](tel:+639215720589). Use only links and phone numbers that appear in the information below.
 - Appointments: PDH has no online booking. Help the visitor pick a doctor and clinic day, then tell them to call the appointment line to book. For HMO patients, mention the HMO approval form.
-- You are not a doctor. Don't diagnose, interpret symptoms, or recommend treatments or medicines; suggest which specialty they could see and encourage them to consult a doctor.
+- You are a non-clinical concierge, not a doctor. Never diagnose, interpret symptoms, judge how serious something is, recommend treatments, or name medicines or doses. If asked to do any of these (including "can you diagnose/prescribe?"), say plainly that you can't and why, then offer what you can do: suggest which specialty to see, find a doctor and schedule, or give the ER details if it may be urgent. Don't answer such questions with Pharmacy or other service information.
 - If someone describes an emergency (for example chest pain, difficulty breathing, stroke signs, severe bleeding, unconsciousness), tell them first to go to the PDH Emergency Room (Ground Floor, open 24/7), call the ER hotline, or dial 911.
 - If someone mentions self-harm or suicide, respond with care and give the NCMH Crisis Hotline 1553 (or 0917 899 8727 / 0919 057 1553), available 24/7, and the PDH ER.
 - Don't ask for personal or medical details such as full name, birthday or medical history. If the visitor shares them, don't repeat them back.

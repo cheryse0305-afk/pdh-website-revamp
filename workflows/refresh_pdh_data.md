@@ -60,6 +60,14 @@ Hand-written, not generated. It maps everyday English/Filipino words to specialt
 - Emergency banner uses the "Emergency" hotline from `contacts.json`. The crisis banner uses the NCMH hotline numbers in the file (verified via web sources on 2026-11-25); PDH should confirm them before launch.
 - The file has its own `review_status`; a clinician or the PDH data owner should review the term mappings and phrases.
 
+## Service groups (`data/service-groups.json`)
+Hand-written. Groups the services page by patient need (Emergency & critical care, See a doctor, Tests & imaging, ...); floors appear as each service's location detail. Every service id in `services.json` must appear exactly once, or `build_pages.py` stops with the ids to fix. A new service from a data refresh must be added to a group before the site can be rebuilt.
+- `search-terms.json` also has a `clarify` list for words that mean different services (e.g. "ultrasound": diagnostic, OB, heart/vessel, therapeutic). The services page, homepage search and Kriss show those options instead of guessing one.
+- Each service has its own page at `/services/<id>/`; featured buttons and search results link there.
+
+## Clinic schedules (`tools/schedule_format.py`)
+Turns the free-text schedules into plain wording ("TTHS 10:30am-12;30NN" -> "Tuesday, Thursday & Saturday: 10:30 AM – 12:30 PM"), used on the Doctor Finder, profiles, the search index and Kriss. Anything it can't read safely is shown unchanged rather than guessed (currently "By appointment" and two day-only entries). After a data refresh, check its output for new formats. Pages always say schedules are *published* and ask patients to call to confirm, and the homepage says "Doctors scheduled today", never "in clinic".
+
 ## Reviewing records (PDH data owner)
 Edit the record in the JSON file and set:
 ```json
@@ -97,3 +105,6 @@ Edit the record in the JSON file and set:
 - Inconsistent specialty names: "Infectious" / "Infectious Diseases"; "Allergology & Immunology" / "Allergology, Immunology" / "Allergology, Asthma".
 - Animal Bite Center, Chemo Infusion Center and Patient Experience Department are "TBD" for location and schedule.
 - HMO partner names are inferred; check "Pacific Cross" and "IMS Wellth Care" in particular.
+- **No clinic room numbers** are published for any doctor. Profiles say "This doctor's clinic room isn't published yet" and point to the OPD floors (3rd to 6th) and the phone lines. Add a verified room field when PDH supplies one.
+- **No department-specific phone numbers** are published: all 28 services list the main line 8776-0644 to 46, so service pages say "Main line ... (ask for <department>)". Add direct lines when PDH verifies them.
+- **HMO coverage per doctor** isn't published; profiles direct patients to the HMO Hub and the online approval form.

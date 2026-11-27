@@ -1,11 +1,15 @@
-/* Kriss, the PDH concierge (prototype). The launcher is created by this script, so nothing shows without JS.
-   Replies come from /api/chat (Claude, grounded in data/*.json) when the server has an API key; otherwise
-   ("guided" mode) they are built here from /data/search-index.json and /data/contacts.json.
-   Emergency and crisis phrases always get the hotline card first, in both modes.
+/* Kriss, the PDH concierge. The launcher is created by this script, so nothing shows without JS.
+   When EMBED is set, the panel hosts the trained Kriss.ai assistant (a CustomGPT project) through CustomGPT's embed
+   script, loaded on first open; the emergency notice stays above it. The CSP in vercel.json allows CustomGPT's
+   script, config and chat origins. With EMBED set to null, the built-in prototype runs instead: replies come from /api/chat (Claude, grounded in
+   data/*.json) when the server has an API key; otherwise ("guided" mode) they are built here from
+   /data/search-index.json and /data/contacts.json. Emergency and crisis phrases always get the hotline card first.
    The conversation is kept in sessionStorage so it survives moving between pages. */
 (function () {
     'use strict';
 
+    // CustomGPT's own embed script builds the chat iframe and handshakes with it; p_key is the project's public embed key.
+    var EMBED = { src: 'https://cdn.customgpt.ai/js/embed.js', p_id: '64568', p_key: 'e16fbe65bf9d5af0047fdc1b7c820be3' };
     var STORE = 'pdh-kriss-v1';
     var MAX_HISTORY = 12;
     var MAX_CHARS = 600;
@@ -26,7 +30,8 @@
         ['Contact numbers', 'What are your contact numbers?']
     ];
     var WELCOME = "Kumusta! Ako si **Kriss**, ang virtual concierge ng PDH. I can help you find a doctor, check clinic schedules, " +
-        'find services and floors, check HMO coverage, and guide you through booking an appointment. What can I help you with?';
+        'find services and floors, check HMO coverage, and guide you through booking an appointment. ' +
+        "I'm not a doctor, so I can't give medical advice. What can I help you with?";
 
     var state = load() || { mode: 'unknown', msgs: [], open: false };
     var data = null, dataPromise = null, busy = false;
@@ -220,7 +225,7 @@
         if (s.loc) lines.push('- Location: ' + s.loc + ' ([floor directory](/directory/?q=' +
             encodeURIComponent(s.name).replace(/\(/g, '%28').replace(/\)/g, '%29') + '))');
         if (s.hours) lines.push('- Hours: ' + s.hours.replace(/\s*\n\s*/g, '; '));
-        lines.push('- [More about ' + s.name + '](/services/#' + s.id + ')');
+        lines.push('- [More about ' + s.name + '](/services/' + s.id + '/)');
         return lines.join('\n');
     }
 
@@ -249,6 +254,19 @@
             'Clinic schedules can change, so it\'s best to confirm when you call.';
     }
 
+    // Non-clinical limits: Kriss never diagnoses, interprets symptoms, recommends treatment or prescribes.
+    var CLINICAL_LIMITS = "I can't diagnose conditions, interpret symptoms, recommend treatments or prescribe medicines. " +
+        "I'm PDH's virtual concierge, not a doctor, and only a doctor who has examined you can do that.\n" +
+        '**What I can do:** help you find the right doctor and their clinic schedule, point you to services and floors, ' +
+        'and explain HMO and appointment steps.\n' +
+        'If this feels urgent, go to the PDH Emergency Room (Ground Floor, open 24/7) or call [0921 572 0589](tel:+639215720589).';
+    var CLINICAL_PHRASES = ['diagnose', 'diagnosis', 'diagnosed', 'prescribe', 'prescription', 'prescriptions', 'reseta', 'magreseta',
+        'what medicine', 'which medicine', 'what medication', 'what should i take', 'what can i take', 'dosage', 'dose', 'how many mg',
+        'is it serious', 'is this serious', 'is that serious', 'how serious', 'should i worry', 'should i be worried', 'serious ba', 'delikado ba', 'normal ba', 'serious', 'symptom', 'symptoms', 'sintomas', 'what is wrong with me', 'whats wrong with me', 'what do i have', 'anong sakit ko', 'ano ang sakit ko', 'anong gamot',
+        'ano ang gamot', 'gamot para sa', 'gamot sa', 'medicine for', 'medication for', 'treatment for', 'cure for', 'how to treat',
+        'can you check my symptoms', 'my symptoms', 'medical advice', 'are you a doctor', 'is this normal'];
+    function asksClinical(q) { return CLINICAL_PHRASES.some(function (p) { return has(q, p); }); }
+
     function guided(text) {
         var q = norm(text);
         var words = q.split(' ');
@@ -258,6 +276,19 @@
         }
         if (words.length <= 5 && hasAny(q, ['thanks', 'thank you', 'salamat', 'ty', 'thank u'])) {
             return 'You\'re welcome! Is there anything else I can help you with?';
+        }
+
+        // Clinical questions come first, so "can you prescribe" never turns into Pharmacy hours.
+        if (asksClinical(q)) {
+            var specHint = findSpecialty(q);
+            return CLINICAL_LIMITS + (specHint ? '\n\nFor this kind of concern you could see a doctor in [' + specHint.label + '](' +
+                specHint.url + ').' : '');
+        }
+        var c = (data.clarify || []).filter(function (x) { return x.terms.some(function (t) { return has(q, norm(t)); }); })[0];
+        if (c) {
+            return c.note + '\n' + c.options.map(function (o) {
+                return '- [' + o.label + '](/services/' + o.service + '/): ' + o.detail;
+            }).join('\n');
         }
 
         var day = findDay(q);
@@ -348,7 +379,67 @@
     var ICON_SEND = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l16-8-6 16-2.5-6.5z"/></svg>';
     var AVATAR = '<span class="pdh-kriss__avatar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span>';
 
+    // Kriss.ai: the same launcher and header, with the trained assistant in an iframe under the emergency notice.
+    function buildEmbed() {
+        root = document.createElement('div');
+        root.className = 'pdh-kriss pdh-kriss--embed';
+        root.innerHTML =
+            '<button type="button" class="pdh-kriss__launcher" aria-expanded="false" aria-controls="pdh-kriss-panel">' + ICON_CHAT +
+            '<span class="pdh-kriss__launch-text"><strong>Ask Kriss</strong><span>PDH concierge</span></span></button>' +
+            '<section class="pdh-kriss__panel" id="pdh-kriss-panel" role="dialog" aria-labelledby="pdh-kriss-title" aria-describedby="pdh-kriss-notice" hidden>' +
+            '<header class="pdh-kriss__head">' + AVATAR +
+            '<div class="pdh-kriss__title"><h2 id="pdh-kriss-title">Kriss</h2><p>PDH virtual concierge · 24/7</p></div>' +
+            '<button type="button" class="pdh-kriss__close" aria-label="Close chat">' + ICON_CLOSE + '</button></header>' +
+            '<p class="pdh-kriss__notice" id="pdh-kriss-notice">Kriss shares general PDH information, not medical advice. ' +
+            '<strong>Emergency?</strong> Call <a href="tel:+639215720589">0921 572 0589</a> or <a href="tel:911">911</a>.</p>' +
+            '<div class="pdh-kriss__frame"><p class="pdh-kriss__loading">Loading Kriss…</p></div>' +
+            '</section>';
+        document.body.appendChild(root);
+        launcher = root.querySelector('.pdh-kriss__launcher');
+        panel = root.querySelector('.pdh-kriss__panel');
+        var frameBox = root.querySelector('.pdh-kriss__frame');
+
+        function setEmbedOpen(open, quiet) {
+            panel.hidden = !open;
+            launcher.setAttribute('aria-expanded', String(open));
+            root.classList.toggle('is-open', open);
+            document.documentElement.classList.toggle('pdh-kriss-open', open);
+            state.open = open;
+            save();
+            if (open && !frameBox.querySelector('script')) {
+                var host = document.createElement('div');
+                host.id = 'customgpt_chat';
+                frameBox.appendChild(host);
+                var s = document.createElement('script');
+                s.src = EMBED.src;
+                s.setAttribute('div_id', 'customgpt_chat');
+                s.setAttribute('p_id', EMBED.p_id);
+                s.setAttribute('p_key', EMBED.p_key);
+                frameBox.appendChild(s);
+                // The script adds its iframe to the host div; drop the "Loading" text once that iframe has loaded.
+                new MutationObserver(function (list, obs) {
+                    var f = host.querySelector('iframe');
+                    if (!f) return;
+                    obs.disconnect();
+                    f.title = 'Chat with Kriss, the PDH virtual concierge';
+                    f.addEventListener('load', function () { frameBox.classList.add('is-loaded'); });
+                }).observe(host, { childList: true, subtree: true });
+            }
+            if (open && !quiet) root.querySelector('.pdh-kriss__close').focus();
+            else if (!open && !quiet) launcher.focus();
+        }
+
+        launcher.addEventListener('click', function () { setEmbedOpen(panel.hidden); });
+        root.querySelector('.pdh-kriss__close').addEventListener('click', function () { setEmbedOpen(false); });
+        panel.addEventListener('keydown', function (e) { if (e.key === 'Escape') setEmbedOpen(false); });
+        if (state.open && window.matchMedia('(min-width: 64em)').matches) setEmbedOpen(true, true);
+        document.addEventListener('click', function (e) {
+            if (e.target.closest && e.target.closest('[data-kriss-open]')) { e.preventDefault(); setEmbedOpen(true); }
+        });
+    }
+
     function build() {
+        if (EMBED) return buildEmbed();
         root = document.createElement('div');
         root.className = 'pdh-kriss';
         root.innerHTML =

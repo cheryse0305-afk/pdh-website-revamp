@@ -142,3 +142,12 @@ html body .header.js-header .global-navigation::after { background: linear-gradi
     html body .header .nav-main__item .nav-main__link { padding: 0 .35rem !important; }
     html body .header .nav-main__cta:has(.pdh-hbtn--lab), html body .header .nav-main__cta:has(.pdh-hbtn--kriss) { display: none; }
 }
+
+/* ---------- Floating controls never cover content ----------
+   html.pdh-typing (pdh-site.js): a field has focus on a phone, so the keyboard is up; hide the bottom bar and the
+   round Kriss button. The footer gets room at the very end of every page so the Kriss button can't cover it. */
+@media screen and (max-width: 63.99em) {
+    html.pdh-typing .pdh-quickbar, html.pdh-typing .pdh-kriss__launcher { display: none; }
+    body .footer { padding-bottom: 5rem; }
+}
+@media screen and (min-width: 64em) { body .footer { padding-bottom: 5.5rem; } }
